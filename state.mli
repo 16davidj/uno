@@ -45,5 +45,5 @@ val top_card : state -> card
 val update_state : Command.command -> player -> state
 
 (* [get_winner] returns an int corresponding to a player if
- * there is a winner in the current state *)
+ * there is a winner in the current state, returns -1 otherwise *)
 val get_winner : state -> int

@@ -10,8 +10,7 @@ type card =
 
 (* This module helps differentiate between AI and Human*)
 module type Intelligence = sig
-  type hand = card list
-  val choose_card : card -> hand -> card
+  val choose_card : card -> card list -> card
   type t
 end
 
@@ -19,6 +18,7 @@ end
 module type Player = sig
   module Intel : Intelligence
   type player_type = Intel.t
+  val id : int
   (* [name] is the name of the player *)
   val name : string
   (* [hand] is a list of cards representing a player's hand *)

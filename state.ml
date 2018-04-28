@@ -1,3 +1,5 @@
+open List
+
 (* [effect] represents the type of special effect a card has. *)
 type effect = Add | Skip | Draw | Reverse | None
 
@@ -7,6 +9,7 @@ type color = Red | Green | Blue | Yellow | Black
 type card =
   {value: int; color: color; effect: effect; id: int}
 
+(* change later *)
 type player = Player
 
 type direction = Clockwise | Counter
@@ -28,4 +31,10 @@ let turn s = failwith("unimplemented")
 let next_turn s = failwith("unimplemented")
 let top_card s = failwith("unimplemented")
 let update_state cmd p = failwith("unimplemented")
-let get_winner s = failwith("unimplemented")
+
+let rec win_help (lst: player list) = match lst with
+  | [] -> -1
+  | h :: t -> if (length h.hand = 0) then h.id
+    else win_help t
+
+let get_winner s = win_help s.players
