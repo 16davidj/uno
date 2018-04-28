@@ -5,7 +5,7 @@ type state
 type card
 
 (* [user] is an abstract type representing a player in the game *)
-type user
+type player
 
 (* [user_hand] is an object of type card list that represents
  * the human player's hand *)
@@ -37,12 +37,12 @@ val next_turn : state -> int
 
 (* [top_card] returns an object of type card that represents
  * the card played in the previous turn on top of the stack *)
-val top_card : card
+val top_card : state -> card
 
 (* [update_state] returns an object of type state that represents
  * the new state of the game after player (user) chooses a card
  * from hand (card list) *)
-val update_state : Command.command -> user -> state
+val update_state : Command.command -> player -> state
 
 (* [get_winner] returns an int corresponding to a player if
  * there is a winner in the current state *)

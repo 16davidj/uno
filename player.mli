@@ -18,7 +18,6 @@ end
 (* [Player] is a module representing a player in the game *)
 module type Player = sig
   module Intel : Intelligence
-
   type player_type = Intel.t
   (* [name] is the name of the player *)
   val name : string
