@@ -1,6 +1,6 @@
 (* [command] represents a command input by a player. *)
 type command =
-  | Play of int             (* plays a card in your hand with the int "id" you specify.
+  | Play of card             (* plays a card in your hand with the int "id" you specify.
                              * "id" calculated from the string as follows:
                                * Y:       10 + face/action value
                                * G:       20 + face/action value

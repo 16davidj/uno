@@ -1,8 +1,9 @@
 (* [effect] represents the type of special effect a card has. *)
-type effect = Add | Skip | Draw | Reverse | None
+type effect = Add | Skip | Draw | Reverse | None | Wild | Wild4
+                (* wtf is add? *)
 
 (* [color] represents the color of a card *)
-type color = Red | Green | Blue | Yellow | Black
+type color = Red | Green | Blue | Yellow | Black | None
 
 (* [card] represents a card in the UNO game*)
 type card =

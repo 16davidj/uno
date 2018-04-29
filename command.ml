@@ -2,8 +2,10 @@
 (* An UNO module responsible for the text-based commands and
  * implementation for parsing of the commands. *)
 
+open Player
+
 type command =
-  | Play of int
+  | Play of card
   | Draw
   | Info
   | Hand
@@ -36,10 +38,42 @@ let get_args str =
   let command_len = String.length (get_command n_str) in
   String.trim (String.sub n_str command_len (String.length n_str - command_len))
 
+(* Helper function for parse_args, which shortens our code by determining the
+ * effect of the int id of the card ONLY when d is between 50 and 80. *)
+let det_effect num =
+  if num >= 50 && num < 80 then begin
+    match num / 10 with
+    | 5 -> Draw
+    | 6 -> Skip
+    | 7 -> Reverse
+    | _ -> None
+  end
+  else None
+
+(* Converts the int id of the card into the actual card record itself. *)
+let parse_args arg =
+  match int_of_string arg with
+  | d when d >= 10 && d < 20 -> {value = d mod 10; color = Yellow; effect = None; id = d}
+  | d when d >= 20 && d < 30 -> {value = d mod 10; color = Green; effect = None; id = d}
+  | d when d >= 30 && d < 40 -> {value = d mod 10; color = Blue; effect = None; id = d}
+  | d when d >= 40 && d < 50 -> {value = d mod 10; color = Red; effect = None; id = d}
+  | d when d >= 50 && d < 80 -> begin
+    let eff = det_effect d in
+    match d mod 10 with
+      | 1 -> {value = -1; color = Yellow; effect = eff; id = d}
+      | 2 -> {value = -1; color = Green; effect = eff; id = d}
+      | 3 -> {value = -1; color = Blue; effect = eff; id = d}
+      | 4 -> {value = -1; color = Red; effect = eff; id = d}
+      | _ -> {value = -1; color = None; effect = eff; id = -1}
+  end
+  | d when d = 80 -> {value = -1; color = Black; effect = Wild; id = d}
+  | d when d = 90 -> {value = -1; color = Black; effect = Wild4; id = d}
+  | _ -> {value = -1; color = None; effect = None; id = -1}
+
 (* Parses user-input string into a command and/or its arguments. *)
 let parse str =
   match (get_command str) with
-  | "play" -> Play (get_args str)
+  | "play" -> Play (parse_args (get_args str))
   | "draw" -> Draw
   | "info" -> Info
   | "hand" -> Hand
