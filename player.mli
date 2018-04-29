@@ -35,6 +35,6 @@ end
 module type PlayerMaker = functor(T: Intelligence) ->
   Player with module Intel = T
 
-module MakeAIPlayer : PlayerMaker
+module AI : Player
 
-module MakeHumanPlayer : PlayerMaker
+module Human : Player
