@@ -46,17 +46,17 @@ let det_effect num =
     | 5 -> Draw
     | 6 -> Skip
     | 7 -> Reverse
-    | _ -> None
+    | _ -> No
   end
   else None
 
 (* Converts the int id of the card into the actual card record itself. *)
 let parse_args arg =
   match int_of_string arg with
-  | d when d >= 10 && d < 20 -> {value = d mod 10; color = Yellow; effect = None; id = d}
-  | d when d >= 20 && d < 30 -> {value = d mod 10; color = Green; effect = None; id = d}
-  | d when d >= 30 && d < 40 -> {value = d mod 10; color = Blue; effect = None; id = d}
-  | d when d >= 40 && d < 50 -> {value = d mod 10; color = Red; effect = None; id = d}
+  | d when d >= 10 && d < 20 -> {value = d mod 10; color = Yellow; effect = No; id = d}
+  | d when d >= 20 && d < 30 -> {value = d mod 10; color = Green; effect = No; id = d}
+  | d when d >= 30 && d < 40 -> {value = d mod 10; color = Blue; effect = No; id = d}
+  | d when d >= 40 && d < 50 -> {value = d mod 10; color = Red; effect = No; id = d}
   | d when d >= 50 && d < 80 -> begin
     let eff = det_effect d in
     match d mod 10 with
@@ -68,7 +68,7 @@ let parse_args arg =
   end
   | d when d = 80 -> {value = -1; color = Black; effect = Wild; id = d}
   | d when d = 90 -> {value = -1; color = Black; effect = Wild4; id = d}
-  | _ -> {value = -1; color = None; effect = None; id = -1}
+  | _ -> {value = -1; color = No; effect = No; id = -1}
 
 (* Parses user-input string into a command and/or its arguments. *)
 let parse str =
