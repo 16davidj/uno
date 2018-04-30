@@ -12,7 +12,7 @@ type command =
                                * Reverse: 70 + color value/10
                                * W:       80
                                * W4:      90 *)
-  | Draw                    (* draws a card from the draw pile and place it in your hand *)
+  | Draw of int             (* draws a card from the draw pile and place it in your hand *)
   | Info 										(* prints information about the state of the game *)
   | Hand 										(* prints information about your hand *)
   | Challenge               (* valid command only when a WILD +4 is played *)
