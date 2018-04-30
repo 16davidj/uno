@@ -1,5 +1,6 @@
 open List
 open Stack
+open Player
 
 (* [effect] represents the type of special effect a card has. *)
 type effect = Add | Skip | Draw | Reverse | None

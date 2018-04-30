@@ -1,0 +1,6 @@
+"Resource: /Users/David/Desktop/School/Cornell/CS 3110/Assignments/uno/player.mli": "\236\175\0151\167\132\006\025)v\026w\179\193;\164"
+"Rule: ocaml dependencies mli (%=player )": "\1857\196\134\012c\198\019\132c\213\145\166\002;\183"
+"Rule: ocaml: ml & cmi -> cmo (%=player )": "\166\162\001\211n\027\243\159\229\164ax\200\023\171\208"
+"Rule: ocaml dependencies ml (%=player )": "c\246U\218VtO\138\001Y\253k\215}\240\b"
+"Rule: ocaml: mli -> cmi (%=player )": "z\219\006k\1955\1426\2255J4\170\143k\019"
+"Resource: /Users/David/Desktop/School/Cornell/CS 3110/Assignments/uno/player.ml": "\134Gz\172h\029\187[\017\250\185\147\228\004h\168"

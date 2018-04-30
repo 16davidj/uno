@@ -1,3 +1,4 @@
+open Player
 (* [command] represents a command input by a player. *)
 type command =
   | Play of card             (* plays a card in your hand with the int "id" you specify.

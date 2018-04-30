@@ -1,7 +1,5 @@
-
-(* An UNO module responsible for the text-based commands and
+ (* An UNO module responsible for the text-based commands and
  * implementation for parsing of the commands. *)
-
 open Player
 
 type command =
@@ -40,7 +38,8 @@ let get_args str =
 
 (* Helper function for parse_args, which shortens our code by determining the
  * effect of the int id of the card ONLY when d is between 50 and 80. *)
-let det_effect num =
+
+let det_effect num : Player.effect =
   if num >= 50 && num < 80 then begin
     match num / 10 with
     | 5 -> Draw
@@ -49,6 +48,7 @@ let det_effect num =
     | _ -> No
   end
   else None
+      
 
 (* Converts the int id of the card into the actual card record itself. *)
 let parse_args arg =

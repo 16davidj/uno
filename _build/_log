@@ -1,0 +1,10 @@
+### Starting build.
+# Target: player.mli.depends, tags: { extension:mli, file:player.mli, ocaml, ocamldep, quiet }
+/Users/David/.opam/4.06.0/bin/ocamldep.opt -modules player.mli > player.mli.depends
+# Target: player.cmi, tags: { byte, compile, extension:mli, file:player.mli, interf, ocaml, quiet }
+/Users/David/.opam/4.06.0/bin/ocamlc.opt -c -o player.cmi player.mli
+# Target: player.ml.depends, tags: { extension:ml, file:player.ml, ocaml, ocamldep, quiet }
+/Users/David/.opam/4.06.0/bin/ocamldep.opt -modules player.ml > player.ml.depends
+# Target: player.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:player.cmo, file:player.ml, implem, ocaml, quiet }
+/Users/David/.opam/4.06.0/bin/ocamlc.opt -c -o player.cmo player.ml
+# Compilation successful.
