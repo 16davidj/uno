@@ -4,7 +4,7 @@ open Player
 
 type command =
   | Play of card
-  | Draw
+  | Draw of int
   | Info
   | Hand
   | Challenge
@@ -42,13 +42,13 @@ let get_args str =
 let det_effect num : Player.effect =
   if num >= 50 && num < 80 then begin
     match num / 10 with
-    | 5 -> Draw
+    | 5 -> Plus
     | 6 -> Skip
     | 7 -> Reverse
     | _ -> No
   end
   else None
-      
+
 
 (* Converts the int id of the card into the actual card record itself. *)
 let parse_args arg =
@@ -74,7 +74,7 @@ let parse_args arg =
 let parse str =
   match (get_command str) with
   | "play" -> Play (parse_args (get_args str))
-  | "draw" -> Draw
+  | "draw" -> Draw 1
   | "info" -> Info
   | "hand" -> Hand
   | "challenge" -> Challenge

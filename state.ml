@@ -3,7 +3,7 @@ open Stack
 open Player
 
 (* [effect] represents the type of special effect a card has. *)
-type effect = Add | Skip | Draw | Reverse | None
+type effect = Plus | Skip | Reverse | None
 
 (* [color] represents the color of a card *)
 type color = Red | Green | Blue | Yellow | Black
