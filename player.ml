@@ -1,4 +1,4 @@
-type effect = Add | Skip | Draw | Reverse | No | Wild | Wild4
+type effect = Add | Skip | Plus | Reverse | No | Wild | Wild4
 
 (* [color] represents the color of a card *)
 type color = Red | Green | Blue | Yellow | Black | No
@@ -7,6 +7,10 @@ type intelligence = AI | Human
 
 (* [card] represents a card in the UNO game*)
 type card = {value: int; color: color; effect: effect; id: int}
+
+type player = {id: int; name: string; mutable hand: card list; intelligence: intelligence;}
+
+let cards_left lst = List.length lst
 
 let rec does_wild4_exist hand =
   match hand with
@@ -32,12 +36,3 @@ let dumbai_choose_card top_card hand =
       | Some x -> x
     end
   | Some h -> h
-
-module DumbAI = struct
-  let id = 1
-  let name = "ai"
-  let hand = []
-  let intelligence = AI
-  let choose_card top hand = dumbai_choose_card
-  let cards_left lst = List.length lst
-end
