@@ -1,0 +1,12 @@
+### Starting build.
+# Target: test.ml.depends, tags: { package(oUnit), extension:ml, file:test.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package oUnit -modules test.ml > test.ml.depends
+# Target: player.ml.depends, tags: { package(oUnit), extension:ml, file:player.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package oUnit -modules player.ml > player.ml.depends # cached
+# Target: player.cmo, tags: { package(oUnit), byte, compile, extension:cmo, extension:ml, file:player.cmo, file:player.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package oUnit -o player.cmo player.ml # cached
+# Target: test.cmo, tags: { package(oUnit), byte, compile, extension:cmo, extension:ml, file:test.cmo, file:test.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package oUnit -o test.cmo test.ml
+# Target: test.byte, tags: { package(oUnit), byte, dont_link_with, extension:byte, file:test.byte, link, ocaml, program, quiet, traverse }
+ocamlfind ocamlc -linkpkg -package oUnit player.cmo test.cmo -o test.byte
+# Compilation successful.
