@@ -31,12 +31,19 @@ open Command
     "command_3" >:: (fun _ -> assert_equal "" (get_args "Info"));
     "command_4" >:: (fun _ -> assert_equal "play" (get_command "PLaY    47"));
     "command_5" >:: (fun _ -> assert_equal "1" (get_args "Draw 1"));
+    "command_a" >:: (fun _ -> assert_equal "red 4" (get_args "Play    red 4"));
 
     "command_6" >:: (fun _ -> assert_equal (Plus) (det_effect 55));
     "command_7" >:: (fun _ -> assert_equal (Skip) (det_effect 69));
     "command_8" >:: (fun _ -> assert_equal (Reverse) (det_effect 70));
     "command_9" >:: (fun _ -> assert_equal (NoEffect) (det_effect 15));
     "command_x" >:: (fun _ -> assert_equal (NoEffect) (det_effect 80));
+
+    "parse_1" >:: (fun _ -> assert_equal (Play card1) (parse "play 44"));
+    "parse_2" >:: (fun _ -> assert_equal (Play ncard) (parse "play 235235"));
+    "parse_3" >:: (fun _ -> assert_equal (Play card2) (parse "play 35"));
+    "parse_4" >:: (fun _ -> assert_equal (Play card5) (parse "play 46"));
+    "parse_5" >:: (fun _ -> assert_equal (Play card3) (parse "play 18"));
   ]
 
 let suite = "Uno test suite" >::: tests
