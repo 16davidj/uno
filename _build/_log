@@ -1,12 +1,14 @@
 ### Starting build.
-# Target: test.ml.depends, tags: { package(oUnit), extension:ml, file:test.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package oUnit -modules test.ml > test.ml.depends
+# Target: command.mli.depends, tags: { package(oUnit), extension:mli, file:command.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package oUnit -modules command.mli > command.mli.depends # cached
 # Target: player.ml.depends, tags: { package(oUnit), extension:ml, file:player.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package oUnit -modules player.ml > player.ml.depends # cached
 # Target: player.cmo, tags: { package(oUnit), byte, compile, extension:cmo, extension:ml, file:player.cmo, file:player.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package oUnit -o player.cmo player.ml # cached
-# Target: test.cmo, tags: { package(oUnit), byte, compile, extension:cmo, extension:ml, file:test.cmo, file:test.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package oUnit -o test.cmo test.ml
-# Target: test.byte, tags: { package(oUnit), byte, dont_link_with, extension:byte, file:test.byte, link, ocaml, program, quiet, traverse }
-ocamlfind ocamlc -linkpkg -package oUnit player.cmo test.cmo -o test.byte
+# Target: command.cmi, tags: { package(oUnit), byte, compile, extension:mli, file:command.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package oUnit -o command.cmi command.mli # cached
+# Target: command.ml.depends, tags: { package(oUnit), extension:ml, file:command.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package oUnit -modules command.ml > command.ml.depends
+# Target: command.cmo, tags: { package(oUnit), byte, compile, extension:cmo, extension:ml, file:command.cmo, file:command.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package oUnit -o command.cmo command.ml
 # Compilation successful.
