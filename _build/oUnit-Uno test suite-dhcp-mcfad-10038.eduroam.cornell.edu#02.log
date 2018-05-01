@@ -1,9 +1,0 @@
-2018-05-01T01:58:24+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#02 I: Start test Uno test suite:1:play_35.
-2018-05-01T01:58:24+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#02 I: Test Uno test suite:1:play_35 is successful.
-2018-05-01T01:58:24+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#02 I: End test Uno test suite:1:play_35.
-2018-05-01T01:58:24+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#02 I: Start test Uno test suite:4:play_-1.
-2018-05-01T01:58:24+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#02 E: Test Uno test suite:4:play_-1 has failed.
-2018-05-01T01:58:24+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#02 E: not equal in test Uno test suite:4:play_-1.
-2018-05-01T01:58:24+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#02 E: Called from unknown location
-2018-05-01T01:58:24+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#02 E: 
-2018-05-01T01:58:24+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#02 I: End test Uno test suite:4:play_-1.
