@@ -3,16 +3,14 @@ open Stack
 open Player
 
 (* [effect] represents the type of special effect a card has. *)
-type effect = Plus | Skip | Reverse | None
+type effect = Plus | Skip | Reverse | NoEffect | Wild | Wild4
 
 (* [color] represents the color of a card *)
-type color = Red | Green | Blue | Yellow | Black
+type color = Red | Green | Blue | Yellow | Black | NoColor
 
 type card = Player.card
 
 type player = Player.player
-
-(* change later *)
 
 type direction = Clockwise | Counter
 
@@ -27,16 +25,134 @@ type state = {
   turn: int
 }
 
+let all_cards = [(0, {value = 0; color = Red; effect = NoEffect; id = 40});
+                 (1, {value = 1; color = Red; effect = NoEffect; id = 41});
+                 (2, {value = 2; color = Red; effect = NoEffect; id = 42});
+                 (3, {value = 3; color = Red; effect = NoEffect; id = 43});
+                 (4, {value = 4; color = Red; effect = NoEffect; id = 44});
+                 (5, {value = 5; color = Red; effect = NoEffect; id = 45});
+                 (6, {value = 6; color = Red; effect = NoEffect; id = 46});
+                 (7, {value = 7; color = Red; effect = NoEffect; id = 47});
+                 (8, {value = 8; color = Red; effect = NoEffect; id = 48});
+                 (9, {value = 9; color = Red; effect = NoEffect; id = 49});
+                 (10, {value = -1; color = Red; effect = Plus; id = 54});
+                 (11, {value = -1; color = Red; effect = Skip; id = 64});
+                 (12, {value = -1; color = Red; effect = Reverse; id = 74});
+                 (*yellow *)
+                (13, {value = 0; color = Yellow; effect = NoEffect; id = 10});
+                (14, {value = 1; color = Yellow; effect = NoEffect; id = 11});
+                (15, {value = 2; color = Yellow; effect = NoEffect; id = 12});
+                (16, {value = 3; color = Yellow; effect = NoEffect; id = 13});
+                (17, {value = 4; color = Yellow; effect = NoEffect; id = 14});
+                (18, {value = 5; color = Yellow; effect = NoEffect; id = 15});
+                (19, {value = 6; color = Yellow; effect = NoEffect; id = 16});
+                (20, {value = 7; color = Yellow; effect = NoEffect; id = 17});
+                (21, {value = 8; color = Yellow; effect = NoEffect; id = 18});
+                (22, {value = 9; color = Yellow; effect = NoEffect; id = 19});
+                (23, {value = -1; color = Yellow; effect = Plus; id = 51});
+                (24, {value = -1; color = Yellow; effect = Skip; id = 61});
+                (25, {value = -1; color = Yellow; effect = Reverse; id = 71});
+                 (* green *)
+                (26, {value = 0; color = Green; effect = NoEffect; id = 20});
+                (27, {value = 1; color = Green; effect = NoEffect; id = 21});
+                (28, {value = 2; color = Green; effect = NoEffect; id = 22});
+                (29, {value = 3; color = Green; effect = NoEffect; id = 23});
+                (30, {value = 4; color = Green; effect = NoEffect; id = 24});
+                (31, {value = 5; color = Green; effect = NoEffect; id = 25});
+                (32, {value = 6; color = Green; effect = NoEffect; id = 26});
+                (33, {value = 7; color = Green; effect = NoEffect; id = 27});
+                (34, {value = 8; color = Green; effect = NoEffect; id = 28});
+                (35, {value = 9; color = Green; effect = NoEffect; id = 29});
+                (36, {value = -1; color = Green; effect = Plus; id = 52});
+                (37, {value = -1; color = Green; effect = Skip; id = 62});
+                (38, {value = -1; color = Green; effect = Reverse; id = 72});
+                 (* blue *)
+                (39, {value = 0; color = Blue; effect = NoEffect; id = 30});
+                (40, {value = 1; color = Blue; effect = NoEffect; id = 31});
+                (41, {value = 2; color = Blue; effect = NoEffect; id = 32});
+                (42, {value = 3; color = Blue; effect = NoEffect; id = 33});
+                (43, {value = 4; color = Blue; effect = NoEffect; id = 34});
+                (44, {value = 5; color = Blue; effect = NoEffect; id = 35});
+                (45, {value = 6; color = Blue; effect = NoEffect; id = 36});
+                (46, {value = 7; color = Blue; effect = NoEffect; id = 37});
+                (47, {value = 8; color = Blue; effect = NoEffect; id = 38});
+                (48, {value = 9; color = Blue; effect = NoEffect; id = 39});
+                (49, {value = -1; color = Blue; effect = Plus; id = 53});
+                (50, {value = -1; color = Blue; effect = Skip; id = 63});
+                (51, {value = -1; color = Blue; effect = Reverse; id = 73});
+                 (*the four wilds*)
+               (52, {value = -1; color = Black; effect = Wild; id = 80});
+               (53, {value = -1; color = Black; effect = Wild; id = 81});
+               (54, {value = -1; color = Black; effect = Wild; id = 82});
+               (55, {value = -1; color = Black; effect = Wild; id = 83});
+               (*the four wilds +4*)
+               (56, {value = -1; color = Black; effect = Wild; id = 90});
+               (57, {value = -1; color = Black; effect = Wild; id = 91});
+               (58, {value = -1; color = Black; effect = Wild; id = 92});
+               (59, {value = -1; color = Black; effect = Wild; id = 93});
+
+              (60, {value = 1; color = Red; effect = NoEffect; id = 41});
+              (61, {value = 2; color = Red; effect = NoEffect; id = 42});
+              (62, {value = 3; color = Red; effect = NoEffect; id = 43});
+              (63, {value = 4; color = Red; effect = NoEffect; id = 44});
+              (64, {value = 5; color = Red; effect = NoEffect; id = 45});
+              (65, {value = 6; color = Red; effect = NoEffect; id = 46});
+              (66, {value = 7; color = Red; effect = NoEffect; id = 47});
+              (67, {value = 8; color = Red; effect = NoEffect; id = 48});
+              (68, {value = 9; color = Red; effect = NoEffect; id = 49});
+              (69, {value = -1; color = Red; effect = Plus; id = 54});
+              (70, {value = -1; color = Red; effect = Skip; id = 64});
+              (71, {value = -1; color = Red; effect = Reverse; id = 74});
+
+             (72, {value = 1; color = Yellow; effect = NoEffect; id = 11});
+             (73, {value = 2; color = Yellow; effect = NoEffect; id = 12});
+             (74, {value = 3; color = Yellow; effect = NoEffect; id = 13});
+             (75, {value = 4; color = Yellow; effect = NoEffect; id = 14});
+             (76, {value = 5; color = Yellow; effect = NoEffect; id = 15});
+             (77, {value = 6; color = Yellow; effect = NoEffect; id = 16});
+             (78, {value = 7; color = Yellow; effect = NoEffect; id = 17});
+             (79, {value = 8; color = Yellow; effect = NoEffect; id = 18});
+             (80, {value = 9; color = Yellow; effect = NoEffect; id = 19});
+             (81, {value = -1; color = Yellow; effect = Plus; id = 51});
+             (82, {value = -1; color = Yellow; effect = Skip; id = 61});
+             (83, {value = -1; color = Yellow; effect = Reverse; id = 71});
+
+             (84, {value = 1; color = Green; effect = NoEffect; id = 21});
+             (85, {value = 2; color = Green; effect = NoEffect; id = 22});
+             (86, {value = 3; color = Green; effect = NoEffect; id = 23});
+             (87, {value = 4; color = Green; effect = NoEffect; id = 24});
+             (88, {value = 5; color = Green; effect = NoEffect; id = 25});
+             (89, {value = 6; color = Green; effect = NoEffect; id = 26});
+             (90, {value = 7; color = Green; effect = NoEffect; id = 27});
+             (91, {value = 8; color = Green; effect = NoEffect; id = 28});
+             (92, {value = 9; color = Green; effect = NoEffect; id = 29});
+             (93, {value = -1; color = Green; effect = Plus; id = 52});
+             (94, {value = -1; color = Green; effect = Skip; id = 62});
+             (95, {value = -1; color = Green; effect = Reverse; id = 72});
+
+             (96, {value = 1; color = Blue; effect = NoEffect; id = 31});
+             (97, {value = 2; color = Blue; effect = NoEffect; id = 32});
+             (98, {value = 3; color = Blue; effect = NoEffect; id = 33});
+             (99, {value = 4; color = Blue; effect = NoEffect; id = 34});
+             (100, {value = 5; color = Blue; effect = NoEffect; id = 35});
+             (101, {value = 6; color = Blue; effect = NoEffect; id = 36});
+             (102, {value = 7; color = Blue; effect = NoEffect; id = 37});
+             (103, {value = 8; color = Blue; effect = NoEffect; id = 38});
+             (104, {value = 9; color = Blue; effect = NoEffect; id = 39});
+             (105, {value = -1; color = Blue; effect = Plus; id = 53});
+             (106, {value = -1; color = Blue; effect = Skip; id = 63});
+             (107, {value = -1; color = Blue; effect = Reverse; id = 73});
+                ]
+
 let user_hand s = let p = hd s.players in p.hand
 let ai1_hand s = let p = nth s.players 1 in p.hand
 let ai2_hand s = let p = nth s.players 2 in p.hand
 let ai3_hand s = let p = nth s.players 3 in p.hand
 
-
 let user = {id = 0; name = "human"; hand = []; intelligence = Human;}
 let dumbai1 = {id = 1; name = "ai1"; hand = []; intelligence = AI;}
-let dumbai2 = {id = 1; name = "ai2"; hand = []; intelligence = AI;}
-let dumbai3 = {id = 1; name = "ai3"; hand = []; intelligence = AI;}
+let dumbai2 = {id = 2; name = "ai2"; hand = []; intelligence = AI;}
+let dumbai3 = {id = 3; name = "ai3"; hand = []; intelligence = AI;}
 
 let init_state = {
       players = [user; dumbai1; dumbai2; dumbai3];

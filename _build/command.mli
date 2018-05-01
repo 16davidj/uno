@@ -10,8 +10,8 @@ type command =
                                * +2:      50 + color value/10
                                * Skip:    60 + color value/10
                                * Reverse: 70 + color value/10
-                               * W:       80
-                               * W4:      90 *)
+                               * W:       80, 81, 82, 83
+                               * W4:      90, 91, 92, 93*)
   | Draw of int             (* draws a card from the draw pile and place it in your hand *)
   | Info 										(* prints information about the state of the game *)
   | Hand 										(* prints information about your hand *)
@@ -26,3 +26,9 @@ type command =
  * card the user would like to place.
  * requires: [str] is a card in the player's hand. *)
 val parse : string -> command
+
+val get_args : string -> string
+
+val get_command : string -> string
+
+val det_effect : int -> effect
