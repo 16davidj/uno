@@ -49,26 +49,58 @@ let det_effect num : Player.effect =
   end
   else NoEffect
 
+let convert_color str =
+  match str with
+  | "yellow" -> 10
+  | "green" -> 20
+  | "blue" -> 30
+  | "red" -> 40
+  | "black" -> 0
+  | _ -> -1
+
+let convert_to_id arg =
+  if String.contains arg ' ' then
+    let get_color = get_command arg in let get_num_or_action = get_args arg in
+    try
+      let num = int_of_string get_num_or_action in
+      if num >= 0 && num < 10 then num + (convert_color get_color) else -1
+    with
+    | _ -> begin
+        match get_num_or_action with
+        | "draw2" -> 50 + (convert_color get_color)/10
+        | "skip" -> 60 + (convert_color get_color)/10
+        | "reverse" -> 70 + (convert_color get_color)/10
+        | "wild" -> 80
+        | "wild4" -> 90
+        | _ -> -1
+      end
+  else -1
 
 (* Converts the int id of the card into the actual card record itself. *)
-let parse_args arg =
-  match int_of_string arg with
-  | d when d >= 10 && d < 20 -> {value = d mod 10; color = Yellow; effect = NoEffect; id = d}
-  | d when d >= 20 && d < 30 -> {value = d mod 10; color = Green; effect = NoEffect; id = d}
-  | d when d >= 30 && d < 40 -> {value = d mod 10; color = Blue; effect = NoEffect; id = d}
-  | d when d >= 40 && d < 50 -> {value = d mod 10; color = Red; effect = NoEffect; id = d}
-  | d when d >= 50 && d < 80 -> begin
-    let eff = det_effect d in
-    match d mod 10 with
-      | 1 -> {value = -1; color = Yellow; effect = eff; id = d}
-      | 2 -> {value = -1; color = Green; effect = eff; id = d}
-      | 3 -> {value = -1; color = Blue; effect = eff; id = d}
-      | 4 -> {value = -1; color = Red; effect = eff; id = d}
-      | _ -> {value = -1; color = NoColor; effect = eff; id = -1}
+let rec parse_args arg =
+  try
+    let id_1 = int_of_string arg in
+    begin
+      match id_1 with
+      | d when d >= 10 && d < 20 -> {value = d mod 10; color = Yellow; effect = NoEffect; id = d}
+      | d when d >= 20 && d < 30 -> {value = d mod 10; color = Green; effect = NoEffect; id = d}
+      | d when d >= 30 && d < 40 -> {value = d mod 10; color = Blue; effect = NoEffect; id = d}
+      | d when d >= 40 && d < 50 -> {value = d mod 10; color = Red; effect = NoEffect; id = d}
+      | d when d >= 50 && d < 80 -> begin
+        let eff = det_effect d in
+        match d mod 10 with
+          | 1 -> {value = -1; color = Yellow; effect = eff; id = d}
+          | 2 -> {value = -1; color = Green; effect = eff; id = d}
+          | 3 -> {value = -1; color = Blue; effect = eff; id = d}
+          | 4 -> {value = -1; color = Red; effect = eff; id = d}
+          | _ -> {value = -1; color = NoColor; effect = eff; id = -1}
+      end
+      | d when d = 80 -> {value = -1; color = Black; effect = Wild; id = d}
+      | d when d = 90 -> {value = -1; color = Black; effect = Wild4; id = d}
+      | _ -> {value = -1; color = NoColor; effect = NoEffect; id = -1}
   end
-  | d when d = 80 -> {value = -1; color = Black; effect = Wild; id = d}
-  | d when d = 90 -> {value = -1; color = Black; effect = Wild4; id = d}
-  | _ -> {value = -1; color = NoColor; effect = NoEffect; id = -1}
+  with
+  | _ -> parse_args (string_of_int (convert_to_id arg))
 
 (* Parses user-input string into a command and/or its arguments. *)
 let parse str =

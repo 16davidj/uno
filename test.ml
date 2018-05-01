@@ -44,6 +44,8 @@ open Command
     "parse_3" >:: (fun _ -> assert_equal (Play card2) (parse "play 35"));
     "parse_4" >:: (fun _ -> assert_equal (Play card5) (parse "play 46"));
     "parse_5" >:: (fun _ -> assert_equal (Play card3) (parse "play 18"));
+
+    "parse_i" >:: (fun _ -> assert_equal (Play card1) (parse "Play red 4"));
   ]
 
 let suite = "Uno test suite" >::: tests
