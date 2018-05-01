@@ -82,14 +82,14 @@ let all_cards = [(0, {value = 0; color = Red; effect = NoEffect; id = 40});
                 (51, {value = -1; color = Blue; effect = Reverse; id = 73});
                  (*the four wilds*)
                (52, {value = -1; color = Black; effect = Wild; id = 80});
-               (53, {value = -1; color = Black; effect = Wild; id = 81});
-               (54, {value = -1; color = Black; effect = Wild; id = 82});
-               (55, {value = -1; color = Black; effect = Wild; id = 83});
+               (53, {value = -1; color = Black; effect = Wild; id = 80});
+               (54, {value = -1; color = Black; effect = Wild; id = 80});
+               (55, {value = -1; color = Black; effect = Wild; id = 80});
                (*the four wilds +4*)
                (56, {value = -1; color = Black; effect = Wild; id = 90});
-               (57, {value = -1; color = Black; effect = Wild; id = 91});
-               (58, {value = -1; color = Black; effect = Wild; id = 92});
-               (59, {value = -1; color = Black; effect = Wild; id = 93});
+               (57, {value = -1; color = Black; effect = Wild; id = 90});
+               (58, {value = -1; color = Black; effect = Wild; id = 90});
+               (59, {value = -1; color = Black; effect = Wild; id = 90});
 
               (60, {value = 1; color = Red; effect = NoEffect; id = 41});
               (61, {value = 2; color = Red; effect = NoEffect; id = 42});
@@ -148,10 +148,28 @@ let ai1_hand s = let p = nth s.players 1 in p.hand
 let ai2_hand s = let p = nth s.players 2 in p.hand
 let ai3_hand s = let p = nth s.players 3 in p.hand
 
-let user = {id = 0; name = "human"; hand = []; intelligence = Human;}
-let dumbai1 = {id = 1; name = "ai1"; hand = []; intelligence = AI;}
-let dumbai2 = {id = 2; name = "ai2"; hand = []; intelligence = AI;}
-let dumbai3 = {id = 3; name = "ai3"; hand = []; intelligence = AI;}
+let rec draw7 card_lst acc =
+if List.length acc != 7 then
+  let idx = Random.int 108 in
+    if List.mem_assoc idx card_lst then
+      let card_draw = List.assoc idx card_lst in
+        draw7 (List.remove_assoc idx card_lst) (card_draw :: acc)
+    else draw7 card_lst acc
+else (card_lst, acc)
+
+let (drawn1, hand1) = draw7 all_cards []
+let (drawn2, hand2) = draw7 drawn1 []
+let (drawn3, hand3) = draw7 drawn2 []
+let (drawn4, hand4) = draw7 drawn3 []
+
+let rec lst_to_q lst q = match lst with
+  | [] -> q
+  | h :: t -> push h q; lst_to_q t q
+
+let user = {id = 0; name = "human"; hand = hand1; intelligence = Human;}
+let dumbai1 = {id = 1; name = "ai1"; hand = hand2; intelligence = AI;}
+let dumbai2 = {id = 2; name = "ai2"; hand = hand3; intelligence = AI;}
+let dumbai3 = {id = 3; name = "ai3"; hand = hand4; intelligence = AI;}
 
 let init_state = {
       players = [user; dumbai1; dumbai2; dumbai3];
