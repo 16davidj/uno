@@ -1,7 +1,7 @@
-type effect = Add | Skip | Plus | Reverse | No | Wild | Wild4
+type effect = Skip | Plus | Reverse | NoEffect | Wild | Wild4
 
 (* [color] represents the color of a card *)
-type color = Red | Green | Blue | Yellow | Black | No
+type color = Red | Green | Blue | Yellow | Black | NoColor
 
 type intelligence = AI | Human
 
@@ -23,7 +23,7 @@ let rec find_possible_card color num eff hand =
   | h::t -> begin
       if h.color = color then Some h else
       if h.value = num then Some h else
-      if h.effect = eff && h.effect <> No then Some h else
+      if h.effect = eff && h.effect <> NoEffect then Some h else
         find_possible_card color num eff t
     end
 
@@ -32,7 +32,7 @@ let dumbai_choose_card top_card hand =
   match exists_card with
   | None -> begin
       match (does_wild4_exist hand) with
-      | None -> {value = -1; color = No; effect = No; id = -1}
+      | None -> {value = -1; color = NoColor; effect = NoEffect; id = -1}
       | Some x -> x
     end
   | Some h -> h

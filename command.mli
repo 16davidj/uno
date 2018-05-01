@@ -26,3 +26,9 @@ type command =
  * card the user would like to place.
  * requires: [str] is a card in the player's hand. *)
 val parse : string -> command
+
+val get_args : string -> string
+
+val get_command : string -> string 
+
+val det_effect : int -> effect
