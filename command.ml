@@ -38,7 +38,6 @@ let get_args str =
 
 (* Helper function for parse_args, which shortens our code by determining the
  * effect of the int id of the card ONLY when d is between 50 and 80. *)
-
 let det_effect num : Player.effect =
   if num >= 50 && num < 80 then begin
     match num / 10 with
@@ -49,6 +48,8 @@ let det_effect num : Player.effect =
   end
   else NoEffect
 
+(* Parses an alternative user input and converts the color they typed in with
+ * the int id it's assigned to. *)
 let convert_color str =
   match str with
   | "yellow" -> 10
@@ -58,6 +59,8 @@ let convert_color str =
   | "black" -> 0
   | _ -> -1
 
+(* If the user types in "play red 4", this is applicable, and our parser is made
+ * to handle these cases as well. *)
 let convert_to_id arg =
   if String.contains arg ' ' then
     let get_color = get_command arg in let get_num_or_action = get_args arg in
