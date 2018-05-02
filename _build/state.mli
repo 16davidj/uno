@@ -1,3 +1,5 @@
+open Queue
+
 (* [state] is an abstract type representing the state of the game. *)
 type state
 
@@ -34,6 +36,9 @@ val turn : state -> int
 (* [next_turn] returns an int corresponding with which player's turn
  * it is for the next turn. 0 will represent the human's turn  *)
 val next_turn : state -> int
+
+(* [draw_ouke] returns the current draw_pile  *)
+val draw_pile : state -> card Queue.t
 
 (* [top_card] returns an object of type card that represents
  * the card played in the previous turn on top of the stack *)

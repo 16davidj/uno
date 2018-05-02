@@ -184,6 +184,8 @@ let init_state = {
 
 let turn s = s.turn
 
+let draw_pile s = s.draw_pile
+
 let next_turn s =
   if s.direction = Clockwise then
     if s.turn != 3 then
