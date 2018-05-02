@@ -31,7 +31,12 @@ open Command
     "command_3" >:: (fun _ -> assert_equal "" (get_args "Info"));
     "command_4" >:: (fun _ -> assert_equal "play" (get_command "PLaY    47"));
     "command_5" >:: (fun _ -> assert_equal "1" (get_args "Draw 1"));
+
     "command_a" >:: (fun _ -> assert_equal "red 4" (get_args "Play    red 4"));
+    "command_b" >:: (fun _ -> assert_equal "yellow draw2" (get_args "Play    yellow draw2"));
+    "command_c" >:: (fun _ -> assert_equal "green 0" (get_args "Play    GREEn 0"));
+    "command_d" >:: (fun _ -> assert_equal "black wild" (get_args "Play BLACK WILD"));
+    "command_e" >:: (fun _ -> assert_equal "blue reverse" (get_args "Play blue Reverse"));
 
     "command_6" >:: (fun _ -> assert_equal (Plus) (det_effect 55));
     "command_7" >:: (fun _ -> assert_equal (Skip) (det_effect 69));
@@ -45,7 +50,11 @@ open Command
     "parse_4" >:: (fun _ -> assert_equal (Play card5) (parse "play 46"));
     "parse_5" >:: (fun _ -> assert_equal (Play card3) (parse "play 18"));
 
-    "parse_i" >:: (fun _ -> assert_equal (Play card1) (parse "Play red 4"));
+    "parse_a" >:: (fun _ -> assert_equal (Play card1) (parse "Play red 4"));
+    "parse_b" >:: (fun _ -> assert_equal (Play card3) (parse "Play yeLLoW 8"));
+    "parse_c" >:: (fun _ -> assert_equal (Play card4) (parse "Play       gReen 2"));
+    "parse_d" >:: (fun _ -> assert_equal (Play ncard) (parse "Play 4 red "));
+    "parse_e" >:: (fun _ -> assert_equal (Play ncard) (parse "Play wild"));
   ]
 
 let suite = "Uno test suite" >::: tests
