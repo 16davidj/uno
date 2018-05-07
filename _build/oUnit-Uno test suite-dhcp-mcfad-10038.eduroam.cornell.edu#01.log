@@ -1,51 +1,54 @@
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:0:play_44.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:0:play_44 is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:0:play_44.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:2:play_22.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:2:play_22 is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:2:play_22.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:4:play_-1.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:4:play_-1 is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:4:play_-1.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:6:command_2.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:6:command_2 is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:6:command_2.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:8:command_4.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:8:command_4 is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:8:command_4.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:10:command_a.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:10:command_a is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:10:command_a.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:12:command_c.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:12:command_c is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:12:command_c.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:14:command_e.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:14:command_e is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:14:command_e.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:16:command_7.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:16:command_7 is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:16:command_7.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:18:command_9.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:18:command_9 is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:18:command_9.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:20:parse_1.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:20:parse_1 is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:20:parse_1.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:22:parse_3.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:22:parse_3 is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:22:parse_3.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:23:parse_4.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:23:parse_4 is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:23:parse_4.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:26:parse_b.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:26:parse_b is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:26:parse_b.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:27:parse_c.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:27:parse_c is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:27:parse_c.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:30:user_hand.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:30:user_hand is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:30:user_hand.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:33:ai3_hand.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:33:ai3_hand is successful.
-2018-05-02T02:25:05+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:33:ai3_hand.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:0:play_44.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:0:play_44 is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:0:play_44.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:2:play_22.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:2:play_22 is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:2:play_22.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:4:play_-1.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:4:play_-1 is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:4:play_-1.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:7:command_3.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:7:command_3 is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:7:command_3.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:9:command_5.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:9:command_5 is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:9:command_5.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:11:command_b.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:11:command_b is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:11:command_b.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:13:command_d.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:13:command_d is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:13:command_d.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:14:command_e.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:14:command_e is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:14:command_e.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:16:command_7.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:16:command_7 is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:16:command_7.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:18:command_9.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:18:command_9 is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:18:command_9.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:20:parse_1.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:20:parse_1 is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:20:parse_1.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:22:parse_3.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:22:parse_3 is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:22:parse_3.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:24:parse_5.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:24:parse_5 is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:24:parse_5.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:26:parse_b.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:26:parse_b is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:26:parse_b.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:28:parse_d.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:28:parse_d is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:28:parse_d.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:30:user_hand.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:30:user_hand is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:30:user_hand.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:32:ai2_hand.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:32:ai2_hand is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:32:ai2_hand.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Start test Uno test suite:34:next_turn.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: Test Uno test suite:34:next_turn is successful.
+2018-05-02T04:22:30+00:00 dhcp-mcfad-10038.eduroam.cornell.edu#01 I: End test Uno test suite:34:next_turn.

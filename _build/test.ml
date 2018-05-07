@@ -63,7 +63,7 @@ open State
     "ai3_hand" >:: (fun _ -> assert_equal 7 (List.length (ai3_hand init_state)));
 
     "next_turn" >:: (fun _ -> assert_equal 1 (next_turn init_state));
-    "draw_pile_length" >:: (fun _ -> assert_equal 79 (Queue.length (draw_pile init_state)));
+    "draw_pile_length" >:: (fun _ -> assert_equal 80 (Queue.length (draw_pile init_state)));
 
   ]
 
