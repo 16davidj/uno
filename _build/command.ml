@@ -5,6 +5,7 @@ open Player
 type command =
   | Play of card
   | Draw of int
+  | Choose of color
   | Info
   | Hand
   | Challenge
@@ -59,6 +60,14 @@ let convert_color str =
   | "black" -> 0
   | _ -> -1
 
+let str_to_color str =
+  match str with
+  | "yellow" -> Yellow
+  | "green" -> Green
+  | "blue" -> Blue
+  | "red" -> Red
+  | _ -> NoColor
+
 (* If the user types in "play red 4", this is applicable, and our parser is made
  * to handle these cases as well. *)
 let convert_to_id arg =
@@ -110,6 +119,7 @@ let parse str =
   match (get_command str) with
   | "play" -> Play (parse_args (get_args str))
   | "draw" -> Draw (int_of_string (get_args str))
+  | "choose" -> Choose (str_to_color (get_args str))
   | "info" -> Info
   | "hand" -> Hand
   | "challenge" -> Challenge
