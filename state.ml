@@ -2,26 +2,15 @@ open List
 open Stack
 open Player
 
-(* [effect] represents the type of special effect a card has. *)
-type effect = Plus | Skip | Reverse | NoEffect | Wild | Wild4
-
-(* [color] represents the color of a card *)
-type color = Red | Green | Blue | Yellow | Black | NoColor
-
-type card = Player.card
-
-type player = Player.player
-
 type direction = Clockwise | Counter
 
 type state = {
   (* size of list 3, where index is the value corresponding to the players
   eg. 0 is the user *)
-  players : player list;
-  draw_pile : card Queue.t;
-  played_pile : card Stack.t;
-  current_color: color;
-  current_player: player;
+  players : Player.player list;
+  draw_pile : Player.card Queue.t;
+  played_pile : Player.card Stack.t;
+  current_player: Player.player;
   direction: direction;
   turn: int
 }
@@ -87,10 +76,10 @@ let all_cards = [(0, {value = 0; color = Red; effect = NoEffect; id = 40});
                (54, {value = -1; color = Black; effect = Wild; id = 80});
                (55, {value = -1; color = Black; effect = Wild; id = 80});
                (*the four wilds +4*)
-               (56, {value = -1; color = Black; effect = Wild; id = 90});
-               (57, {value = -1; color = Black; effect = Wild; id = 90});
-               (58, {value = -1; color = Black; effect = Wild; id = 90});
-               (59, {value = -1; color = Black; effect = Wild; id = 90});
+               (56, {value = -1; color = Black; effect = Wild4; id = 90});
+               (57, {value = -1; color = Black; effect = Wild4; id = 90});
+               (58, {value = -1; color = Black; effect = Wild4; id = 90});
+               (59, {value = -1; color = Black; effect = Wild4; id = 90});
 
               (60, {value = 1; color = Red; effect = NoEffect; id = 41});
               (61, {value = 2; color = Red; effect = NoEffect; id = 42});
@@ -192,6 +181,12 @@ let current_player s = s.current_player
 let direction s = s.direction
 let turn s = s.turn
 
+let current_player s = s.current_player
+
+let is_counter s = match s.direction with
+  | Counter -> true
+  | _ -> false
+
 let next_turn s =
   if s.direction = Clockwise then
     if s.turn != 3 then
@@ -210,7 +205,7 @@ let prev_turn s =
     s.turn - 1
   else 3
 
-let rec win_help (lst: player list) = match lst with
+let rec win_help (lst: Player.player list) = match lst with
   | [] -> -1
   | h :: t -> if (List.length h.hand = 0) then h.id
     else win_help t

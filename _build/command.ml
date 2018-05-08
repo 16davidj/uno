@@ -5,10 +5,9 @@ open Player
 type command =
   | Play of card
   | Draw of int
+  | Choose of color
   | Info
-  | Hand
-  | Challenge
-  | UNO
+  | Uno of card
   | NA
   | Quit
 
@@ -58,6 +57,14 @@ let convert_color str =
   | "red" -> 40
   | "black" -> 0
   | _ -> -1
+
+let str_to_color str =
+  match str with
+  | "yellow" -> Yellow
+  | "green" -> Green
+  | "blue" -> Blue
+  | "red" -> Red
+  | _ -> NoColor
 
 (* If the user types in "play red 4", this is applicable, and our parser is made
  * to handle these cases as well. *)
@@ -110,27 +117,8 @@ let parse str =
   match (get_command str) with
   | "play" -> Play (parse_args (get_args str))
   | "draw" -> Draw (int_of_string (get_args str))
+  | "choose" -> Choose (str_to_color (get_args str))
   | "info" -> Info
-  | "hand" -> Hand
-  | "challenge" -> Challenge
-  | "uno" -> UNO
+  | "uno" -> Uno (parse_args (get_args str))
   | "quit" -> Quit
   | _ -> NA
-
-(* let rec repl s =
-   if get_winner s <> 0 then print_endline "Game is over" else
-   let user_input = read_line() in
-   try
-    match parse user_input with
-    | Play i -> let new_state = State.update_state (parse user_input) s in
-                if new_state = s then print_endline "Invalid card value"; repl s
-                else repl new_state
-    | Draw ->
-    | Info ->
-    | Hand ->
-    | Challenge ->
-    | Uno ->
-    | Quit -> exit 0
-    | NA ->
-   with
-    | _ -> print_endline "Not a valid input. Try again"; repl s  *)

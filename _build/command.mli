@@ -13,10 +13,9 @@ type command =
                                * W:       80, 81, 82, 83
                                * W4:      90, 91, 92, 93*)
   | Draw of int             (* draws a card from the draw pile and place it in your hand *)
+  | Choose of color
   | Info 										(* prints information about the state of the game *)
-  | Hand 										(* prints information about your hand *)
-  | Challenge               (* valid command only when a WILD +4 is played *)
-  | UNO                     (* NOT TOO SURE how this will be implemented since the user
+  | Uno of card             (* NOT TOO SURE how this will be implemented since the user
                              * would have to type in 2 commands *)
   | NA                      (* For invalid commands *)
   | Quit                    (* Quit the game *)
