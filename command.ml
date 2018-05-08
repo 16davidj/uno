@@ -119,12 +119,6 @@ let parse str =
   | "draw" -> Draw (int_of_string (get_args str))
   | "choose" -> Choose (str_to_color (get_args str))
   | "info" -> Info
-<<<<<<< HEAD
-  | "uno" -> UNO
-=======
-  | "hand" -> Hand
-  | "challenge" -> Challenge
-  | "uno" -> UNO (parse_args (get_args str))
->>>>>>> 40108163f02eb6e1f144b3bb4324c40785aec736
+  | "uno" -> Uno (parse_args (get_args str))
   | "quit" -> Quit
   | _ -> NA

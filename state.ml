@@ -8,19 +8,15 @@ type effect = Plus | Skip | Reverse | NoEffect | Wild | Wild4
 (* [color] represents the color of a card *)
 type color = Red | Green | Blue | Yellow | Black | NoColor
 
-type card = Player.card
-
-type player = Player.player
-
 type direction = Clockwise | Counter
 
 type state = {
   (* size of list 3, where index is the value corresponding to the players
   eg. 0 is the user *)
-  players : player list;
-  draw_pile : card Queue.t;
-  played_pile : card Stack.t;
-  current_player: player;
+  players : Player.player list;
+  draw_pile : Player.card Queue.t;
+  played_pile : Player.card Stack.t;
+  current_player: Player.player;
   direction: direction;
   turn: int
 }
@@ -186,6 +182,12 @@ let turn s = s.turn
 
 let draw_pile s = s.draw_pile
 
+let current_player s = s.current_player
+
+let is_counter s = match s.direction with 
+  | Counter -> true
+  | _ -> false
+
 let next_turn s =
   if s.direction = Clockwise then
     if s.turn != 3 then
@@ -197,7 +199,7 @@ let next_turn s =
 
 let top_card s = top s.played_pile
 
-let rec win_help (lst: player list) = match lst with
+let rec win_help (lst: Player.player list) = match lst with
   | [] -> -1
   | h :: t -> if (List.length h.hand = 0) then h.id
     else win_help t

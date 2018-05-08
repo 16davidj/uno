@@ -1,5 +1,3 @@
-open State
-
 type effect = Skip | Plus | Reverse | NoEffect | Wild | Wild4
 
 (* [color] represents the color of a card *)
@@ -77,19 +75,8 @@ let most_color tup =
     if (max (max (max y g) b) r) = b then 3 else
     if (max (max (max y g) b) r) = r then 4 else 5
 
-let find_best_card hand color top_card num_h =
+let find_best_card hand color top_card num_h = failwith("unimplemented")
 
 
 let smartai_choose_card top_card hand state =
-  let get_human = List.find (fun x -> x.id = 0) state.players in
-  let num_h_cards = List.length get_human.hand in
-  let possible_plays = get_possible_list hand top_card [] in
-  let curr_hand_stats = color_count possible_plays (0,0,0,0,0) in
-  begin
-    match most_color (curr_hand_stats) with
-    | 1 -> find_best_card possible_plays Yellow top_card num_h_cards
-    | 2 -> find_best_card possible_plays Green top_card num_h_cards
-    | 3 -> find_best_card possible_plays Blue top_card num_h_cards
-    | 4 -> find_best_card possible_plays Red top_card num_h_cards
-    | _ ->
-  end
+  failwith("unimplemented")

@@ -1,6 +1,10 @@
 open State
 open Command
 open Player
+open Graphics
+open Gui
+
+let rec loop () = loop ()
 
 let info = "UNO info goes here"
 
@@ -16,8 +20,8 @@ let rec repl_loop input state =
   | NA -> print_endline("\n**Console**: not a valid command"); repl_loop (read_line ()) state;
 *)
 
-  let main () = Graphics.open_graph " 1280x720";
-    Graphics.set_window_title "Uno";
+  let main () = open_graph " 1280x720";
+    set_window_title "Uno";
     set_color 0xb30000;
     fill_rect 0 0 1280 720;
     (*drawing the draw pile *)
@@ -59,6 +63,7 @@ let rec repl_loop input state =
     draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 390;
     draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 410;
 
-    draw_human_hand (init_state);
+    draw_state init_state;
+    loop ()
 
     let () = main ()
