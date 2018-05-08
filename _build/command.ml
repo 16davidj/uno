@@ -7,9 +7,7 @@ type command =
   | Draw of int
   | Choose of color
   | Info
-  | Hand
-  | Challenge
-  | UNO
+  | Uno of card
   | NA
   | Quit
 
@@ -121,26 +119,6 @@ let parse str =
   | "draw" -> Draw (int_of_string (get_args str))
   | "choose" -> Choose (str_to_color (get_args str))
   | "info" -> Info
-  | "hand" -> Hand
-  | "challenge" -> Challenge
   | "uno" -> UNO
   | "quit" -> Quit
   | _ -> NA
-
-(* let rec repl s =
-   if get_winner s <> 0 then print_endline "Game is over" else
-   let user_input = read_line() in
-   try
-    match parse user_input with
-    | Play i -> let new_state = State.update_state (parse user_input) s in
-                if new_state = s then print_endline "Invalid card value"; repl s
-                else repl new_state
-    | Draw ->
-    | Info ->
-    | Hand ->
-    | Challenge ->
-    | Uno ->
-    | Quit -> exit 0
-    | NA ->
-   with
-    | _ -> print_endline "Not a valid input. Try again"; repl s  *)

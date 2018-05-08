@@ -1,6 +1,4 @@
 ### Starting build.
-# Target: gui.ml.depends, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), extension:ml, file:gui.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -modules gui.ml > gui.ml.depends
 # Target: command.mli.depends, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), extension:mli, file:command.mli, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -modules command.mli > command.mli.depends # cached
 # Target: player.ml.depends, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), extension:ml, file:player.ml, ocaml, ocamldep, quiet, traverse }
@@ -9,20 +7,13 @@ ocamlfind ocamldep -package oUnit -package Graphics -package Camlimages -package
 ocamlfind ocamlc -c -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -o player.cmo player.ml # cached
 # Target: command.cmi, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), byte, compile, extension:mli, file:command.mli, interf, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -o command.cmi command.mli # cached
-# Target: state.mli.depends, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), extension:mli, file:state.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -modules state.mli > state.mli.depends # cached
-# Target: state.cmi, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), byte, compile, extension:mli, file:state.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -o state.cmi state.mli # cached
-# Target: gui.cmo, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), byte, compile, extension:cmo, extension:ml, file:gui.cmo, file:gui.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -o gui.cmo gui.ml
 # Target: command.ml.depends, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), extension:ml, file:command.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -modules command.ml > command.ml.depends # cached
+ocamlfind ocamldep -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -modules command.ml > command.ml.depends
 # Target: command.cmo, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), byte, compile, extension:cmo, extension:ml, file:command.cmo, file:command.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -o command.cmo command.ml # cached
-# Target: state.ml.depends, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), extension:ml, file:state.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -modules state.ml > state.ml.depends # cached
-# Target: state.cmo, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), byte, compile, extension:cmo, extension:ml, file:state.cmo, file:state.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -o state.cmo state.ml # cached
-# Target: gui.byte, tags: { package(Camlimages), package(Camlimages.jpeg), package(Camlimages.png), package(Graphics), package(oUnit), byte, dont_link_with, extension:byte, file:gui.byte, link, ocaml, program, quiet, traverse }
-ocamlfind ocamlc -linkpkg -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg player.cmo command.cmo state.cmo gui.cmo -o gui.byte
-# Compilation successful.
+ocamlfind ocamlc -c -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -o command.cmo command.ml
++ ocamlfind ocamlc -c -package oUnit -package Graphics -package Camlimages -package Camlimages.png -package Camlimages.jpeg -o command.cmo command.ml
+File "command.ml", line 122, characters 13-16:
+Error: This variant expression is expected to have type command
+       The constructor UNO does not belong to type command
+Command exited with code 2.
+# Compilation unsuccessful.

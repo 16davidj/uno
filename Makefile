@@ -8,5 +8,6 @@ compile:
 	ocamlbuild -use-ocamlfind player.cmo
 	ocamlbuild -use-ocamlfind state.cmo
 	ocamlbuild -use-ocamlfind command.cmo
+	ocamlbuild -use-ocamlfind main.cmo
 play:
-	ocamlbuild -use-ocamlfind gui.byte && ./gui.byte
+	ocamlbuild -use-ocamlfind main.byte && ./main.byte

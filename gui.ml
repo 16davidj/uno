@@ -59,66 +59,50 @@ let image_of grpimg =
   done;
   img
 
-let () = Graphics.open_graph " 1280x720";
-  Graphics.set_window_title "Uno";
-  set_color 0xb30000;
-  fill_rect 0 0 1280 720;
-  (*drawing the draw pile *)
-  draw_image (Png.load_as_rgb24 "assets/draw.png" []) 850 300;
-  draw_image (Png.load_as_rgb24 "assets/draw.png" []) 847 297;
-  draw_image (Png.load_as_rgb24 "assets/draw.png" []) 844 294;
-  draw_image (Png.load_as_rgb24 "assets/draw.png" []) 841 291;
+let effect_to_str ef = match ef with
+  | Plus 0 -> "DrawTwo"
+  | Skip -> "Skip"
+  | Reverse -> "Reverse"
+  | Wild -> "wild"
+  | Wild4 -> "drawFour"
+  | _ -> "noeffect"
 
-  set_color black; moveto 450 185; draw_string "Player 1";
-  draw_image (Png.load_as_rgb24 "assets/player1.png" []) 425 75;
-  draw_image (Png.load_as_rgb24 "assets/cards/blue0.png" []) 535 75;
-  draw_image (Png.load_as_rgb24 "assets/cards/yellow3.png" []) 565 75;
-  draw_image (Png.load_as_rgb24 "assets/cards/wild.png" []) 595 75;
-  draw_image (Png.load_as_rgb24 "assets/cards/greenSkip.png" []) 625 75;
-  draw_image (Png.load_as_rgb24 "assets/cards/drawFour.png" []) 655 75;
-  draw_image (Png.load_as_rgb24 "assets/cards/blue6.png" []) 685 75;
-  draw_image (Png.load_as_rgb24 "assets/cards/red8.png" []) 715 75;
+let color_to_str col = match col with
+  | Blue -> "blue"
+  | Yellow -> "yellow"
+  | Green -> "green"
+  | Red -> "red"
+  | Black -> "black"
+  | _ -> failwith("nocolor")
 
-  moveto 1050 185; draw_string "Player 2";
-  draw_image (Png.load_as_rgb24 "assets/player2.png" []) 1025 205;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 315;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 335;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 355;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 375;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 395;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 415;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 435;
+let card_to_str card = if card.value != -1 then
+    "assets/cards/" ^ (color_to_str card.color) ^ (string_of_int card.value) ^ ".png"
+  else if card.color = Black then
+    "assets/cards/" ^ effect_to_str (card.effect) ^ ".png"
+  else "assets/cards/" ^ (color_to_str card.color) ^ (effect_to_str (card.effect)) ^ ".png"
 
-  moveto 450 700; draw_string "Player 3";
-  draw_image (Png.load_as_rgb24 "assets/player3.png" []) 425 590;
-  draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 535 589;
-  draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 555 589;
-  draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 575 589;
-  draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 595 589;
-  draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 615 589;
-  draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 635 589;
-  draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 655 589;
+let cardlst_to_png s = let human = List.hd s.players in
+  List.map (fun card -> Png.load_as_rgb24 (card_to_str card) []) human.hand
 
-  moveto 250 160; draw_string "Frank";
-  draw_image (Png.load_as_rgb24 "assets/frank.png" []) 225 175;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 290;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 310;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 330;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 350;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 370;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 390;
-  draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 410;
+(* x-coordinate should always start at 535 *)
+let rec draw_human_hand img_lst x = match img_lst with
+  | [] -> ();
+  | h :: t -> draw_image h x 75; draw_human_hand t (x+30);
 
+let draw_state s =
+  draw_human_hand (cardlst_to_png s) 535;
+
+  moveto 10 10;
+  draw_string (s.current_player.name);
   (* direction arrows *)
-  set_line_width 6;
-  set_color green;
-  draw_arc 640 360 100 100 (-55) 55;
-  draw_segments (Array.of_list [697, 443, 725, 435]);
-  draw_segments (Array.of_list [697, 443, 700, 420]);
-
-  set_color black;
-  draw_arc 550 360 100 100 125 235;
-  draw_segments (Array.of_list [495, 279, 490, 305]);
-  draw_segments (Array.of_list [495, 279, 471, 277]);
-
-  loop ()
+  if(s.direction = Counter) then
+    set_line_width 6;
+    set_color green;
+    draw_arc 640 360 100 100 (-55) 55;
+    draw_segments (Array.of_list [697, 443, 725, 435]);
+    draw_segments (Array.of_list [697, 443, 700, 420]);
+  else
+    set_color black;
+    draw_arc 550 360 100 100 125 235;
+    draw_segments (Array.of_list [495, 279, 490, 305]);
+    draw_segments (Array.of_list [495, 279, 471, 277]);

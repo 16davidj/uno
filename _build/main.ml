@@ -61,4 +61,4 @@ let rec repl_loop input state =
 
     draw_human_hand (init_state);
 
-    let () = main ();
+    let () = main ()

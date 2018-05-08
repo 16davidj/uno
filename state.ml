@@ -204,4 +204,4 @@ let rec win_help (lst: player list) = match lst with
 
 let get_winner s = win_help s.players
 
-let update_state cmd p = failwith("unimplemented")
+let update_state cmd s = failwith("unimplemented")
