@@ -12,7 +12,7 @@ type command =
                                * Reverse: 70 + color value/10
                                * W:       80, 81, 82, 83
                                * W4:      90, 91, 92, 93*)
-  | Draw of int             (* draws a card from the draw pile and place it in your hand *)
+  | Draw           (* draws a card from the draw pile and place it in your hand *)
   | Choose of color
   | Info 										(* prints information about the state of the game *)
   | Uno of card             (* NOT TOO SURE how this will be implemented since the user
