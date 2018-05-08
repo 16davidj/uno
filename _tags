@@ -1,1 +1,1 @@
-true: package(oUnit)
+true: package(oUnit), package(Graphics), package(Camlimages), package(Camlimages.png), package(Camlimages.jpeg)
