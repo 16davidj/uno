@@ -4,10 +4,10 @@ open Player
 
 type command =
   | Play of card
-  | Draw of int
+  | Draw
   | Choose of color
-  | Info
   | Uno of card
+  | Info
   | NA
   | Quit
 
@@ -116,9 +116,9 @@ let rec parse_args arg =
 let parse str =
   match (get_command str) with
   | "play" -> Play (parse_args (get_args str))
-  | "draw" -> Draw (int_of_string (get_args str))
-  | "choose" -> Choose (str_to_color (get_args str))
-  | "info" -> Info
+  | "draw" -> Draw
+  | "choose" -> failwith("unimplemented")
   | "uno" -> Uno (parse_args (get_args str))
+  | "info" -> Info
   | "quit" -> Quit
   | _ -> NA

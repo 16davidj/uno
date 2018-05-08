@@ -29,6 +29,7 @@ val init_state : state
  * it is in the current state. 0 will be human's turn  *)
 val turn : state -> int
 
+
 (* [next_turn] returns an int corresponding with which player's turn
  * it is for the next turn. 0 will represent the human's turn  *)
 val next_turn : state -> int

@@ -10,6 +10,7 @@ type state = {
   players : Player.player list;
   draw_pile : Player.card Queue.t;
   played_pile : Player.card Stack.t;
+  current_color: Player.color;
   current_player: Player.player;
   direction: direction;
   turn: int
@@ -212,6 +213,11 @@ let rec win_help (lst: Player.player list) = match lst with
 
 let get_winner s = win_help s.players
 
+let top_card s = top s.played_pile
+
+let update_state cmd s = failwith("unimplemented")
+
+    (*
 let rec remove_card_from_hand hand card =
 match hand with
 | h::t ->
@@ -322,7 +328,7 @@ match card.effect with
   }
 | _ -> s
 
-let check_playability color c1 c2 =
+let check_playability color c1 c2 = failwith("unimplemented")
 
 let update_state_color color s =
 {
@@ -343,3 +349,4 @@ match cmd with
   update_state_play_card card s;
 | Choose color -> update_state_color color s;
 | _ -> s
+*)

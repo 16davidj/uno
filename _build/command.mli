@@ -1,7 +1,7 @@
 open Player
 (* [command] represents a command input by a player. *)
 type command =
-  | Play of card             (* plays a card in your hand with the int "id" you specify.
+  | Play of card             (* Plays a card in your hand with the int "id" you specify.
                              * "id" calculated from the string as follows:
                                * Y:       10 + face/action value
                                * G:       20 + face/action value
@@ -12,11 +12,11 @@ type command =
                                * Reverse: 70 + color value/10
                                * W:       80, 81, 82, 83
                                * W4:      90, 91, 92, 93*)
-  | Draw of int             (* draws a card from the draw pile and place it in your hand *)
-  | Choose of color
+  | Draw                    (* Draws a card from the draw pile and place it in your hand *)
+  | Choose of color         (* Changes the color of the play pile *)
+  | Uno of card             (* Declares "UNO" and plays a card in your hand with
+                              * the int "id" you specify. *)
   | Info 										(* prints information about the state of the game *)
-  | Uno of card             (* NOT TOO SURE how this will be implemented since the user
-                             * would have to type in 2 commands *)
   | NA                      (* For invalid commands *)
   | Quit                    (* Quit the game *)
 
