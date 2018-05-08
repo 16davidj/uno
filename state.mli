@@ -47,7 +47,7 @@ val top_card : state -> card
 (* [update_state] returns an object of type state that represents
  * the new state of the game after player (user) chooses a card
  * from hand (card list) *)
-val update_state : Command.command -> player -> state
+val update_state : Command.command -> state -> state
 
 (* [get_winner] returns an int corresponding to a player if
  * there is a winner in the current state, returns -1 otherwise *)
