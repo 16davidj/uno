@@ -2,12 +2,6 @@ open List
 open Stack
 open Player
 
-(* [effect] represents the type of special effect a card has. *)
-type effect = Plus | Skip | Reverse | NoEffect | Wild | Wild4
-
-(* [color] represents the color of a card *)
-type color = Red | Green | Blue | Yellow | Black | NoColor
-
 type direction = Clockwise | Counter
 
 type state = {
@@ -184,7 +178,7 @@ let draw_pile s = s.draw_pile
 
 let current_player s = s.current_player
 
-let is_counter s = match s.direction with 
+let is_counter s = match s.direction with
   | Counter -> true
   | _ -> false
 
