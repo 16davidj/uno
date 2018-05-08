@@ -9,7 +9,7 @@ type command =
   | Info
   | Hand
   | Challenge
-  | UNO
+  | UNO of card
   | NA
   | Quit
 
@@ -123,7 +123,7 @@ let parse str =
   | "info" -> Info
   | "hand" -> Hand
   | "challenge" -> Challenge
-  | "uno" -> UNO
+  | "uno" -> UNO (parse_args (get_args str))
   | "quit" -> Quit
   | _ -> NA
 
