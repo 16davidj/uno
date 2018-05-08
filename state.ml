@@ -86,10 +86,10 @@ let all_cards = [(0, {value = 0; color = Red; effect = NoEffect; id = 40});
                (54, {value = -1; color = Black; effect = Wild; id = 80});
                (55, {value = -1; color = Black; effect = Wild; id = 80});
                (*the four wilds +4*)
-               (56, {value = -1; color = Black; effect = Wild; id = 90});
-               (57, {value = -1; color = Black; effect = Wild; id = 90});
-               (58, {value = -1; color = Black; effect = Wild; id = 90});
-               (59, {value = -1; color = Black; effect = Wild; id = 90});
+               (56, {value = -1; color = Black; effect = Wild4; id = 90});
+               (57, {value = -1; color = Black; effect = Wild4; id = 90});
+               (58, {value = -1; color = Black; effect = Wild4; id = 90});
+               (59, {value = -1; color = Black; effect = Wild4; id = 90});
 
               (60, {value = 1; color = Red; effect = NoEffect; id = 41});
               (61, {value = 2; color = Red; effect = NoEffect; id = 42});
