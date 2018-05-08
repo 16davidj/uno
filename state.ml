@@ -167,14 +167,19 @@ let init_state = {
       players = [user; dumbai1; dumbai2; dumbai3];
       draw_pile = lst_to_q drawn4 empty;
       played_pile = Stack.create ();
+      current_color = NoColor;
       current_player = user;
       direction = Clockwise;
       turn = 0;
     }
 
-let turn s = s.turn
-
+let players s = s.players
 let draw_pile s = s.draw_pile
+let played_pile s = s.played_pile
+let current_color s = s.current_color
+let current_player s = s.current_player
+let direction s = s.direction
+let turn s = s.turn
 
 let current_player s = s.current_player
 
@@ -191,7 +196,14 @@ let next_turn s =
     s.turn - 1
   else 3
 
-let top_card s = top s.played_pile
+let prev_turn s =
+  if s.direction = Counter then
+    if s.turn != 3 then
+      s.turn + 1
+    else 0
+  else if s.turn != 0 then
+    s.turn - 1
+  else 3
 
 let rec win_help (lst: Player.player list) = match lst with
   | [] -> -1
@@ -200,4 +212,134 @@ let rec win_help (lst: Player.player list) = match lst with
 
 let get_winner s = win_help s.players
 
-let update_state cmd s = failwith("unimplemented")
+let rec remove_card_from_hand hand card =
+match hand with
+| h::t ->
+  if h.id = card.id then t
+  else h::(remove_card_from_hand t card)
+| [] -> []
+
+let rec remove_card_from_player players id card =
+match players with
+| p::others ->
+  if p.id = id then let hand' = remove_card_from_hand p.hand card in
+  let p' = {id = p.id; name = p.name; hand = hand';
+    intelligence = p.intelligence} in p'::others
+  else p::(remove_card_from_player others id card)
+| [] -> []
+
+let rec add_card_to_player players id card =
+match players with
+| p::others ->
+  if p.id = id then let p' = {id = p.id; name = p.name; hand = card::(p.hand);
+       intelligence = p.intelligence} in p'::others
+  else p::(add_cards_to_player others id card)
+| [] -> []
+
+let rec add_cards_to_player players id cards =
+match cards with
+| [] -> players
+| h::t -> add_cards_to_player (add_card_to_player players id h) id t
+
+let reverse dir =
+match dir with
+| Clockwise -> Counter
+| Counter -> Clockwise
+
+let update_state_play_card card s =
+match card.effect with
+| NoEffect ->
+  {
+    players = remove_card_from_player s.players s.current_player card;
+    draw_pile = s.draw_pile;
+    played_pile = push card s.played_pile;
+    current_color = card.color;
+    current_player = nth players (next_turn s)
+    direction = s.direction;
+    turn = next_turn s;
+  }
+| Skip ->
+  {
+    players = remove_card_from_player s.players s.current_player card;
+    draw_pile = s.draw_pile;
+    played_pile = push card s.played_pile;
+    current_color = card.color;
+    current_player = nth players (next_turn (next_turn s))
+    direction = s.direction;
+    turn = next_turn (next_turn s);
+  }
+| Plus ->
+  let c1 = pop s.draw_pile in
+  let c2 = pop s.draw_pile in
+  let plus_cards = c1::c2::[] in
+  let nextp = nth players (next_turn s) in
+  let players' = remove_card_from_player s.players s.current_player card in
+  {
+    players = add_cards_to_player players' nextp plus_cards;
+    draw_pile = s.draw_pile;
+    played_pile = push card s.played_pile;
+    current_color = card.color;
+    current_player = nextp;
+    direction = s.direction;
+    turn = next_turn (next_turn s);
+  }
+| Reverse ->
+  {
+    players = remove_card_from_player s.players s.current_player card;
+    draw_pile = s.draw_pile;
+    played_pile = push card s.played_pile;
+    current_color = card.color;
+    current_player = nth players (prev_turn s)
+    direction = reverse s.direction;
+    turn = prev_turn s;
+  }
+| Wild ->
+  {
+    players = remove_card_from_player s.players s.current_player card;
+    draw_pile = s.draw_pile;
+    played_pile = push card s.played_pile;
+    current_color = Black;
+    current_player = nth players (next_turn s);
+    direction = s.direction;
+    turn = next_turn s.turn;
+  }
+| Wild4 ->
+  let c1 = pop s.draw_pile in
+  let c2 = pop s.draw_pile in
+  let c3 = pop s.draw_pile in
+  let c4 = pop s.draw_pile in
+  let plus_cards = c1::c2::c3::c4::[] in
+  let nextp = nth players (next_turn s) in
+  let players' = remove_card_from_player s.players s.current_player card in
+  {
+    players = add_cards_to_player players' nextp plus_cards;
+    draw_pile = s.draw_pile;
+    played_pile = push card s.played_pile;
+    current_color = Black;
+    current_player = s.current_player;
+    direction = s.direction;
+    turn = s.turn;
+  }
+| _ -> s
+
+let check_playability color c1 c2 =
+
+let update_state_color color s =
+{
+  players = s.players;
+  draw_pile = s.draw_pile;
+  played_pile = s.played_pile;
+  current_player = s.current_player;
+  direction = s.direction;
+  turn = s.turn;
+}
+
+let update_state cmd s =
+match cmd with
+| Play card ->
+  update_state_play_card card s;
+| Draw
+| Uno card ->
+  update_state_play_card card s;
+| Choose color -> update_state_color color s;
+| _ -> s
