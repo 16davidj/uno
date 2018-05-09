@@ -121,23 +121,30 @@ let draw_clock () = set_line_width 6;
   draw_segments (Array.of_list [495, 279, 490, 305]);
   draw_segments (Array.of_list [495, 279, 471, 277])
 
-let counter_circle () = set_color green; draw_counter (); set_color black; draw_clock()
+let convert_color col = match col with
+  | Red -> red
+  | Green -> green
+  | Blue -> blue
+  | Yellow -> yellow
+  | Black -> black
+  | NoColor -> white
 
-let clock_circle () = set_color green; draw_clock (); set_color black; draw_counter()
+let counter_circle s = set_color (convert_color (current_color s));
+  draw_counter (); set_color black; draw_clock()
 
-let draw_circle s = if is_counter s then counter_circle () else clock_circle ()
+let clock_circle s = set_color (convert_color (current_color s));
+  draw_clock (); set_color black; draw_counter()
+
+let draw_circle s = if is_counter s then counter_circle s else clock_circle s
 
 let draw_state s =
   (* direction arrows *)
   draw_circle s;
-
   draw_human_hand (cardlst_to_png s) 535;
   draw_ai1_hand (ai1_hand s) 315;
   draw_ai2_hand (ai2_hand s) 535;
   draw_ai3_hand (ai3_hand s) 290;
   draw_image (Png.load_as_rgb24 (card_to_str (top_card s)) []) 565 300;
-
-
   moveto 10 10;
   let curr = (current_player s) in
-  draw_string (curr.name);
+  draw_string ("Current player: " ^ curr.name);

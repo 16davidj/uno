@@ -18,8 +18,19 @@ let update_ai2_hand updated_s = fill_rect 525 589 535 108;
   draw_ai2_hand (ai2_hand updated_s) 535
 
 let update_ai3_hand updated_s = fill_rect 225 290 108 430;
-draw_ai3_hand (ai3_hand updated_s) 290
+  draw_ai3_hand (ai3_hand updated_s) 290
 
+let update_arrow updated_s = draw_circle (updated_s)
+
+let update_curr updated_s =
+  set_color 0xb30000;
+  fill_rect 10 10 200 10;
+  moveto 10 10;
+  set_color black;
+  let curr = (current_player updated_s) in draw_string ("Current player: " ^ curr.name)
+
+let update_stack updated_s =
+  draw_image (Png.load_as_rgb24 (card_to_str (top_card updated_s)) []) 565 300
 
 let update_hand old_s updated_s =
   set_color 0xb30000;
@@ -35,9 +46,11 @@ let update_hand old_s updated_s =
 
   let update_gui cmd old_s updated_s = match cmd with
   | Play c ->
-    draw_image (Png.load_as_rgb24 (card_to_str c) []) 565 300;
     update_hand old_s updated_s;
-  | Draw -> update_hand old_s updated_s;
+    update_arrow updated_s;
+    update_curr updated_s;
+    update_stack updated_s;
+  | Draw -> update_hand old_s updated_s; update_arrow updated_s; update_curr updated_s;
   | _ -> ()
 
 
@@ -85,6 +98,7 @@ let rec repl_loop input s = let updated_s = update_state (parse input) s in
     draw_string "Frank";
     draw_image (Png.load_as_rgb24 "assets/frank.png" []) 225 175;
 
+    init_pile ();
     draw_state init_state;
     repl_loop (read_line ()) init_state
 

@@ -159,17 +159,23 @@ let rec lst_to_q lst q = match lst with
   | [] -> q
   | (k, v):: t -> Queue.add v q; lst_to_q t q
 
-let user = {id = 0; name = "human"; hand = hand1; intelligence = Human;}
-let dumbai1 = {id = 1; name = "ai1"; hand = hand2; intelligence = AI;}
-let dumbai2 = {id = 2; name = "ai2"; hand = hand3; intelligence = AI;}
-let dumbai3 = {id = 3; name = "ai3"; hand = hand4; intelligence = AI;}
+let user = {id = 0; name = "You"; hand = hand1; intelligence = Human;}
+let dumbai1 = {id = 1; name = "Player 2"; hand = hand2; intelligence = AI;}
+let dumbai2 = {id = 2; name = "Player 3"; hand = hand3; intelligence = AI;}
+let dumbai3 = {id = 3; name = "Frank"; hand = hand4; intelligence = AI;}
 
 let empty = Queue.create ()
 
+let pile = Stack.create ()
+
+let init_draw = lst_to_q drawn4 empty
+
+let init_pile () = let x = Queue.pop init_draw in Stack.push x pile
+
 let init_state = {
   players = [user; dumbai1; dumbai2; dumbai3];
-  draw_pile = lst_to_q drawn4 empty;
-  played_pile = let x = Stack.create () in Stack.push x (Queue.pop (lst_to_q drawn4 empty));
+  draw_pile = init_draw;
+  played_pile = pile;
   current_color = Red;
   current_player = user;
   direction = Clockwise;
@@ -261,23 +267,17 @@ Stack.push card s.played_pile;
 let curr_player = s.current_player in
 match card.effect with
 | NoEffect ->
-  {
+  { s with
     players = remove_card_from_player s.players curr_player.id card;
-    draw_pile = s.draw_pile;
-    played_pile = s.played_pile;
     current_color = card.color;
     current_player = nth s.players (next_turn s);
-    direction = s.direction;
     turn = next_turn s;
   }
 | Skip ->
-  {
+  { s with
     players = remove_card_from_player s.players curr_player.id card;
-    draw_pile = s.draw_pile;
-    played_pile = s.played_pile;
     current_color = card.color;
     current_player = nth s.players (next_next_turn s);
-    direction = s.direction;
     turn = next_next_turn s;
   }
 | Plus ->
@@ -286,32 +286,24 @@ match card.effect with
   let plus_cards = c1::c2::[] in
   let nextp = nth s.players (next_turn s) in
   let players' = remove_card_from_player s.players curr_player.id card in
-  {
+  { s with
     players = add_cards_to_player players' nextp.id plus_cards;
-    draw_pile = s.draw_pile;
-    played_pile = s.played_pile;
     current_color = card.color;
     current_player = nextp;
-    direction = s.direction;
     turn = next_turn s;
   }
 | Reverse ->
-  {
+  { s with
     players = remove_card_from_player s.players curr_player.id card;
-    draw_pile = s.draw_pile;
-    played_pile = s.played_pile;
     current_color = card.color;
     current_player = nth s.players (prev_turn s);
     direction = reverse s.direction;
     turn = prev_turn s;
   }
 | Wild ->
-  {
+  { s with
     players = remove_card_from_player s.players curr_player.id card;
-    draw_pile = s.draw_pile;
-    played_pile = s.played_pile;
     current_color = Black;
-    current_player = s.current_player;
     direction = s.direction;
     turn = next_turn s;
   }
@@ -323,14 +315,9 @@ match card.effect with
   let plus_cards = c1::c2::c3::c4::[] in
   let nextp = nth s.players (next_turn s) in
   let players' = remove_card_from_player s.players curr_player.id card in
-  {
+  { s with
     players = add_cards_to_player players' nextp.id plus_cards;
-    draw_pile = s.draw_pile;
-    played_pile = s.played_pile;
     current_color = Black;
-    current_player = s.current_player;
-    direction = s.direction;
-    turn = s.turn;
   }
 | _ -> s
 
@@ -341,14 +328,8 @@ let check_playability color c1 c2 =
   else c2.effect = c1.effect
 
 let update_state_color color s =
-{
-  players = s.players;
-  draw_pile = s.draw_pile;
-  played_pile = s.played_pile;
+{ s with
   current_color = color;
-  current_player = s.current_player;
-  direction = s.direction;
-  turn = s.turn;
 }
 
 let add_2_to_prev_player s =
@@ -356,32 +337,19 @@ let c1 = pop s.draw_pile in
 let c2 = pop s.draw_pile in
 let plus_cards = c1::c2::[] in
 let prevp = nth s.players (prev_turn s) in
-{
+{ s with
   players = add_cards_to_player s.players prevp.id plus_cards;
-  draw_pile = s.draw_pile;
-  played_pile = s.played_pile;
-  current_color = s.current_color;
-  current_player = s.current_player;
-  direction = s.direction;
-  turn = s.turn;
 }
 
 let draw_card s =
 let c1 = pop s.draw_pile in
 let plus_cards = c1::[] in
 let curr_player = s.current_player in
-{
+{ s with
   players = add_cards_to_player s.players curr_player.id plus_cards;
-  draw_pile = s.draw_pile;
-  played_pile = s.played_pile;
-  current_color = s.current_color;
-  current_player = s.current_player;
-  direction = s.direction;
-  turn = s.turn;
 }
 
-let check_uno s =
-let curr_player = s.current_player in
+let check_uno s = let curr_player = s.current_player in
 List.length curr_player.hand = 1
 
 let update_state cmd s =

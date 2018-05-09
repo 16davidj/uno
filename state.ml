@@ -159,17 +159,23 @@ let rec lst_to_q lst q = match lst with
   | [] -> q
   | (k, v):: t -> Queue.add v q; lst_to_q t q
 
-let user = {id = 0; name = "human"; hand = hand1; intelligence = Human;}
-let dumbai1 = {id = 1; name = "ai1"; hand = hand2; intelligence = AI;}
-let dumbai2 = {id = 2; name = "ai2"; hand = hand3; intelligence = AI;}
-let dumbai3 = {id = 3; name = "ai3"; hand = hand4; intelligence = AI;}
+let user = {id = 0; name = "You"; hand = hand1; intelligence = Human;}
+let dumbai1 = {id = 1; name = "Player 2"; hand = hand2; intelligence = AI;}
+let dumbai2 = {id = 2; name = "Player 3"; hand = hand3; intelligence = AI;}
+let dumbai3 = {id = 3; name = "Frank"; hand = hand4; intelligence = AI;}
 
 let empty = Queue.create ()
 
+let pile = Stack.create ()
+
+let init_draw = lst_to_q drawn4 empty
+
+let init_pile () = let x = Queue.pop init_draw in Stack.push x pile
+
 let init_state = {
   players = [user; dumbai1; dumbai2; dumbai3];
-  draw_pile = lst_to_q drawn4 empty;
-  played_pile = Stack.create ();
+  draw_pile = init_draw;
+  played_pile = pile;
   current_color = Red;
   current_player = user;
   direction = Clockwise;

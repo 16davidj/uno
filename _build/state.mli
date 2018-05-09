@@ -29,6 +29,8 @@ val init_state : state
  * it is in the current state. 0 will be human's turn  *)
 val turn : state -> int
 
+val current_color : state -> Player.color
+
 
 (* [next_turn] returns an int corresponding with which player's turn
  * it is for the next turn. 0 will represent the human's turn  *)
@@ -37,6 +39,8 @@ val next_turn : state -> int
 val is_counter : state -> bool
 
 val current_player : state -> Player.player
+
+val init_pile : unit -> unit
 
 (* [draw_ouke] returns the current draw_pile  *)
 val draw_pile : state -> Player.card Queue.t
