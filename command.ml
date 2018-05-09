@@ -1,18 +1,14 @@
  (* An UNO module responsible for the text-based commands and
  * implementation for parsing of the commands. *)
 open Player
+(* open Ai *)
 
 type command =
   | Play of card
-  | Draw of int
+  | Draw
   | Choose of color
-<<<<<<< HEAD
   | Uno of card
   | Info
-=======
-  | Info
-  | Uno of card
->>>>>>> 4e3a3eb8aab3b3d1159bed6573469e948350ddd5
   | NA
   | Quit
 
@@ -42,7 +38,7 @@ let get_args str =
 
 (* Helper function for parse_args, which shortens our code by determining the
  * effect of the int id of the card ONLY when d is between 50 and 80. *)
-let det_effect num : Player.effect =
+let det_effect num =
   if num >= 50 && num < 80 then begin
     match num / 10 with
     | 5 -> Plus
@@ -122,7 +118,7 @@ let parse str =
   match (get_command str) with
   | "play" -> Play (parse_args (get_args str))
   | "draw" -> Draw
-  | "choose" -> Choose (parse_args (get_args str))
+  | "choose" -> failwith("unimplemented")
   | "uno" -> Uno (parse_args (get_args str))
   | "info" -> Info
   | "quit" -> Quit

@@ -2,6 +2,7 @@ open OUnit2
 open Player
 open Command
 open State
+open Ai
 
   let card1 = {value = 4; color = Red; effect = NoEffect; id = 44}
   let card2 = {value = 5; color = Blue; effect = NoEffect; id = 35}
@@ -21,11 +22,11 @@ open State
   let top_card3 = {value = 9; color = Blue; effect = NoEffect; id = 39}
 
   let tests = [
-    "play_44" >:: (fun _ -> assert_equal (card1) (dumbai_choose_card top_card0 hand1));
-    "play_35" >:: (fun _ -> assert_equal (card2) (dumbai_choose_card top_card0 hand2));
-    "play_22" >:: (fun _ -> assert_equal (card4) (dumbai_choose_card top_card1 hand1));
-    "play_46" >:: (fun _ -> assert_equal (card5) (dumbai_choose_card top_card2 hand2));
-    "play_-1" >:: (fun _ -> assert_equal (ncard) (dumbai_choose_card top_card0 hand3));
+    "play_44" >:: (fun _ -> assert_equal (Play card1) (dumbai_choose_card top_card0 hand1));
+    "play_35" >:: (fun _ -> assert_equal (Play card2) (dumbai_choose_card top_card0 hand2));
+    "play_22" >:: (fun _ -> assert_equal (Play card4) (dumbai_choose_card top_card1 hand1));
+    "play_46" >:: (fun _ -> assert_equal (Play card5) (dumbai_choose_card top_card2 hand2));
+    "play_-1" >:: (fun _ -> assert_equal (Draw) (dumbai_choose_card top_card0 hand3));
 
     "command_1" >:: (fun _ -> assert_equal "54" (get_args "Play    54"));
     "command_2" >:: (fun _ -> assert_equal "54" (get_args "play 54"));
@@ -39,11 +40,11 @@ open State
     "command_d" >:: (fun _ -> assert_equal "black wild" (get_args "Play BLACK WILD"));
     "command_e" >:: (fun _ -> assert_equal "blue reverse" (get_args "Play blue Reverse"));
 
-    "command_6" >:: (fun _ -> assert_equal (Plus) (det_effect 55));
+    (* "command_6" >:: (fun _ -> assert_equal (Plus) (det_effect 55));
     "command_7" >:: (fun _ -> assert_equal (Skip) (det_effect 69));
     "command_8" >:: (fun _ -> assert_equal (Reverse) (det_effect 70));
     "command_9" >:: (fun _ -> assert_equal (NoEffect) (det_effect 15));
-    "command_x" >:: (fun _ -> assert_equal (NoEffect) (det_effect 80));
+    "command_x" >:: (fun _ -> assert_equal (NoEffect) (det_effect 80)); *)
 
     "parse_1" >:: (fun _ -> assert_equal (Play card1) (parse "play 44"));
     "parse_2" >:: (fun _ -> assert_equal (Play ncard) (parse "play 235235"));
@@ -62,9 +63,8 @@ open State
     "ai2_hand" >:: (fun _ -> assert_equal 7 (List.length (ai2_hand init_state)));
     "ai3_hand" >:: (fun _ -> assert_equal 7 (List.length (ai3_hand init_state)));
 
-    "next_turn" >:: (fun _ -> assert_equal 1 (next_turn init_state));
+    "next_turn" >:: (fun _ -> assert_equal 1 (next_turn (init_state)));
     "draw_pile_length" >:: (fun _ -> assert_equal 80 (Queue.length (draw_pile init_state)));
-
   ]
 
 let suite = "Uno test suite" >::: tests
