@@ -63,9 +63,8 @@ open Ai
     "ai2_hand" >:: (fun _ -> assert_equal 7 (List.length (ai2_hand init_state)));
     "ai3_hand" >:: (fun _ -> assert_equal 7 (List.length (ai3_hand init_state)));
 
-    "next_turn" >:: (fun _ -> assert_equal 1 (next_turn init_state));
+    "next_turn" >:: (fun _ -> assert_equal 1 (next_turn (init_state)));
     "draw_pile_length" >:: (fun _ -> assert_equal 80 (Queue.length (draw_pile init_state)));
-
   ]
 
 let suite = "Uno test suite" >::: tests
