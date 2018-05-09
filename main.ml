@@ -4,8 +4,6 @@ open Player
 open Graphics
 open Gui
 
-let rec loop () = loop ()
-
 let info = "UNO info goes here"
 
 let update_user_hand updated_s = fill_rect 535 75 745 108;
@@ -22,12 +20,29 @@ let update_ai3_hand updated_s = fill_rect 225 290 108 430;
 
 let update_arrow updated_s = draw_circle (updated_s)
 
-let update_curr updated_s =
-  set_color 0xb30000;
-  fill_rect 10 10 200 10;
-  moveto 10 10;
-  set_color black;
-  let curr = (current_player updated_s) in draw_string ("Current player: " ^ curr.name)
+let update_turn updated_s = set_color green;
+  let p = current_player updated_s in match p.id with
+  | 0 -> moveto 450 185; draw_string "Player 1";
+         set_color black;
+    moveto 1050 185; draw_string "Player 2";
+    moveto 450 700; draw_string "Player 3";
+    moveto 250 160; draw_string "Frank";
+  | 1 -> moveto 1050 185; draw_string "Player 2";
+    set_color black;
+    moveto 450 185; draw_string "Player 1";
+    moveto 450 700; draw_string "Player 3";
+    moveto 250 160; draw_string "Frank";
+  | 2 -> moveto 450 700; draw_string "Player 3";
+    set_color black;
+    moveto 450 185; draw_string "Player 1";
+    moveto 1050 185; draw_string "Player 2";
+    moveto 250 160; draw_string "Frank";
+  | 3 -> moveto 250 160; draw_string "Frank";
+    set_color black;
+    moveto 450 185; draw_string "Player 1";
+    moveto 1050 185; draw_string "Player 2";
+    moveto 450 700; draw_string "Player 3";
+  | _ -> failwith("player does not exist")
 
 let update_stack updated_s =
   draw_image (Png.load_as_rgb24 (card_to_str (top_card updated_s)) []) 565 300
@@ -47,11 +62,11 @@ let update_hand old_s updated_s =
   | Play c ->
     update_hand old_s updated_s;
     update_arrow updated_s;
-    update_curr updated_s;
     update_stack updated_s;
-  | Draw -> update_hand old_s updated_s; update_arrow updated_s; update_curr updated_s;
+    update_turn updated_s
+  | Draw -> update_hand old_s updated_s; update_arrow updated_s;
+    update_turn updated_s;
   | _ -> ()
-
 
 let rec repl_loop input s = let updated_s = update_state (parse input) s in
   begin match (parse input) with
@@ -67,7 +82,6 @@ let rec repl_loop input s = let updated_s = update_state (parse input) s in
   | _ -> print_endline("\n**Console**: not a valid command");
     repl_loop (read_line ()) s;
   end
-
 
   let main () = open_graph " 1280x720";
     set_window_title "Uno";
@@ -100,6 +114,7 @@ let rec repl_loop input s = let updated_s = update_state (parse input) s in
     Random.self_init();
     init_pile ();
     draw_state init_state;
+    update_turn init_state;
     repl_loop (read_line ()) init_state
 
     let () = main ()

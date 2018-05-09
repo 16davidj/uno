@@ -5,8 +5,6 @@ open Images
 open Player
 open State
 
-let rec loop () = loop ()
-
 (* Note: this function was taken from the original source code of Camlimages,
    graphic_image.ml
  Source:https://bitbucket.org/camlspotter/camlimages/src/1611545463f493462aeafab65839c1112162559a?at=default*)
@@ -38,7 +36,6 @@ let array_of_image img =
             let {r = r; g = g; b = b} = Rgb24.unsafe_get bitmap j i in
             rgb r g b))
   | Rgba32 _ | Cmyk32 _ -> failwith "RGBA and CMYK not supported"
-
 
 let of_image img = Graphics.make_image (array_of_image img)
 
@@ -105,7 +102,7 @@ let rec draw_ai2_hand ai_hand x = begin match ai_hand with
     draw_ai2_hand t (x+20);
 end
 
-  (* start at 290 *)
+(* start at 290 *)
 let rec draw_ai3_hand ai_hand y = begin match ai_hand with
   | [] -> ();
   | h :: t -> draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 y;
@@ -145,6 +142,3 @@ let draw_state s = let s1 = update_state (Play init_card) s in
   draw_ai2_hand (ai2_hand s1) 535;
   draw_ai3_hand (ai3_hand s1) 290;
   draw_image (Png.load_as_rgb24 (card_to_str (top_card s1)) []) 565 300;
-  moveto 10 10;
-  let curr = (current_player s1) in
-  draw_string ("Current player: " ^ curr.name);
