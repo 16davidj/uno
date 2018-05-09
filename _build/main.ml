@@ -43,7 +43,6 @@ let update_hand old_s updated_s =
   else if ai3_hand old_s != ai3_hand updated_s then
     update_ai3_hand updated_s
 
-
   let update_gui cmd old_s updated_s = match cmd with
   | Play c ->
     update_hand old_s updated_s;

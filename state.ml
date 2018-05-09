@@ -166,19 +166,30 @@ let dumbai1 = {id = 1; name = "Player 2"; hand = hand2; intelligence = AI;}
 let dumbai2 = {id = 2; name = "Player 3"; hand = hand3; intelligence = AI;}
 let dumbai3 = {id = 3; name = "Frank"; hand = hand4; intelligence = AI;}
 
+let top_card s = Stack.top s.played_pile
+
 let empty = Queue.create ()
 
 let pile = Stack.create ()
 
 let init_draw = lst_to_q drawn4 empty
 
-let init_pile () = let x = Queue.pop init_draw in Stack.push x pile
+let rec get_init_card () =
+  let c = Queue.pop init_draw in
+  if c.effect = Wild then (get_init_card (Queue.push c init_draw))
+  else c
+
+let init_card = get_init_card ()
+
+let init_pile () = Stack.push (init_card) pile
+
+let init_color = init_card.color
 
 let init_state = {
   players = [user; dumbai1; dumbai2; dumbai3];
   draw_pile = init_draw;
   played_pile = pile;
-  current_color = Red;
+  current_color = init_color;
   current_player = user;
   direction = Clockwise;
   turn = 0;
@@ -191,8 +202,6 @@ let current_color s = s.current_color
 let current_player s = s.current_player
 let direction s = s.direction
 let turn s = s.turn
-
-let current_player s = s.current_player
 
 let is_counter s = match s.direction with
   | Counter -> true
@@ -228,7 +237,6 @@ let rec win_help (lst: Player.player list) = match lst with
 
 let get_winner s = win_help s.players
 
-let top_card s = Stack.top s.played_pile
 
 let rec remove_card_from_hand (hand: card list) (card: card) =
 match hand with

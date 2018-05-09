@@ -137,14 +137,14 @@ let clock_circle s = set_color (convert_color (current_color s));
 
 let draw_circle s = if is_counter s then counter_circle s else clock_circle s
 
-let draw_state s =
+let draw_state s = let s1 = update_state (Play init_card) s in
   (* direction arrows *)
-  draw_circle s;
-  draw_human_hand (cardlst_to_png s) 535;
-  draw_ai1_hand (ai1_hand s) 315;
-  draw_ai2_hand (ai2_hand s) 535;
-  draw_ai3_hand (ai3_hand s) 290;
-  draw_image (Png.load_as_rgb24 (card_to_str (top_card s)) []) 565 300;
+  draw_circle s1;
+  draw_human_hand (cardlst_to_png s1) 535;
+  draw_ai1_hand (ai1_hand s1) 315;
+  draw_ai2_hand (ai2_hand s1) 535;
+  draw_ai3_hand (ai3_hand s1) 290;
+  draw_image (Png.load_as_rgb24 (card_to_str (top_card s1)) []) 565 300;
   moveto 10 10;
-  let curr = (current_player s) in
+  let curr = (current_player s1) in
   draw_string ("Current player: " ^ curr.name);
