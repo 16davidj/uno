@@ -140,13 +140,13 @@ let ai2_hand s = let p = nth s.players 2 in p.hand
 let ai3_hand s = let p = nth s.players 3 in p.hand
 
 let rec draw7 card_lst acc =
-if List.length acc != 7 then
-  let idx = Random.int 108 in
+  if List.length acc != 7 then
+    let idx = Random.int 108 in
     if List.mem_assoc idx card_lst then
       let card_draw = List.assoc idx card_lst in
-        draw7 (List.remove_assoc idx card_lst) (card_draw :: acc)
+      draw7 (List.remove_assoc idx card_lst) (card_draw :: acc)
     else draw7 card_lst acc
-else (card_lst, acc)
+  else (card_lst, acc)
 
 let (drawn1, hand1) = draw7 all_cards []
 let (drawn2, hand2) = draw7 drawn1 []
@@ -165,14 +165,14 @@ let dumbai3 = {id = 3; name = "ai3"; hand = hand4; intelligence = AI;}
 let empty = Queue.create ()
 
 let init_state = {
-      players = [user; dumbai1; dumbai2; dumbai3];
-      draw_pile = lst_to_q drawn4 empty;
-      played_pile = Stack.create ();
-      current_color = NoColor;
-      current_player = user;
-      direction = Clockwise;
-      turn = 0;
-    }
+  players = [user; dumbai1; dumbai2; dumbai3];
+  draw_pile = lst_to_q drawn4 empty;
+  played_pile = Stack.create ();
+  current_color = Red;
+  current_player = user;
+  direction = Clockwise;
+  turn = 0;
+}
 
 let players s = s.players
 let draw_pile s = s.draw_pile

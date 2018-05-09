@@ -8,17 +8,22 @@ let rec loop () = loop ()
 
 let info = "UNO info goes here"
 
-(*
-let rec repl_loop input state =
-  match parse input with
-  | Play c -> (*update_gui;*) repl_loop (read_line ()) update_state (Play c) state
-  | Draw i -> (*update_gui;*) repl_loop (read_line ()) update_state (Draw i) state;
-  | Choose col -> (*update_gui;*) repl_loop (read_line ()) update_state (Choose col) state;
+let update_gui cmd old_s updated_s = () (*begin match cmd with
+  | Play c -> if is_counter s then draw_counter () else draw_clock ();
+    Png.load_as_rgb24 (card_to_str c) [] 640 360;
+                                          end *)
+
+let rec repl_loop input s = let updated_s = update_state (parse input) s in
+  begin match (parse input) with
+  | Play c -> update_gui (Play c) s updated_s; repl_loop (read_line ()) updated_s;
+  | Draw -> update_gui (Draw) s updated_s; repl_loop (read_line ()) updated_s;
+  | Choose col -> update_gui (Choose col) s updated_s; repl_loop (read_line ()) updated_s;
   | Info -> print_endline info;
-  | UNO of c -> failwith("unimplemented")
+  | Uno c -> failwith("unimplemented")
   | Quit -> exit 0
-  | NA -> print_endline("\n**Console**: not a valid command"); repl_loop (read_line ()) state;
-*)
+  | _ -> print_endline("\n**Console**: not a valid command"); repl_loop (read_line ()) s;
+end
+
 
   let main () = open_graph " 1280x720";
     set_window_title "Uno";
@@ -35,33 +40,12 @@ let rec repl_loop input state =
 
     moveto 1050 185; draw_string "Player 2";
     draw_image (Png.load_as_rgb24 "assets/player2.png" []) 1025 205;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 315;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 335;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 355;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 375;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 395;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 415;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard.png" []) 1025 435;
 
     moveto 450 700; draw_string "Player 3";
     draw_image (Png.load_as_rgb24 "assets/player3.png" []) 425 590;
-    draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 535 589;
-    draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 555 589;
-    draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 575 589;
-    draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 595 589;
-    draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 615 589;
-    draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 635 589;
-    draw_image (Png.load_as_rgb24 "assets/cards/upsidebackcard.png" []) 655 589;
 
     moveto 250 160; draw_string "Frank";
     draw_image (Png.load_as_rgb24 "assets/frank.png" []) 225 175;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 290;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 310;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 330;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 350;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 370;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 390;
-    draw_image (Png.load_as_rgb24 "assets/cards/sidewaybackcard2.png" []) 225 410;
 
     draw_state init_state;
     loop ()
