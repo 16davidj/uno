@@ -98,6 +98,7 @@ let rec repl_loop input s = let updated_s = update_state (parse input) s in
     draw_string "Frank";
     draw_image (Png.load_as_rgb24 "assets/frank.png" []) 225 175;
 
+    Random.self_init();
     init_pile ();
     draw_state init_state;
     repl_loop (read_line ()) init_state
