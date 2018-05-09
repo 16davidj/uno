@@ -6,17 +6,17 @@ open Gui
 
 let info = "UNO info goes here"
 
-let update_user_hand updated_s = fill_rect 535 75 745 108;
-  (draw_human_hand (cardlst_to_png updated_s) 535)
+let update_user_hand updated_s = fill_rect 535 0 745 183;
+  (draw_human_hand (cardlst_to_png updated_s) 535 75)
 
-let update_ai1_hand updated_s = fill_rect 1025 315 108 405;
-  draw_ai1_hand (ai1_hand updated_s) 315
+let update_ai1_hand updated_s = fill_rect 1025 315 720 405;
+  draw_ai1_hand (ai1_hand updated_s) 1025 315
 
-let update_ai2_hand updated_s = fill_rect 525 589 535 108;
-  draw_ai2_hand (ai2_hand updated_s) 535
+let update_ai2_hand updated_s = fill_rect 525 589 335 108;
+  draw_ai2_hand (ai2_hand updated_s) 535 589
 
 let update_ai3_hand updated_s = fill_rect 225 290 108 430;
-  draw_ai3_hand (ai3_hand updated_s) 290
+  draw_ai3_hand (ai3_hand updated_s) 225 290
 
 let update_arrow updated_s = draw_circle (updated_s)
 
@@ -70,8 +70,11 @@ let update_hand old_s updated_s =
 
 let rec repl_loop input s = let updated_s = update_state (parse input) s in
   begin match (parse input) with
-  | Play c -> update_gui (Play c) s updated_s;
-              repl_loop (read_line ()) updated_s;
+    | Play c ->
+      if updated_s != s then update_gui (Play c) s updated_s;
+      repl_loop (read_line ()) updated_s;
+      if updated_s = s then print_endline("Play a valid card");
+      repl_loop (read_line ()) s;
   | Draw -> update_gui (Draw) s updated_s;
             repl_loop (read_line ()) updated_s;
   | Choose col -> update_gui (Choose col) s updated_s;

@@ -1,6 +1,6 @@
 ### Starting build.
 # Target: main.ml.depends, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), extension:ml, file:main.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -modules main.ml > main.ml.depends
+ocamlfind ocamldep -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -modules main.ml > main.ml.depends # cached
 # Target: command.mli.depends, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), extension:mli, file:command.mli, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -modules command.mli > command.mli.depends # cached
 # Target: player.ml.depends, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), extension:ml, file:player.ml, ocaml, ocamldep, quiet, traverse }
