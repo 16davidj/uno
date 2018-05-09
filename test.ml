@@ -47,7 +47,7 @@ open Ai
     "command_x" >:: (fun _ -> assert_equal (NoEffect) (det_effect 80)); *)
 
     "parse_1" >:: (fun _ -> assert_equal (Play card1) (parse "play 44"));
-    "parse_2" >:: (fun _ -> assert_equal (Play ncard) (parse "play 235235"));
+    "parse_2" >:: (fun _ -> assert_equal (NA) (parse "play 235235"));
     "parse_3" >:: (fun _ -> assert_equal (Play card2) (parse "play 35"));
     "parse_4" >:: (fun _ -> assert_equal (Play card5) (parse "play 46"));
     "parse_5" >:: (fun _ -> assert_equal (Play card3) (parse "play 18"));
@@ -55,8 +55,8 @@ open Ai
     "parse_a" >:: (fun _ -> assert_equal (Play card1) (parse "Play red 4"));
     "parse_b" >:: (fun _ -> assert_equal (Play card3) (parse "Play yeLLoW 8"));
     "parse_c" >:: (fun _ -> assert_equal (Play card4) (parse "Play       gReen 2"));
-    "parse_d" >:: (fun _ -> assert_equal (Play ncard) (parse "Play 4 red "));
-    "parse_e" >:: (fun _ -> assert_equal (Play ncard) (parse "Play wild"));
+    "parse_d" >:: (fun _ -> assert_equal (NA) (parse "Play 4 red "));
+    "parse_e" >:: (fun _ -> assert_equal (NA) (parse "Play wild"));
 
     "user_hand" >:: (fun _ -> assert_equal 7 (List.length (user_hand init_state)));
     "ai1_hand" >:: (fun _ -> assert_equal 7 (List.length (ai1_hand init_state)));

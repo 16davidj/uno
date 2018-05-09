@@ -116,10 +116,14 @@ let rec parse_args arg =
 (* Parses user-input string into a command and/or its arguments. *)
 let parse str =
   match (get_command str) with
-  | "play" -> Play (parse_args (get_args str))
+  | "play" -> if (parse_args (get_args str)) <> ({value = -1; color = NoColor; effect = NoEffect; id = -1}) then
+      Play (parse_args (get_args str)) else
+      NA
   | "draw" -> Draw
   | "choose" -> failwith("unimplemented")
-  | "uno" -> Uno (parse_args (get_args str))
+  | "uno" -> if (parse_args (get_args str)) <> ({value = -1; color = NoColor; effect = NoEffect; id = -1}) then
+      Uno (parse_args (get_args str)) else
+      NA
   | "info" -> Info
   | "quit" -> Quit
   | _ -> NA
