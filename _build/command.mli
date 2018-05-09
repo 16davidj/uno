@@ -1,4 +1,5 @@
 open Player
+(* open Ai *)
 (* [command] represents a command input by a player. *)
 type command =
   | Play of card             (* Plays a card in your hand with the int "id" you specify.
