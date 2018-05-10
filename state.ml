@@ -18,6 +18,7 @@ type state = {
   turn: int
 }
 
+
 let all_cards = [(0, {value = 0; color = Red; effect = NoEffect; id = 40});
                  (1, {value = 1; color = Red; effect = NoEffect; id = 41});
                  (2, {value = 2; color = Red; effect = NoEffect; id = 42});
