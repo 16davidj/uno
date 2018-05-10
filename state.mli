@@ -25,6 +25,8 @@ val ai3_hand : state -> Player.card list
  * the starting state of a game of UNO *)
 val init_state : state
 
+val init_card : Player.card
+
 (* [turn] returns an int corresponding with which player's turn
  * it is in the current state. 0 will be human's turn  *)
 val turn : state -> int
