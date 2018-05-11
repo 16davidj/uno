@@ -238,7 +238,7 @@ let rec win_help (lst: Player.player list) = match lst with
 let get_winner s = win_help s.players
 
 
-let rec remove_card_from_hand (hand: card list) (card: card) =
+let rec remove_card_from_hand (hand: Player.card list) (card: Player.card) =
 match hand with
 | h::t ->
   if h.id = card.id then t
@@ -266,6 +266,18 @@ let rec add_cards_to_player players id cards =
 match cards with
 | [] -> players
 | h::t -> add_cards_to_player (add_card_to_player players id h) id t
+
+let rec card_in_hand (hand: Player.card list) (card: Player.card) =
+match hand with
+| [] -> false
+| c1::others -> if c1.id = card.id then true
+    else card_in_hand others card
+
+let rec player_has_card (players: Player.player list) id card =
+match players with
+| [] -> false
+| p1::others -> if p1.id = id then card_in_hand (p1.hand) card
+    else player_has_card others id card
 
 let reverse dir =
 match dir with
@@ -329,7 +341,6 @@ match card.effect with
     players = add_cards_to_player players' nextp.id plus_cards;
     current_color = Black;
   }
-| _ -> s
 
 let check_playability color c1 c2 =
   if c2.color = color then true
@@ -365,9 +376,11 @@ List.length curr_player.hand = 1
 let update_state cmd s =
   let curr_color = s.current_color in
   let top_card = Stack.top s.played_pile in
+  let curr_player = s.current_player in
   match cmd with
   | Play card ->
-    if check_playability curr_color top_card card then
+    if (check_playability curr_color top_card card)
+    && (player_has_card s.players curr_player.id card) then
       let new_state = update_state_play_card card s in
       if check_uno new_state then add_2_to_prev_player new_state
       else new_state

@@ -267,7 +267,7 @@ match cards with
 | [] -> players
 | h::t -> add_cards_to_player (add_card_to_player players id h) id t
 
-let rec card_in_hand hand (card: Player.card) =
+let rec card_in_hand (hand: Player.card list) (card: Player.card) =
 match hand with
 | [] -> false
 | c1::others -> if c1.id = card.id then true
@@ -276,7 +276,7 @@ match hand with
 let rec player_has_card (players: Player.player list) id card =
 match players with
 | [] -> false
-| p1::others -> if p1.id = id then card_in_hand p1.hand card
+| p1::others -> if p1.id = id then card_in_hand (p1.hand) card
     else player_has_card others id card
 
 let reverse dir =
@@ -341,7 +341,6 @@ match card.effect with
     players = add_cards_to_player players' nextp.id plus_cards;
     current_color = Black;
   }
-| _ -> s
 
 let check_playability color c1 c2 =
   if c2.color = color then true
