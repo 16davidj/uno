@@ -44,6 +44,10 @@ val current_player : state -> Player.player
 
 val init_pile : unit -> unit
 
+val played_pile : state -> Player.card Stack.t
+
+val players : state -> Player.player list
+
 (* [draw_ouke] returns the current draw_pile  *)
 val draw_pile : state -> Player.card Queue.t
 

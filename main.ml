@@ -4,8 +4,6 @@ open Player
 open Graphics
 open Gui
 
-let info = "UNO info goes here"
-
 let update_user_hand updated_s = fill_rect 535 0 745 183;
   (draw_human_hand (cardlst_to_png updated_s) 535 75)
 
@@ -68,22 +66,28 @@ let update_hand old_s updated_s =
     update_turn updated_s;
   | _ -> ()
 
-let rec repl_loop input s = let updated_s = update_state (parse input) s in
-  begin match (parse input) with
+let rec repl_loop s =
+  let curr = current_player s in
+  if curr.id != 0 then (Unix.sleep 1);
+  if curr.id = 0 then print_endline("Enter a command: ");
+  let cmd =
+    if curr.id = 0 then parse (read_line ()) else Ai.smartai_choose_card s in
+  let updated_s = update_state cmd s in
+  begin match cmd with
     | Play c ->
       if updated_s != s then update_gui (Play c) s updated_s;
-      repl_loop (read_line ()) updated_s;
+      repl_loop updated_s;
       if updated_s = s then print_endline("Play a valid card");
-      repl_loop (read_line ()) s;
-  | Draw -> update_gui (Draw) s updated_s;
-            repl_loop (read_line ()) updated_s;
-  | Choose col -> update_gui (Choose col) s updated_s;
-                  repl_loop (read_line ()) updated_s;
-  | Info -> print_endline info;
-  | Uno c -> failwith("unimplemented");
-  | Quit -> exit 0;
-  | _ -> print_endline("\n**Console**: not a valid command");
-    repl_loop (read_line ()) s;
+      repl_loop s;
+    | Draw -> update_gui (Draw) s updated_s;
+      repl_loop updated_s;
+    | Choose col -> update_gui (Choose col) s updated_s;
+      repl_loop updated_s;
+    | Info -> print_endline("info goes here");
+    | Uno c -> failwith("unimplemented");
+    | Quit -> exit 0;
+    | _ -> print_endline("\n**Console**: not a valid command");
+      repl_loop s;
   end
 
   let main () = open_graph " 1280x720";
@@ -118,6 +122,6 @@ let rec repl_loop input s = let updated_s = update_state (parse input) s in
     init_pile ();
     draw_state init_state;
     update_turn init_state;
-    repl_loop (read_line ()) init_state
+    repl_loop init_state
 
     let () = main ()
