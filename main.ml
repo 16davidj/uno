@@ -66,16 +66,69 @@ let update_hand old_s updated_s =
     update_turn updated_s;
   | _ -> ()
 
+let rec one_row hand x y acc = begin match hand with
+  | [] -> List.rev acc
+  | h :: [] -> List.rev ((((x, y), ((x+69), (y+108))), h) :: acc)
+  | h :: t -> one_row t (x+30) y ((((x, y), ((x+30), (y+108))), h) :: acc)
+end
+
+let rec mult_row row_lst x y =
+  begin match row_lst with
+  | [] -> []
+  | h :: [] -> one_row h 535 y []
+  | h :: t -> begin match h with
+      | [] -> begin match t with
+          | [] -> []
+          | h1 :: t1 -> mult_row (h1 :: t1) 535 (y-40)
+        end
+      | h1 :: t1 -> (((x, y+68), ((x+30), (y+40))), h1) :: (mult_row (t1 :: t) (x+30) y)
+    end
+end
+
+let rec get_first_n lst n acc = if n = 0 then ((List.rev acc), lst) else
+  begin match lst with
+    | [] -> (List.rev acc), lst
+    | h :: t -> get_first_n t (n-1) (h :: acc)
+  end
+
+let rec split_lst lst acc n =
+  if n = 0 then List.rev acc else
+    begin match lst with
+      | [] -> List.rev acc
+      | h :: t -> let (fstn, rest) = (get_first_n (h :: t) 19 []) in
+        split_lst rest (fstn :: acc) (n-1)
+    end
+
+let convert_hand_to_pos human_hand =
+  let lst = split_lst human_hand [] (((List.length human_hand)/19) + 1) in
+  mult_row lst 535 75
+
+let in_position status position =
+  let coordinates = fst position in
+  status.mouse_x >= fst (fst coordinates) && status.mouse_x <= fst (snd coordinates)
+     && status.mouse_y >= snd (fst coordinates) && status.mouse_y <= snd (snd coordinates)
+
+let convert_statustocmd status positions =
+  try let (_, card) = (List.find (in_position status) positions)
+  in Play card with
+| _ -> if (status.mouse_x >= 850 && status.mouse_x <= 950 && status.mouse_y >= 291
+           && status.mouse_y <= 447) then Draw else NA
+
+let parse_click curr_hand =
+  let positions = (convert_hand_to_pos curr_hand) in
+  convert_statustocmd (wait_next_event [Button_down]) positions
+
 let rec repl_loop s =
   let curr = current_player s in
   if curr.id != 0 then (Unix.sleep 1);
-  if curr.id = 0 then print_endline("Enter a command: ");
   let cmd =
-    if curr.id = 0 then parse (read_line ()) else Ai.smartai_choose_card s in
+    if curr.id = 0 then parse_click curr.hand else Ai.smartai_choose_card s in
   let updated_s = update_state cmd s in
   begin match cmd with
     | Play c ->
       if updated_s != s then update_gui (Play c) s updated_s;
+      let top = State.top_card updated_s in
+      print_endline(string_of_int top.value);
       repl_loop updated_s;
       if updated_s = s then print_endline("Play a valid card");
       repl_loop s;
