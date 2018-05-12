@@ -38,6 +38,8 @@ val current_color : state -> Player.color
  * it is for the next turn. 0 will represent the human's turn  *)
 val next_turn : state -> int
 
+val next_next_turn : state -> int
+
 val is_counter : state -> bool
 
 val current_player : state -> Player.player
