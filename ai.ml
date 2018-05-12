@@ -38,7 +38,7 @@ let dumbai_choose_card top_card hand =
  * given a top_card. Includes cards of the same color, value, effect, or
  * Wild cards. (implemented in a way that reverses original order)*)
 let rec get_possible_list hand top_card lst =
-  match hand with
+  (* match hand with
   | [] -> lst
   | h::t -> if h.color = Black then get_possible_list t top_card (h::lst) else
     if (h.value <> -1) then
@@ -47,6 +47,13 @@ let rec get_possible_list hand top_card lst =
         get_possible_list t top_card lst else
     if h.color = top_card.color || (h.effect = top_card.effect && h.effect <> NoEffect) then
       get_possible_list t top_card (h::lst) else
+      get_possible_list t top_card lst *)
+  match hand with
+  | [] -> lst
+  | h::t -> if h.color = Black then get_possible_list t top_card (h::lst) else
+    if h.color = top_card.color then get_possible_list t top_card (h::lst) else
+    if h.effect = NoEffect && h.value = top_card.value then get_possible_list t top_card (h::lst) else
+    if h.effect = top_card.effect && h.effect <> NoEffect then get_possible_list t top_card (h::lst) else
       get_possible_list t top_card lst
 
 (* counts the number of colors you have in your hand and stores each value in
