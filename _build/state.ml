@@ -217,9 +217,11 @@ let next_turn s =
   else 3
 
 let next_next_turn s =
-  if s.turn < 2 then
-    s.turn + 2
-  else s.turn - 2
+  let next_state =
+  {s with
+    turn = next_turn s;
+  }
+  in next_turn (next_state)
 
 let prev_turn s =
   if s.direction = Counter then
