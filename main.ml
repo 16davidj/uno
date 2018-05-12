@@ -137,7 +137,13 @@ let rec repl_loop s =
     | Choose col -> update_gui (Choose col) s updated_s;
       repl_loop updated_s;
     | Info -> print_endline("info goes here");
-    | Uno c -> failwith("unimplemented");
+    | Uno c ->
+      if updated_s != s then update_gui (Play c) s updated_s;
+      let top = State.top_card updated_s in
+      print_endline(string_of_int top.value);
+      repl_loop updated_s;
+      if updated_s = s then print_endline("Play a valid card");
+      repl_loop s;
     | Quit -> exit 0;
     | _ -> print_endline("\n**Console**: not a valid command");
       repl_loop s;

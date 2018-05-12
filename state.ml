@@ -217,9 +217,7 @@ let next_turn s =
   else 3
 
 let next_next_turn s =
-  if s.turn < 2 then
-    s.turn + 2
-  else s.turn - 2
+  next_turn (next_turn s)
 
 let prev_turn s =
   if s.direction = Counter then

@@ -10,14 +10,14 @@ open Ai
   let card5 = {value = 6; color = Red; effect = NoEffect; id = 46}
   let card3 = {value = 8; color = Yellow; effect = NoEffect; id = 18}
   let card4 = {value = 2; color = Green; effect = NoEffect; id = 22}
-let card6 = {value = 5; color = Blue; effect = NoEffect; id = 35}
+  let card6 = {value = 5; color = Blue; effect = NoEffect; id = 35}
 
-let card7 = {value = -1; color = Blue; effect = Skip; id = 63}
-let card8 = {value = -1; color = Yellow; effect = Plus; id = 51}
-let card9 = {value = -1; color = Green; effect = Reverse; id = 72}
-let card10 = {value = -1; color = Yellow; effect = Skip; id = 61}
-let card11 = {value = -1; color = Black; effect = Wild; id = 80}
-let card12 = {value = -1; color = Black; effect = Wild4; id = 90}
+  let card7 = {value = -1; color = Blue; effect = Skip; id = 63}
+  let card8 = {value = -1; color = Yellow; effect = Plus; id = 51}
+  let card9 = {value = -1; color = Green; effect = Reverse; id = 72}
+  let card10 = {value = -1; color = Yellow; effect = Skip; id = 61}
+  let card11 = {value = -1; color = Black; effect = Wild; id = 80}
+  let card12 = {value = -1; color = Black; effect = Wild4; id = 90}
 
   let ncard = {value = -1; color = NoColor; effect = NoEffect; id = -1}
 
@@ -31,12 +31,13 @@ let card12 = {value = -1; color = Black; effect = Wild4; id = 90}
   let top_card1 = {value = 7; color = Green; effect = NoEffect; id = 27}
   let top_card2 = {value = 0; color = Red; effect = NoEffect; id = 40}
   let top_card3 = {value = 9; color = Blue; effect = NoEffect; id = 39}
-let top_card4 = {value = -1; color = Blue; effect = Plus; id = 53}
+  let top_card4 = {value = -1; color = Blue; effect = Plus; id = 53}
 
 (* let queue1 = (Queue.create ());
   Queue.add card1 queue1; *)
 
   let tests = [
+
 
     "lst1" >:: (fun _ -> assert_equal [card6;card5;card2;card1] (get_possible_list hand1 top_card0 []));
     "nlst" >:: (fun _ -> assert_equal [] (get_possible_list hand3 top_card1 []));
