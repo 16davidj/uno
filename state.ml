@@ -306,12 +306,12 @@ match card.effect with
   let c1 = take s.draw_pile in
   let c2 = take s.draw_pile in
   let plus_cards = c1::c2::[] in
-  let nextp = nth s.players (next_turn s) in
+  let next_player = nth s.players (next_turn s) in
   let players' = remove_card_from_player s.players curr_player.id card in
   { s with
-    players = add_cards_to_player players' nextp.id plus_cards;
+    players = add_cards_to_player players' next_player.id plus_cards;
     current_color = card.color;
-    current_player = nextp;
+    current_player = next_player;
     turn = next_turn s;
   }
 | Reverse ->
@@ -326,8 +326,6 @@ match card.effect with
   { s with
     players = remove_card_from_player s.players curr_player.id card;
     current_color = Black;
-    direction = s.direction;
-    turn = next_turn s;
   }
 | Wild4 ->
   let c1 = pop s.draw_pile in
@@ -335,10 +333,10 @@ match card.effect with
   let c3 = pop s.draw_pile in
   let c4 = pop s.draw_pile in
   let plus_cards = c1::c2::c3::c4::[] in
-  let nextp = nth s.players (next_turn s) in
+  let next_player = nth s.players (next_turn s) in
   let players' = remove_card_from_player s.players curr_player.id card in
   { s with
-    players = add_cards_to_player players' nextp.id plus_cards;
+    players = add_cards_to_player players' next_player.id plus_cards;
     current_color = Black;
   }
 
@@ -351,15 +349,17 @@ let check_playability color c1 c2 =
 let update_state_color color s =
 { s with
   current_color = color;
+  current_player = nth s.players (next_turn s);
+  turn = next_turn s;
 }
 
 let add_2_to_prev_player s =
 let c1 = pop s.draw_pile in
 let c2 = pop s.draw_pile in
 let plus_cards = c1::c2::[] in
-let prevp = nth s.players (prev_turn s) in
+let prev_player = nth s.players (prev_turn s) in
 { s with
-  players = add_cards_to_player s.players prevp.id plus_cards;
+  players = add_cards_to_player s.players prev_player.id plus_cards;
 }
 
 let draw_card s =
@@ -391,5 +391,8 @@ let update_state cmd s =
   | Uno card ->
     if check_uno s then update_state_play_card card s
     else s
-  | Choose color -> update_state_color color s;
+  | Choose color ->
+    if s.current_color = Black && color <> Black
+    then update_state_color color s
+    else s
   | _ -> s
