@@ -368,6 +368,8 @@ let plus_cards = c1::[] in
 let curr_player = s.current_player in
 { s with
   players = add_cards_to_player s.players curr_player.id plus_cards;
+  current_player = nth s.players (next_turn s);
+  turn = next_turn s;
 }
 
 let check_uno s = let curr_player = s.current_player in
