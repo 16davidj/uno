@@ -1,0 +1,359 @@
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Runner: processes
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Chooser: simple
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration suite_name = "Uno test suite"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration cache_filename = "/home/vagrant/Documents/uno4/_build/oUnit-$(suite_name).cache"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration display = "true"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration results_style_1_X = "false"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration verbose = "false"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration health_check_interval = "1."
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration testdata_dir = "none"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration chooser = "simple"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration output_html_dir = "none"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration processes_kill_period = "5."
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration runner = "processes"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration shards = "2"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration processes_grace_period = "5."
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration log_encoding = "utf-8"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration output_junit_file = "none"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Configuration output_file = "/home/vagrant/Documents/uno4/_build/oUnit-$(suite_name)-$(shard_id).log"
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Using 2 workers maximum.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Starting worker number vm3110-2018sp#01.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Worker vm3110-2018sp#01 started.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Starting worker number vm3110-2018sp#02.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Worker vm3110-2018sp#02 started.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:1:nlst, Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:1:nlst.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:1:nlst, Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:1:nlst, Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:1:nlst is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:1:nlst, Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:1:nlst.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:1:nlst, Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:2:lst2, Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:2:lst2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:2:lst2, Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:0:lst1 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:2:lst2, Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:2:lst2, Uno test suite:0:lst1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:3:lst3, Uno test suite:2:lst2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:3:lst3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:3:lst3, Uno test suite:2:lst2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:2:lst2 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:3:lst3, Uno test suite:2:lst2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:2:lst2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:3:lst3, Uno test suite:2:lst2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:4:lst4, Uno test suite:3:lst3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:4:lst4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:4:lst4, Uno test suite:3:lst3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:3:lst3 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:4:lst4, Uno test suite:3:lst3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:3:lst3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:4:lst4, Uno test suite:3:lst3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:5:cc1, Uno test suite:4:lst4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:5:cc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:5:cc1, Uno test suite:4:lst4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:4:lst4 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:5:cc1, Uno test suite:4:lst4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:4:lst4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:5:cc1, Uno test suite:4:lst4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:6:cc2, Uno test suite:5:cc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:6:cc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:6:cc2, Uno test suite:5:cc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:5:cc1 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:6:cc2, Uno test suite:5:cc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:5:cc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:6:cc2, Uno test suite:5:cc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:7:cc3, Uno test suite:6:cc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:7:cc3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:7:cc3, Uno test suite:6:cc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:6:cc2 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:7:cc3, Uno test suite:6:cc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:6:cc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:7:cc3, Uno test suite:6:cc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:8:cc4, Uno test suite:7:cc3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:8:cc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:8:cc4, Uno test suite:7:cc3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:7:cc3 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:8:cc4, Uno test suite:7:cc3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:7:cc3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:8:cc4, Uno test suite:7:cc3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:9:mc1, Uno test suite:8:cc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:9:mc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:9:mc1, Uno test suite:8:cc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:8:cc4 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:9:mc1, Uno test suite:8:cc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:8:cc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:9:mc1, Uno test suite:8:cc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:10:mc2, Uno test suite:9:mc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:10:mc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:10:mc2, Uno test suite:9:mc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:9:mc1 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:10:mc2, Uno test suite:9:mc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:9:mc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:10:mc2, Uno test suite:9:mc1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:11:mc3, Uno test suite:10:mc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:11:mc3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:11:mc3, Uno test suite:10:mc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:11:mc3 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:11:mc3, Uno test suite:10:mc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:11:mc3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:11:mc3, Uno test suite:10:mc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:12:mc4, Uno test suite:10:mc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:10:mc2 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:12:mc4, Uno test suite:10:mc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:10:mc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:12:mc4, Uno test suite:10:mc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:12:mc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:12:mc4, Uno test suite:10:mc2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:13:command_1, Uno test suite:12:mc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:13:command_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:13:command_1, Uno test suite:12:mc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:12:mc4 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:13:command_1, Uno test suite:12:mc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:12:mc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:13:command_1, Uno test suite:12:mc4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:14:command_2, Uno test suite:13:command_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:14:command_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:14:command_2, Uno test suite:13:command_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:13:command_1 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:14:command_2, Uno test suite:13:command_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:13:command_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:14:command_2, Uno test suite:13:command_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:15:command_3, Uno test suite:14:command_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:15:command_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:15:command_3, Uno test suite:14:command_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:14:command_2 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:15:command_3, Uno test suite:14:command_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:14:command_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:15:command_3, Uno test suite:14:command_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:16:command_4, Uno test suite:15:command_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:16:command_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:16:command_4, Uno test suite:15:command_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:15:command_3 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:16:command_4, Uno test suite:15:command_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:15:command_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:16:command_4, Uno test suite:15:command_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:17:command_5, Uno test suite:16:command_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:17:command_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:17:command_5, Uno test suite:16:command_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:16:command_4 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:17:command_5, Uno test suite:16:command_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:16:command_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:17:command_5, Uno test suite:16:command_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:18:command_a, Uno test suite:17:command_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:18:command_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:18:command_a, Uno test suite:17:command_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:17:command_5 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:18:command_a, Uno test suite:17:command_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:17:command_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:18:command_a, Uno test suite:17:command_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:19:command_b, Uno test suite:18:command_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:19:command_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:19:command_b, Uno test suite:18:command_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:18:command_a is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:19:command_b, Uno test suite:18:command_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:18:command_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:19:command_b, Uno test suite:18:command_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:20:command_c, Uno test suite:19:command_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:20:command_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:20:command_c, Uno test suite:19:command_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:19:command_b is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:20:command_c, Uno test suite:19:command_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:19:command_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:20:command_c, Uno test suite:19:command_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:21:command_d, Uno test suite:20:command_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:21:command_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:21:command_d, Uno test suite:20:command_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:20:command_c is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:21:command_d, Uno test suite:20:command_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:20:command_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:21:command_d, Uno test suite:20:command_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:22:command_e, Uno test suite:21:command_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:22:command_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:22:command_e, Uno test suite:21:command_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:21:command_d is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:22:command_e, Uno test suite:21:command_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:21:command_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:22:command_e, Uno test suite:21:command_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:23:parse_1, Uno test suite:22:command_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:23:parse_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:23:parse_1, Uno test suite:22:command_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:22:command_e is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:23:parse_1, Uno test suite:22:command_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:22:command_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:23:parse_1, Uno test suite:22:command_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:24:parse_2, Uno test suite:23:parse_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:24:parse_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:24:parse_2, Uno test suite:23:parse_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:23:parse_1 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:24:parse_2, Uno test suite:23:parse_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:23:parse_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:24:parse_2, Uno test suite:23:parse_1.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:25:parse_3, Uno test suite:24:parse_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:25:parse_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:25:parse_3, Uno test suite:24:parse_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:24:parse_2 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:25:parse_3, Uno test suite:24:parse_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:24:parse_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:25:parse_3, Uno test suite:24:parse_2.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:26:parse_4, Uno test suite:25:parse_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:26:parse_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:26:parse_4, Uno test suite:25:parse_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:25:parse_3 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:26:parse_4, Uno test suite:25:parse_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:25:parse_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:26:parse_4, Uno test suite:25:parse_3.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:27:parse_5, Uno test suite:26:parse_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:27:parse_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:27:parse_5, Uno test suite:26:parse_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:26:parse_4 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:27:parse_5, Uno test suite:26:parse_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:26:parse_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:27:parse_5, Uno test suite:26:parse_4.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:28:parse_a, Uno test suite:27:parse_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:28:parse_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:28:parse_a, Uno test suite:27:parse_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:27:parse_5 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:28:parse_a, Uno test suite:27:parse_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:27:parse_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:28:parse_a, Uno test suite:27:parse_5.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:29:parse_b, Uno test suite:28:parse_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:29:parse_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:29:parse_b, Uno test suite:28:parse_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:28:parse_a is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:29:parse_b, Uno test suite:28:parse_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:28:parse_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:29:parse_b, Uno test suite:28:parse_a.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:30:parse_c, Uno test suite:29:parse_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:30:parse_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:30:parse_c, Uno test suite:29:parse_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:29:parse_b is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:30:parse_c, Uno test suite:29:parse_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:29:parse_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:30:parse_c, Uno test suite:29:parse_b.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:31:parse_d, Uno test suite:30:parse_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:31:parse_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:31:parse_d, Uno test suite:30:parse_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:30:parse_c is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:31:parse_d, Uno test suite:30:parse_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:30:parse_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:31:parse_d, Uno test suite:30:parse_c.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:32:parse_e, Uno test suite:31:parse_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:32:parse_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:32:parse_e, Uno test suite:31:parse_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:31:parse_d is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:32:parse_e, Uno test suite:31:parse_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:31:parse_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:32:parse_e, Uno test suite:31:parse_d.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:33:user_hand, Uno test suite:32:parse_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:33:user_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:33:user_hand, Uno test suite:32:parse_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:33:user_hand is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:33:user_hand, Uno test suite:32:parse_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:33:user_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:33:user_hand, Uno test suite:32:parse_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:34:ai1_hand, Uno test suite:32:parse_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:32:parse_e is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:34:ai1_hand, Uno test suite:32:parse_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:32:parse_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:34:ai1_hand, Uno test suite:32:parse_e.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:35:ai2_hand, Uno test suite:34:ai1_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:35:ai2_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:35:ai2_hand, Uno test suite:34:ai1_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:34:ai1_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:35:ai2_hand, Uno test suite:34:ai1_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:35:ai2_hand is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:35:ai2_hand, Uno test suite:34:ai1_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:34:ai1_hand is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:35:ai2_hand, Uno test suite:34:ai1_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:34:ai1_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:35:ai2_hand, Uno test suite:34:ai1_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:36:ai3_hand, Uno test suite:35:ai2_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:36:ai3_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:36:ai3_hand, Uno test suite:35:ai2_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:36:ai3_hand is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:36:ai3_hand, Uno test suite:35:ai2_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:36:ai3_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:36:ai3_hand, Uno test suite:35:ai2_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:37:next_turn, Uno test suite:35:ai2_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Start test Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:37:next_turn, Uno test suite:35:ai2_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:35:ai2_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:37:next_turn, Uno test suite:35:ai2_hand.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Still 2 tests running : Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Start test Uno test suite:38:draw_pile_length.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Still 2 tests running : Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: Test Uno test suite:37:next_turn is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Still 2 tests running : Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#02 I: End test Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Still 2 tests running : Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: Test Uno test suite:38:draw_pile_length is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Still 2 tests running : Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#01 I: End test Uno test suite:38:draw_pile_length.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Still 2 tests running : Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 2 tests running: Uno test suite:38:draw_pile_length, Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Still 1 tests running : Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 1 tests running: Uno test suite:37:next_turn.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 0 tests running: .
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Worker vm3110-2018sp#01 has ended.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: 0 tests running: .
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Worker vm3110-2018sp#02 has ended.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Used 2 worker during test execution.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Run 19 tests with shard vm3110-2018sp#01.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Run 20 tests with shard vm3110-2018sp#02.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: ==============
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Summary:
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:37:next_turn is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:38:draw_pile_length is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:35:ai2_hand is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:36:ai3_hand is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:34:ai1_hand is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:32:parse_e is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:33:user_hand is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:31:parse_d is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:30:parse_c is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:29:parse_b is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:28:parse_a is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:27:parse_5 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:26:parse_4 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:25:parse_3 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:24:parse_2 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:23:parse_1 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:22:command_e is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:21:command_d is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:20:command_c is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:19:command_b is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:18:command_a is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:17:command_5 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:16:command_4 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:15:command_3 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:14:command_2 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:13:command_1 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:12:mc4 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:10:mc2 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:11:mc3 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:9:mc1 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:8:cc4 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:7:cc3 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:6:cc2 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:5:cc1 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:4:lst4 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:3:lst3 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:2:lst2 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:0:lst1 is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Test Uno test suite:1:nlst is successful.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Ran: 39 tests in: 0.24 seconds.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Cases: 39.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Tried: 39.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Errors: 0.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Failures: 0.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Skip: 0.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Todo: 0.
+2018-05-12T19:49:01+00:00 vm3110-2018sp#00 I: Timeout: 0.
