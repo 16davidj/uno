@@ -35,22 +35,22 @@ let dumbai_choose_card top_card hand =
                                         *)
 
 (* returns a list of all the possible cards you could play
- * given a top_card. *)
+ * given a top_card. Includes cards of the same color, value, effect, or
+ * Wild cards. (implemented in a way that reverses original order)*)
 let rec get_possible_list hand top_card lst =
   match hand with
   | [] -> lst
   | h::t -> if h.color = Black then get_possible_list t top_card (h::lst) else
-    if top_card.value = -1 then
-      if (top_card.color = h.color ||
-          (top_card.effect = h.effect && top_card.effect <> NoEffect)) then
+    if h.value <> -1 then
+      if h.value = top_card.value || h.color = top_card.color then
         get_possible_list t top_card (h::lst) else
         get_possible_list t top_card lst else
-    if h.color = Black || (h.value = top_card.value && h.value <> -1) then
+    if h.color = top_card.color || (h.effect = top_card.effect && h.effect <> NoEffect) then
       get_possible_list t top_card (h::lst) else
       get_possible_list t top_card lst
 
 (* counts the number of colors you have in your hand and stores each value in
- * a tuple. *)
+ * a tuple in the order Y,G,B,R,Bl. *)
 let rec color_count hand tup =
   match hand with
   | [] -> tup
@@ -72,32 +72,27 @@ let most_color tup =
     if (max (max (max y g) b) r) = b then Blue else
     if (max (max (max y g) b) r) = r then Red else Black
 
-(* type stats = {mutable yellow:int; mutable green:int; mutable blue:int; mutable red:int} *)
-
-(* gets a list of cards already played  *)
+(* gets a list of cards already played, extracting each card from the stack.
+ * Returns the elements to the list in the order opposite that of the stack. *)
 let rec board_stats play_pile lst =
   let pp = Stack.copy play_pile in
   match Stack.is_empty pp with
   | true -> lst
   | _ -> let t = (Stack.pop pp) in board_stats pp (t::lst)
 
-
+(* extracting values in a 5 tuple. *)
 let fir tup =
   match tup with
   | (t,_,_,_,_) -> t
-
 let sen tup =
   match tup with
   | (_,t,_,_,_) -> t
-
 let trd tup =
   match tup with
   | (_,_,t,_,_) -> t
-
 let frt tup =
   match tup with
   | (_,_,_,f,_) -> f
-
 let fif tup =
   match tup with
   | (_,_,_,_,f) -> f
@@ -107,15 +102,66 @@ let rec find_max lst num c =
   | [] -> c
   | (n,ca)::t -> if n > num then find_max t n ca else find_max t num c
 
-let play_best lst =
-  match lst with
-  | [] -> Draw
-  | h::t -> Play (find_max lst (fst h) (snd h))
+let call_color lst =
+  match most_color (color_count lst (0,0,0,0,0)) with
+  | Black -> Player.Red
+  | Yellow -> Player.Yellow
+  | Green -> Player.Green
+  | Blue -> Player.Blue
+  | _ -> Player.Red
+
+let helper_best lst  =
+  if List.length lst = 0 then Draw else
+    let best_card = find_max lst 0 ({value = -1; color = NoColor; effect = NoEffect; id = -1}) in begin
+    (* let best_color = call_color (snd (List.split lst)) in begin *)
+      match List.length lst with
+      | 2 -> begin
+          match best_card.effect with
+          | Wild -> Uno best_card; Choose (call_color (snd (List.split lst)))
+          | Wild4 -> Uno best_card; Choose (call_color (snd (List.split lst)))
+          | _ -> Uno best_card
+      end
+      | _ -> begin
+          match best_card.effect with
+          | Wild -> Play best_card; Choose (call_color (snd (List.split lst)))
+          | Wild4 -> Play best_card; Choose (call_color (snd (List.split lst)))
+          | _ -> Play best_card
+        end
+    end
 
 
-let rec find_best_card hand c top_card num_h st lst =
-  (* let remaining_cards = 108 - st.played_pile - (List.length hand) in  *)
+    (* if List.length lst = 2 then if (best_card.effect = Wild || best_card.effect = Wild4) then Uno best_card; Choose best_color; else Uno best_card
+    else if (best_card.effect = Wild || best_card.effect = Wild4) then Play best_card; Choose best_color; else Play best_card *)
+
+    (* if List.length lst = 2 then Uno (find_max lst (fst h) (snd h)) else
+      Play (find_max lst (fst h) (snd h)) (* take UNO into acct, change color *) *)
+
+
+let rec find_best_card hand c top_card num_h s lst =
   match hand with
+  | [] -> helper_best lst
+  | h::t ->
+    if (next_turn s = 0) then
+      if (h.effect = Skip || h.effect = Plus || h.effect = Reverse) then find_best_card t c top_card num_h s ((50,h)::lst)
+      else if (h.effect = Wild4) then if (num_h <= 3) then find_best_card t c top_card num_h s ((100,h)::lst) else find_best_card t c top_card num_h s ((50,h)::lst)
+      else if (h.effect = Wild) then if (List.length hand <= 3) then find_best_card t c top_card num_h s ((75,h)::lst) else find_best_card t c top_card num_h s ((20,h)::lst)
+      (* else NoEffect *)
+      else if (h.value = 0) then if (h.color = c) then find_best_card t c top_card num_h s ((40,h)::lst) else find_best_card t c top_card num_h s ((30,h)::lst)
+      else if (h.color = c) then find_best_card t c top_card num_h s ((25,h)::lst) else find_best_card t c top_card num_h s ((20,h)::lst)
+    else if (next_next_turn s = 0) then
+      if (h.effect = Skip || h.effect = Plus || h.effect = Wild4) then find_best_card t c top_card num_h s ((10,h)::lst)
+      else if (h.effect = Reverse) then find_best_card t c top_card num_h s ((20,h)::lst)
+      else if (h.effect = Wild) then if (List.length hand <= 3) then find_best_card t c top_card num_h s ((50,h)::lst) else find_best_card t c top_card num_h s ((20,h)::lst)
+      (* else NoEffect *)
+      else if (h.value = 0) then if (h.color = c) then find_best_card t c top_card num_h s ((60,h)::lst) else find_best_card t c top_card num_h s ((55,h)::lst) else find_best_card t c top_card num_h s ((52,h)::lst)
+    else
+      if (h.effect = Reverse || h.effect = Wild4) then find_best_card t c top_card num_h s ((5,h)::lst)
+      else if (h.effect = Skip || h.effect = Plus) then find_best_card t c top_card num_h s ((15,h)::lst)
+      else if (h.effect = Wild) then find_best_card t c top_card num_h s ((25,h)::lst)
+      else if (h.value = 0) then if (h.color = c) then find_best_card t c top_card num_h s ((70,h)::lst) else find_best_card t c top_card num_h s ((60,h)::lst)
+      else find_best_card t c top_card num_h s ((50,h)::lst)
+
+  (* match hand with
   | [] -> play_best lst
   | h::t -> if (State.next_turn st = 0 && h.effect <> NoEffect) then
       if (h.effect = Wild4 || h.effect = Plus || h.effect = Skip) then find_best_card t c top_card num_h st ((150,h)::lst) else
@@ -151,10 +197,10 @@ let rec find_best_card hand c top_card num_h st lst =
         find_best_card t c top_card num_h st ((50,h)::lst) else
       if next_player_cards < 4 then
         find_best_card t c top_card num_h st ((40,h)::lst) else
-        find_best_card t c top_card num_h st ((25,h)::lst)
+        find_best_card t c top_card num_h st ((25,h)::lst) *)
 
 let smartai_choose_card s =
-  let hand = let curr = current_player s in curr.hand in
+  let curr = current_player s in let hand = curr.hand in
   let get_human = List.find (fun x -> x.id = 0) (players s) in
   let num_h_cards = List.length (get_human.hand) in
   let possible_plays = get_possible_list hand (top_card s) [] in
@@ -164,6 +210,6 @@ let smartai_choose_card s =
     | Yellow -> find_best_card possible_plays Yellow (top_card s) num_h_cards s []
     | Green -> find_best_card possible_plays Green (top_card s) num_h_cards s []
     | Blue -> find_best_card possible_plays Blue (top_card s) num_h_cards s []
-    | Black -> find_best_card possible_plays Red (top_card s) num_h_cards s []
+    | Red -> find_best_card possible_plays Red (top_card s) num_h_cards s []
     | _ -> find_best_card possible_plays Black (top_card s) num_h_cards s []
   end

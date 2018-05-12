@@ -113,6 +113,17 @@ let rec parse_args arg =
   with
   | _ -> parse_args (string_of_int (convert_to_id arg))
 
+let get_color str =
+  let col_str = get_args str in
+  begin
+    match col_str with
+    | "red" -> Red
+    | "blue" -> Blue
+    | "green" -> Green
+    | "yellow" -> Yellow
+    | _ -> NoColor
+  end
+
 (* Parses user-input string into a command and/or its arguments. *)
 let parse str =
   match (get_command str) with
@@ -120,7 +131,7 @@ let parse str =
       Play (parse_args (get_args str)) else
       NA
   | "draw" -> Draw
-  | "choose" -> failwith("unimplemented")
+  | "choose" -> if get_color str = NoColor then NA else Choose (get_color str)
   | "uno" -> if (parse_args (get_args str)) <> ({value = -1; color = NoColor; effect = NoEffect; id = -1}) then
       Uno (parse_args (get_args str)) else
       NA
