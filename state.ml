@@ -397,7 +397,7 @@ let update_state cmd s =
   else
     match cmd with
     | Choose color ->
-      if s.current_color = Black && color <> Black
+      if color <> Black
       then update_state_color color s
       else s
     | _ -> s
