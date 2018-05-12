@@ -41,7 +41,7 @@ let rec get_possible_list hand top_card lst =
   match hand with
   | [] -> lst
   | h::t -> if h.color = Black then get_possible_list t top_card (h::lst) else
-    if h.value <> -1 then
+    if (h.value <> -1) then
       if h.value = top_card.value || h.color = top_card.color then
         get_possible_list t top_card (h::lst) else
         get_possible_list t top_card lst else

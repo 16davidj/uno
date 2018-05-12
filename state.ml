@@ -217,9 +217,11 @@ let next_turn s =
   else 3
 
 let next_next_turn s =
-  if s.turn < 2 then
-    s.turn + 2
-  else s.turn - 2
+  let next_state =
+  {s with
+    turn = next_turn s;
+  }
+  in next_turn (next_state)
 
 let prev_turn s =
   if s.direction = Counter then
@@ -343,7 +345,7 @@ let check_playability color c1 c2 =
   if c2.color = Black then true
   else if c2.color = color then true
   else if c2.effect = NoEffect && c2.value = c1.value then true
-  else c2.effect = c1.effect
+  else c2.effect = c1.effect && c2.effect <> NoEffect
 
 let update_state_color color s =
 { s with
@@ -378,7 +380,7 @@ let update_state cmd s =
   let curr_color = s.current_color in
   let top_card = Stack.top s.played_pile in
   let curr_player = s.current_player in
-  if s.current_color <> Black then
+  if curr_color <> Black then
     match cmd with
     | Play card ->
       if (check_playability curr_color top_card card)
