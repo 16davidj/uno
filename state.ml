@@ -237,7 +237,6 @@ let rec win_help (lst: Player.player list) = match lst with
 
 let get_winner s = win_help s.players
 
-
 let rec remove_card_from_hand (hand: Player.card list) (card: Player.card) =
 match hand with
 | h::t ->
@@ -341,8 +340,8 @@ match card.effect with
   }
 
 let check_playability color c1 c2 =
-  if c2.color = color then true
-  else if c2.color = Black then true
+  if c2.color = Black then true
+  else if c2.color = color then true
   else if c2.effect = NoEffect && c2.value = c1.value then true
   else c2.effect = c1.effect
 
