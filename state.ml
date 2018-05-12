@@ -379,20 +379,24 @@ let update_state cmd s =
   let curr_color = s.current_color in
   let top_card = Stack.top s.played_pile in
   let curr_player = s.current_player in
-  match cmd with
-  | Play card ->
-    if (check_playability curr_color top_card card)
-    && (player_has_card s.players curr_player.id card) then
-      let new_state = update_state_play_card card s in
-      if check_uno new_state then add_2_to_prev_player new_state
-      else new_state
-    else s
-  | Draw -> draw_card s
-  | Uno card ->
-    if check_uno s then update_state_play_card card s
-    else s
-  | Choose color ->
-    if s.current_color = Black && color <> Black
-    then update_state_color color s
-    else s
-  | _ -> s
+  if s.current_color <> Black then
+    match cmd with
+    | Play card ->
+      if (check_playability curr_color top_card card)
+      && (player_has_card s.players curr_player.id card) then
+        let new_state = update_state_play_card card s in
+        if check_uno new_state then add_2_to_prev_player new_state
+        else new_state
+      else s
+    | Draw -> draw_card s
+    | Uno card ->
+      if check_uno s then update_state_play_card card s
+      else s
+    | _ -> s
+  else
+    match cmd with
+    | Choose color ->
+      if s.current_color = Black && color <> Black
+      then update_state_color color s
+      else s
+    | _ -> s
