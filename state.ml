@@ -390,8 +390,8 @@ let update_state cmd s =
         else new_state
       else s
     | Draw -> draw_card s
-    | Uno card ->
-      if check_uno s then update_state_play_card card s
+    | Uno ->
+      if check_uno s then s
       else s
     | _ -> s
   else
