@@ -66,6 +66,10 @@ let update_hand old_s updated_s =
     update_turn updated_s;
   | Uno -> update_hand old_s updated_s;
     update_turn update_s;
+    (*
+  | Choose c -> update_arrow updated_s;
+    update_turn updated_s;
+*)
   | _ -> ()
 
 let rec one_row hand x y acc = begin match hand with
@@ -116,7 +120,9 @@ let convert_statustocmd status positions =
 | _ -> if (status.mouse_x >= 850 && status.mouse_x <= 950 && status.mouse_y >= 291
            && status.mouse_y <= 447) then Draw
   else if (status.mouse_x >= 425 && status.mouse_x <= 515 && status.mouse_y >= 15
-           && status.mouse_y <= 60) then (* TODO: change this to Uno*) Info else NA
+           && status.mouse_y <= 60) then Uno
+  (* TODO: else if: parse location of mouse click for the four colors of rectangles *)
+  else NA
 
 let parse_click curr_hand =
   let positions = (convert_hand_to_pos curr_hand) in
@@ -182,6 +188,8 @@ let rec repl_loop s =
     init_pile ();
     draw_state init_state;
     update_turn init_state;
+    (* TODO: jeff's draw function for colors *)
+  
     repl_loop init_state
 
     let () = main ()
