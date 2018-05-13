@@ -7,7 +7,7 @@ type command =
   | Play of card
   | Draw
   | Choose of color
-  | Uno of card
+  | Uno
   | Info
   | NA
   | Quit
@@ -133,7 +133,7 @@ let parse str =
   | "draw" -> Draw
   | "choose" -> if get_color str = NoColor then NA else Choose (get_color str)
   | "uno" -> if (parse_args (get_args str)) <> ({value = -1; color = NoColor; effect = NoEffect; id = -1}) then
-      Uno (parse_args (get_args str)) else
+      Uno else
       NA
   | "info" -> Info
   | "quit" -> Quit
