@@ -32,7 +32,7 @@ let dumbai_choose_card s =
       | None -> Draw (* {value = -1; color = NoColor; effect = NoEffect; id = -1} *)
       | Some x -> Draw (* {value = -1; color = Red; effect = x.effect; id = x.id} *)
     end
-  | Some h -> if List.length hand = 2 then Uno h else Play h
+  | Some h -> if List.length hand = 2 then Uno else Play h
 
 
 (* returns a list of all the possible cards you could play

@@ -147,7 +147,7 @@ let rec repl_loop s =
     | Choose col -> update_gui (Choose col) s updated_s;
       repl_loop updated_s;
     | Info -> print_endline("info goes here"); repl_loop s;
-    | Uno c -> update_gui (Uno) s updated_s;
+    | Uno -> update_gui (Uno) s updated_s;
       repl_loop updated_s;
       if updated_s = s then print_endline("Play a valid card");
       repl_loop s;
