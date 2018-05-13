@@ -124,14 +124,14 @@ let rec draw_ai3_hand ai_hand x y = begin match ai_hand with
     draw_ai3_hand t x1 (y1+20);
 end
 
-let draw_counter () = set_line_width 6; draw_arc 640 360 100 100 (-55) 55;
-  draw_segments (Array.of_list [697, 443, 725, 435]);
-  draw_segments (Array.of_list [697, 443, 700, 420])
-
-let draw_clock () = set_line_width 6;
+let draw_counter () = set_line_width 6;
   draw_arc 550 360 100 100 125 235;
   draw_segments (Array.of_list [495, 279, 490, 305]);
   draw_segments (Array.of_list [495, 279, 471, 277])
+
+let draw_clock () = set_line_width 6; draw_arc 640 360 100 100 (-55) 55;
+  draw_segments (Array.of_list [697, 277, 695, 300]);
+  draw_segments (Array.of_list [697, 277, 720, 277])
 
 let convert_color col = match col with
   | Red -> red
@@ -152,6 +152,7 @@ let draw_circle s = if is_counter s then counter_circle s else clock_circle s
 let draw_state s = let s1 = update_state (Play init_card) s in
   (* direction arrows *)
   draw_circle s1;
+  draw_image (Png.load_as_rgb24 "assets/unobutton.png" []) 435 15;
   draw_human_hand (cardlst_to_png s1) 535 75;
   draw_ai1_hand (ai1_hand s1) 1025 315;
   draw_ai2_hand (ai2_hand s1) 535 589;

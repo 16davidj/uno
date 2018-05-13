@@ -112,7 +112,9 @@ let convert_statustocmd status positions =
   try let (_, card) = (List.find (in_position status) positions)
   in Play card with
 | _ -> if (status.mouse_x >= 850 && status.mouse_x <= 950 && status.mouse_y >= 291
-           && status.mouse_y <= 447) then Draw else NA
+           && status.mouse_y <= 447) then Draw
+  else if (status.mouse_x >= 425 && status.mouse_x <= 515 && status.mouse_y >= 15
+           && status.mouse_y <= 60) then (* TODO: change this to Uno*) Info else NA
 
 let parse_click curr_hand =
   let positions = (convert_hand_to_pos curr_hand) in
@@ -120,7 +122,7 @@ let parse_click curr_hand =
 
 let rec repl_loop s =
   let curr = current_player s in
-  if curr.id != 0 then (Unix.sleep 1);
+  if curr.id != 0 then (Unix.sleep 2);
   let cmd =
     if curr.id = 0 then parse_click curr.hand else Ai.smartai_choose_card s in
   let updated_s = update_state cmd s in
@@ -136,7 +138,7 @@ let rec repl_loop s =
       repl_loop updated_s;
     | Choose col -> update_gui (Choose col) s updated_s;
       repl_loop updated_s;
-    | Info -> print_endline("info goes here");
+    | Info -> print_endline("info goes here"); repl_loop s;
     | Uno c ->
       if updated_s != s then update_gui (Play c) s updated_s;
       let top = State.top_card updated_s in
