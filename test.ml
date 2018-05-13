@@ -3,7 +3,7 @@ open Player
 open Command
 open State
 open Ai
-(* open List *)
+open List
 
   let card1 = {value = 4; color = Red; effect = NoEffect; id = 44}
   let card2 = {value = 5; color = Blue; effect = NoEffect; id = 35}
@@ -33,11 +33,30 @@ open Ai
   let top_card3 = {value = 9; color = Blue; effect = NoEffect; id = 39}
   let top_card4 = {value = -1; color = Blue; effect = Plus; id = 53}
 
-(* let queue1 = (Queue.create ());
-  Queue.add card1 queue1; *)
+  let queue1 = (Queue.create ())
+
+    let stack1 = (Stack.create ())
+
+  (* Queue.add card1 queue1; *)
+
+let (p1 : Player.player) = {id = 0; name="bruh"; hand = hand1; intelligence = Human}
+let (p2 : Player.player) = {id = 1; name="brua"; hand = hand1; intelligence = AI}
+let (p3 : Player.player) = {id = 2; name="brux"; hand = hand1; intelligence = AI}
+let (p4 : Player.player) = {id = 3; name="bruc"; hand = hand1; intelligence = AI}
+
+let (st1 : State.state) = {
+  players = (p1::p2::p3::p4::[]);
+  draw_pile = queue1;
+  played_pile = stack1;
+  current_color = Red;
+  current_player = p2;
+  direction = Clockwise;
+  turn = 2
+}
 
   let tests = [
 
+    "ai1" >:: (fun _ -> assert_equal (Play card1) (smartai_choose_card st1));
 
     "lst1" >:: (fun _ -> assert_equal [card6;card5;card2;card1] (get_possible_list hand1 top_card0 []));
     "nlst" >:: (fun _ -> assert_equal [] (get_possible_list hand3 top_card1 []));

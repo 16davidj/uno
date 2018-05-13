@@ -17,22 +17,23 @@ let rec find_possible_card color num eff hand =
   | [] -> None
   | h::t -> begin
       if h.color = color then Some h else
-      if h.value = num then Some h else
+      if h.effect = NoEffect && h.value = num then Some h else
       if h.effect = eff && h.effect <> NoEffect then Some h else
         find_possible_card color num eff t
     end
 
-(* this no longer works
-let dumbai_choose_card top_card hand =
+
+let dumbai_choose_card s =
+  let top_card = top_card s in let hand = (current_player s).hand in
   let exists_card = find_possible_card (top_card.color) (top_card.value) (top_card.effect) hand in
   match exists_card with
   | None -> begin
       match (does_wild4_exist hand) with
       | None -> Draw (* {value = -1; color = NoColor; effect = NoEffect; id = -1} *)
-      | Some x -> Play x; Choose Red (* {value = -1; color = Red; effect = x.effect; id = x.id} *)
+      | Some x -> Draw (* {value = -1; color = Red; effect = x.effect; id = x.id} *)
     end
-                                          | Some h -> if List.length hand = 2 then Uno h else Play h
-                                        *)
+  | Some h -> if List.length hand = 2 then Uno h else Play h
+
 
 (* returns a list of all the possible cards you could play
  * given a top_card. Includes cards of the same color, value, effect, or
@@ -50,10 +51,11 @@ let rec get_possible_list hand top_card lst =
       get_possible_list t top_card lst *)
   match hand with
   | [] -> lst
-  | h::t -> if h.color = Black then get_possible_list t top_card (h::lst) else
+  | h::t ->
+    if h.color = Black then get_possible_list t top_card (h::lst) else
     if h.color = top_card.color then get_possible_list t top_card (h::lst) else
-    if h.effect = NoEffect && h.value = top_card.value then get_possible_list t top_card (h::lst) else
-    if h.effect = top_card.effect && h.effect <> NoEffect then get_possible_list t top_card (h::lst) else
+    if (h.effect = NoEffect && top_card.effect = NoEffect && h.value = top_card.value) then get_possible_list t top_card (h::lst) else
+    if (h.effect = top_card.effect && h.effect <> NoEffect && top_card.effect <> NoEffect) then get_possible_list t top_card (h::lst) else
       get_possible_list t top_card lst
 
 (* counts the number of colors you have in your hand and stores each value in
@@ -81,11 +83,11 @@ let most_color tup =
 
 (* gets a list of cards already played, extracting each card from the stack.
  * Returns the elements to the list in the order opposite that of the stack. *)
-let rec board_stats play_pile lst =
-  let pp = Stack.copy play_pile in
-  match Stack.is_empty pp with
+(* let rec board_stats play_pile lst =
+  (* let pp = Stack.copy play_pile in *)
+  match Stack.is_empty play_pile with
   | true -> lst
-  | _ -> let t = (Stack.pop pp) in board_stats pp (t::lst)
+  | _ -> let t = (Stack.pop play_pile) in board_stats play_pile (t::lst) *)
 
 (* extracting values in a 5 tuple. *)
 let fir tup =
@@ -118,20 +120,23 @@ let call_color lst =
   | _ -> Player.Red
 
 let helper_best lst  =
+  (* Draw *)
   if List.length lst = 0 then Draw else
-    let best_card = find_max lst 0 ({value = -1; color = NoColor; effect = NoEffect; id = -1}) in begin
+    let best_card = find_max lst 0 ({value = -1; color = NoColor; effect = NoEffect; id = -1}) in
+    if (best_card = {value = -1; color = NoColor; effect = NoEffect; id = -1}) then Draw else
+    begin
     (* let best_color = call_color (snd (List.split lst)) in begin *)
       match List.length lst with
       | 2 -> begin
           match best_card.effect with
-          | Wild -> Uno best_card; Choose (call_color (snd (List.split lst)))
-          | Wild4 -> Uno best_card; Choose (call_color (snd (List.split lst)))
-          | _ -> Uno best_card
+          | Wild -> Play best_card
+          | Wild4 -> Play best_card
+          | _ -> Play best_card
       end
       | _ -> begin
           match best_card.effect with
-          | Wild -> Play best_card; Choose (call_color (snd (List.split lst)))
-          | Wild4 -> Play best_card; Choose (call_color (snd (List.split lst)))
+          | Wild -> Play best_card
+          | Wild4 -> Play best_card
           | _ -> Play best_card
         end
     end

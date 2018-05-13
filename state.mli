@@ -1,9 +1,25 @@
 open Queue
+open List
+open Stack
+(* open Player
+open Command *)
 
-(* [state] is an abstract type representing the state of the game. *)
-type state
 
 type direction
+
+(* [state] is an abstract type representing the state of the game. *)
+type state = {
+  (* size of list 3, where index is the value corresponding to the players
+     eg. 0 is the user *)
+  players : Player.player list;
+  draw_pile : Player.card Queue.t;
+  played_pile : Player.card Stack.t;
+  current_color: Player.color;
+  current_player: Player.player;
+  direction: direction;
+  turn: int
+}
+
 
 (* [user_hand] is an object of type card list that represents
  * the human player's hand *)
