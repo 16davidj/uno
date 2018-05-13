@@ -64,6 +64,12 @@ let update_hand old_s updated_s =
     update_turn updated_s
   | Draw -> update_hand old_s updated_s; update_arrow updated_s;
     update_turn updated_s;
+  | Uno -> update_hand old_s updated_s;
+    update_turn update_s;
+    (*
+  | Choose c -> update_arrow updated_s;
+    update_turn updated_s;
+*)
   | _ -> ()
 
 let rec one_row hand x y acc = begin match hand with
@@ -114,7 +120,9 @@ let convert_statustocmd status positions =
 | _ -> if (status.mouse_x >= 850 && status.mouse_x <= 950 && status.mouse_y >= 291
            && status.mouse_y <= 447) then Draw
   else if (status.mouse_x >= 425 && status.mouse_x <= 515 && status.mouse_y >= 15
-           && status.mouse_y <= 60) then (* TODO: change this to Uno*) Info else NA
+           && status.mouse_y <= 60) then Uno
+  (* TODO: else if: parse location of mouse click for the four colors of rectangles *)
+  else NA
 
 let parse_click curr_hand =
   let positions = (convert_hand_to_pos curr_hand) in
@@ -139,10 +147,7 @@ let rec repl_loop s =
     | Choose col -> update_gui (Choose col) s updated_s;
       repl_loop updated_s;
     | Info -> print_endline("info goes here"); repl_loop s;
-    | Uno c ->
-      if updated_s != s then update_gui (Play c) s updated_s;
-      let top = State.top_card updated_s in
-      print_endline(string_of_int top.value);
+    | Uno -> update_gui (Uno) s updated_s;
       repl_loop updated_s;
       if updated_s = s then print_endline("Play a valid card");
       repl_loop s;
@@ -183,6 +188,8 @@ let rec repl_loop s =
     init_pile ();
     draw_state init_state;
     update_turn init_state;
+    (* TODO: jeff's draw function for colors *)
+  
     repl_loop init_state
 
     let () = main ()
