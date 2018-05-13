@@ -23,7 +23,7 @@ let rec find_possible_card color num eff hand =
     end
 
 
-let dumbai_choose_card s =
+(* let dumbai_choose_card s =
   let top_card = top_card s in let hand = (current_player s).hand in
   let exists_card = find_possible_card (top_card.color) (top_card.value) (top_card.effect) hand in
   match exists_card with
@@ -32,13 +32,13 @@ let dumbai_choose_card s =
       | None -> Draw (* {value = -1; color = NoColor; effect = NoEffect; id = -1} *)
       | Some x -> Draw (* {value = -1; color = Red; effect = x.effect; id = x.id} *)
     end
-  | Some h -> if List.length hand = 2 then Uno else Play h
+  | Some h -> if List.length hand = 2 then Uno else Play h *)
 
 
 (* returns a list of all the possible cards you could play
  * given a top_card. Includes cards of the same color, value, effect, or
  * Wild cards. (implemented in a way that reverses original order)*)
-let rec get_possible_list hand top_card lst =
+let rec get_possible_list hand top_card lst s =
   (* match hand with
   | [] -> lst
   | h::t -> if h.color = Black then get_possible_list t top_card (h::lst) else
@@ -52,11 +52,11 @@ let rec get_possible_list hand top_card lst =
   match hand with
   | [] -> lst
   | h::t ->
-    if h.color = Black then get_possible_list t top_card (h::lst) else
-    if h.color = top_card.color then get_possible_list t top_card (h::lst) else
-    if (h.effect = NoEffect && top_card.effect = NoEffect && h.value = top_card.value) then get_possible_list t top_card (h::lst) else
-    if (h.effect = top_card.effect && h.effect <> NoEffect && top_card.effect <> NoEffect) then get_possible_list t top_card (h::lst) else
-      get_possible_list t top_card lst
+    if h.color = Black then get_possible_list t top_card (h::lst) s else
+    if h.color = (current_color s) then get_possible_list t top_card (h::lst) s else
+    if (h.effect = NoEffect && top_card.effect = NoEffect && h.value = top_card.value) then get_possible_list t top_card (h::lst) s else
+    if (h.effect = top_card.effect && h.effect <> NoEffect && top_card.effect <> NoEffect) then get_possible_list t top_card (h::lst) s else
+      get_possible_list t top_card lst s
 
 (* counts the number of colors you have in your hand and stores each value in
  * a tuple in the order Y,G,B,R,Bl. *)
@@ -125,22 +125,7 @@ let helper_best lst tf hand =
   if List.length lst = 0 then Draw else
     let best_card = find_max lst 0 ({value = -1; color = NoColor; effect = NoEffect; id = -1}) in
     if (best_card = {value = -1; color = NoColor; effect = NoEffect; id = -1}) then Draw else
-    begin
-    (* let best_color = call_color (snd (List.split lst)) in begin *)
-      match List.length lst with
-      | 2 -> begin
-          match best_card.effect with
-          | Wild -> Play best_card
-          | Wild4 -> Play best_card
-          | _ -> Play best_card
-      end
-      | _ -> begin
-          match best_card.effect with
-          | Wild -> Play best_card
-          | Wild4 -> Play best_card
-          | _ -> Play best_card
-        end
-    end
+    Play best_card
 
 
     (* if List.length lst = 2 then if (best_card.effect = Wild || best_card.effect = Wild4) then Uno best_card; Choose best_color; else Uno best_card
@@ -218,7 +203,7 @@ let smartai_choose_card s =
   let curr = current_player s in let hand = curr.hand in
   let get_human = List.find (fun x -> x.id = 0) (players s) in
   let num_h_cards = List.length (get_human.hand) in
-  let possible_plays = get_possible_list hand (top_card s) [] in
+  let possible_plays = get_possible_list hand (top_card s) [] s in
   if current_color s = Black then find_best_card possible_plays NoColor (top_card s) num_h_cards s [] else
   let curr_hand_stats = color_count possible_plays (0,0,0,0,0) in
   begin

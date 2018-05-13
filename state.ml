@@ -347,6 +347,16 @@ let check_playability color c1 c2 =
   else if c2.effect = NoEffect && c2.value = c1.value then true
   else c2.effect = c1.effect && c2.effect <> NoEffect
 
+let uno_card curr_color top_card hand =
+let false_card = {value = -1; color = NoColor; effect = NoEffect; id = -1} in
+if List.length hand <> 2 then false_card else
+match hand with
+| c1::c2::[] ->
+    if (check_playability curr_color top_card c1) then c1
+    else if (check_playability curr_color top_card c2) then c2
+    else false_card
+| _ -> false_card
+
 let update_state_color color s =
 { s with
   current_color = color;
@@ -376,6 +386,17 @@ let curr_player = s.current_player in
 let check_uno s = let curr_player = s.current_player in
 List.length curr_player.hand = 1
 
+let bad_uno_attempt s =
+  let c1 = pop s.draw_pile in
+  let c2 = pop s.draw_pile in
+  let plus_cards = c1::c2::[] in
+  let curr_player = s.current_player in
+  { s with
+    players = add_cards_to_player s.players curr_player.id plus_cards;
+    current_player = nth s.players (next_turn s);
+    turn = next_turn s;
+  }
+
 let update_state cmd s =
   let curr_color = s.current_color in
   let top_card = Stack.top s.played_pile in
@@ -391,8 +412,9 @@ let update_state cmd s =
       else s
     | Draw -> draw_card s
     | Uno ->
-      if check_uno s then s
-      else s
+      let unocard = uno_card curr_color top_card curr_player.hand in
+      if unocard.id = -1 then bad_uno_attempt s
+      else update_state_play_card unocard s
     | _ -> s
   else
     match cmd with

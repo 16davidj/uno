@@ -65,11 +65,10 @@ let update_hand old_s updated_s =
   | Draw -> update_hand old_s updated_s; update_arrow updated_s;
     update_turn updated_s;
   | Uno -> update_hand old_s updated_s;
-    update_turn update_s;
-    (*
+    update_turn updated_s;
+    (* JEFFREY'S CHOOSE *)
   | Choose c -> update_arrow updated_s;
     update_turn updated_s;
-*)
   | _ -> ()
 
 let rec one_row hand x y acc = begin match hand with
@@ -121,12 +120,19 @@ let convert_statustocmd status positions =
            && status.mouse_y <= 447) then Draw
   else if (status.mouse_x >= 425 && status.mouse_x <= 515 && status.mouse_y >= 15
            && status.mouse_y <= 60) then Uno
-  (* TODO: else if: parse location of mouse click for the four colors of rectangles *)
+(* TODO: else if: parse location of mouse click for the four colors of rectangles *)
+  else if (status.mouse_x >= 500 && status.mouse_x <= 530 && status.mouse_y >= 220 && status.mouse_y <= 250) then Choose Yellow
+  else if (status.mouse_x >= 550 && status.mouse_x <= 580 && status.mouse_y >= 220 && status.mouse_y <= 250) then Choose Green
+  else if (status.mouse_x >= 600 && status.mouse_x <= 630 && status.mouse_y >= 220 && status.mouse_y <= 250) then Choose Blue
+  else if (status.mouse_x >= 650 && status.mouse_x <= 680 && status.mouse_y >= 220 && status.mouse_y <= 250) then Choose Red 
   else NA
 
 let parse_click curr_hand =
   let positions = (convert_hand_to_pos curr_hand) in
   convert_statustocmd (wait_next_event [Button_down]) positions
+
+
+
 
 let rec repl_loop s =
   let curr = current_player s in
@@ -184,12 +190,25 @@ let rec repl_loop s =
     draw_string "Frank";
     draw_image (Png.load_as_rgb24 "assets/frank.png" []) 225 175;
 
+    (* JEFFREY'S CHOOSE COLOR *)
+    moveto 420 230;
+    draw_string "Color chosen";
+    set_color yellow;
+    fill_rect 500 220 30 30;
+    set_color green;
+    fill_rect 550 220 30 30;
+    set_color blue;
+    fill_rect 600 220 30 30;
+    set_color red;
+    fill_rect 650 220 30 30;
+
     Random.self_init();
     init_pile ();
     draw_state init_state;
     update_turn init_state;
-    (* TODO: jeff's draw function for colors *)
-  
+
+
+
     repl_loop init_state
 
     let () = main ()
