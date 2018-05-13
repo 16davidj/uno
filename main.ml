@@ -64,6 +64,8 @@ let update_hand old_s updated_s =
     update_turn updated_s
   | Draw -> update_hand old_s updated_s; update_arrow updated_s;
     update_turn updated_s;
+  | Uno -> update_hand old_s updated_s;
+    update_turn update_s;
   | _ -> ()
 
 let rec one_row hand x y acc = begin match hand with
@@ -139,10 +141,7 @@ let rec repl_loop s =
     | Choose col -> update_gui (Choose col) s updated_s;
       repl_loop updated_s;
     | Info -> print_endline("info goes here"); repl_loop s;
-    | Uno c ->
-      if updated_s != s then update_gui (Play c) s updated_s;
-      let top = State.top_card updated_s in
-      print_endline(string_of_int top.value);
+    | Uno c -> update_gui (Uno) s updated_s;
       repl_loop updated_s;
       if updated_s = s then print_endline("Play a valid card");
       repl_loop s;

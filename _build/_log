@@ -1,0 +1,23 @@
+### Starting build.
+# Target: state.mli.depends, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), extension:mli, file:state.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -modules state.mli > state.mli.depends
+# Target: command.mli.depends, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), extension:mli, file:command.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -modules command.mli > command.mli.depends
+# Target: player.ml.depends, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), extension:ml, file:player.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -modules player.ml > player.ml.depends # cached
+# Target: player.cmo, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), byte, compile, extension:cmo, extension:ml, file:player.cmo, file:player.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -o player.cmo player.ml # cached
+# Target: command.cmi, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), byte, compile, extension:mli, file:command.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -o command.cmi command.mli
+# Target: state.cmi, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), byte, compile, extension:mli, file:state.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -o state.cmi state.mli
+# Target: state.ml.depends, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), extension:ml, file:state.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -modules state.ml > state.ml.depends
+# Target: state.cmo, tags: { package(camlimages), package(camlimages.jpeg), package(camlimages.png), package(graphics), package(oUnit), byte, compile, extension:cmo, extension:ml, file:state.cmo, file:state.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -o state.cmo state.ml
++ ocamlfind ocamlc -c -package oUnit -package graphics -package camlimages -package camlimages.png -package camlimages.jpeg -o state.cmo state.ml
+File "state.ml", line 393, characters 6-14:
+Error: The constructor Uno expects 0 argument(s),
+       but is applied here to 1 argument(s)
+Command exited with code 2.
+# Compilation unsuccessful.
