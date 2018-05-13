@@ -15,7 +15,7 @@ type command =
                                * W4:      90, 91, 92, 93*)
   | Draw                    (* Draws a card from the draw pile and place it in your hand *)
   | Choose of color         (* Changes the color of the play pile *)
-  | Uno of card             (* Declares "UNO" and plays a card in your hand with
+  | Uno                     (* Declares "UNO" and plays a card in your hand with
                               * the int "id" you specify. *)
   | Info 										(* prints information about the state of the game *)
   | NA                      (* For invalid commands *)
