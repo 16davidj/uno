@@ -3,7 +3,7 @@ open Player
 open Command
 open State
 open Ai
-(* open List *)
+open List
 
   let card1 = {value = 4; color = Red; effect = NoEffect; id = 44}
   let card2 = {value = 5; color = Blue; effect = NoEffect; id = 35}
