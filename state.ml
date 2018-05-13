@@ -84,6 +84,7 @@ let all_cards = [{value = 0; color = Red; effect = NoEffect; id = 40};
                {value = -1; color = Black; effect = Wild4; id = 90};
                {value = -1; color = Black; effect = Wild4; id = 90};
 
+
               {value = 1; color = Red; effect = NoEffect; id = 41};
               {value = 2; color = Red; effect = NoEffect; id = 42};
               {value = 3; color = Red; effect = NoEffect; id = 43};
@@ -110,6 +111,7 @@ let all_cards = [{value = 0; color = Red; effect = NoEffect; id = 40};
              {value = -1; color = Yellow; effect = Skip; id = 61};
              {value = -1; color = Yellow; effect = Reverse; id = 71};
 
+
              {value = 1; color = Green; effect = NoEffect; id = 21};
              {value = 2; color = Green; effect = NoEffect; id = 22};
              {value = 3; color = Green; effect = NoEffect; id = 23};
@@ -134,7 +136,7 @@ let all_cards = [{value = 0; color = Red; effect = NoEffect; id = 40};
              {value = 9; color = Blue; effect = NoEffect; id = 39};
              {value = -1; color = Blue; effect = Plus; id = 53};
              {value = -1; color = Blue; effect = Skip; id = 63};
-             {value = -1; color = Blue; effect = Reverse; id = 73}; ]
+               {value = -1; color = Blue; effect = Reverse; id = 73}; ]
 
 let user_hand s = let p = hd s.players in p.hand
 let ai1_hand s = let p = nth s.players 1 in p.hand
@@ -174,9 +176,9 @@ let pile = Stack.create ()
 
 let init_draw = lst_to_q drawn4 empty
 
-let rec get_init_card () =
-  let c = Queue.pop init_draw in
-  if c.effect = Wild then (get_init_card (Queue.push c init_draw))
+let rec get_init_card count =
+  let c = Queue.take init_draw in
+  if (c.effect = Wild || c.effect = Wild4) then get_init_card ()
   else c
 
 let init_card = get_init_card ()
