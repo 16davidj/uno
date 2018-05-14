@@ -454,8 +454,6 @@ let bad_uno_attempt s =
   let curr_player = s.current_player in
   { s with
     players = add_cards_to_player s.players curr_player.id plus_cards;
-    current_player = nth s.players (next_turn s);
-    turn = next_turn s;
   }
 
 (* [stack_to_list] returns a list of the stack *)
