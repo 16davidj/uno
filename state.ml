@@ -314,8 +314,8 @@ match card.effect with
   { s with
     players = add_cards_to_player players' next_player.id plus_cards;
     current_color = card.color;
-    current_player = next_player;
-    turn = next_turn s;
+    current_player = nth s.players (next_next_turn s);
+    turn = next_next_turn s;
   }
 | Reverse ->
   { s with
@@ -360,11 +360,20 @@ match hand with
 | _ -> false_card
 
 let update_state_color color s =
-{ s with
-  current_color = color;
-  current_player = nth s.players (next_turn s);
-  turn = next_turn s;
-}
+  let c = top_card s in
+  match c.effect with
+  | Wild -> { s with
+      current_color = color;
+      current_player = nth s.players (next_turn s);
+      turn = next_turn s;
+            }
+  | Wild4 -> {
+      s with
+      current_color = color;
+      current_player = nth s.players (next_next_turn s);
+      turn = next_next_turn s
+    }
+  | _ -> s
 
 let add_2_to_prev_player s =
 let c1 = pop s.draw_pile in
@@ -399,14 +408,35 @@ let bad_uno_attempt s =
     turn = next_turn s;
   }
 
-let update_state cmd s =
+let stack_to_list stack =
+  Stack.fold (fun x y -> y::x) [] stack
+
+let rec transfer_list_to_queue lst queue =
+  match lst with
+  | [] -> queue
+  | h::t -> Queue.push h queue; transfer_list_to_queue t queue
+
+let replenish_draw_pile s =
+  if Queue.length s.draw_pile < 4 then
+  let top_card = Stack.pop s.played_pile in
+  let played_list =
+    shuffle (shuffle (shuffle (stack_to_list (s.played_pile)))) in
+  transfer_list_to_queue played_list s.draw_pile;
+  Stack.clear s.played_pile;
+  Stack.push top_card s.played_pile;
+  s else s
+
+let update_state cmd s0 =
+  let s = replenish_draw_pile s0 in
   let curr_color = s.current_color in
   let top_card = Stack.top s.played_pile in
   let curr_player = s.current_player in
+  let unocard = uno_card curr_color top_card curr_player.hand in
   if curr_color <> Black then
     match cmd with
     | Play card ->
-      if (check_playability curr_color top_card card)
+      if unocard.id <> -1 && curr_player.id = 0 then bad_uno_attempt s
+      else if (check_playability curr_color top_card card)
       && (player_has_card s.players curr_player.id card) then
         let new_state = update_state_play_card card s in
         if check_uno new_state then add_2_to_prev_player new_state

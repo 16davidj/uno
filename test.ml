@@ -94,16 +94,20 @@ open List
    (*the four wilds +4*)
   let wildplus = {value = -1; color = Black; effect = Wild4; id = 90}
 
+
+let bluehand = [blue0;blue1;blue2;yellow0]
 (* let queue1 = (Queue.create ());
   Queue.add card1 queue1; *)
 
   let tests = [
 
-    "lst1" >:: (fun _ -> assert_equal [card6;card5;card2;card1] (get_possible_list hand1 top_card0 []));
+    "co1" >:: (fun _ -> assert_equal Player.Blue (call_color bluehand));
+
+    (* "lst1" >:: (fun _ -> assert_equal [card6;card5;card2;card1] (get_possible_list hand1 top_card0 []));
     "nlst" >:: (fun _ -> assert_equal [] (get_possible_list hand3 top_card1 []));
     "lst2" >:: (fun _ -> assert_equal [card12;card11;card8;card7;card6;card2] (get_possible_list hand4 top_card4 []));
     "lst3" >:: (fun _ -> assert_equal [card12;card11;card5;card1] (get_possible_list hand4 top_card2 []));
-    "lst4" >:: (fun _ -> assert_equal [card12;card11;card10;card8;card3] (get_possible_list hand4 card8 []));
+    "lst4" >:: (fun _ -> assert_equal [card12;card11;card10;card8;card3] (get_possible_list hand4 card8 [])); *)
 
     "cc1" >:: (fun _ -> assert_equal (1,1,2,2,0) (color_count hand1 (0,0,0,0,0)));
     "cc2" >:: (fun _ -> assert_equal (1,1,2,1,0) (color_count hand2 (0,0,0,0,0)));

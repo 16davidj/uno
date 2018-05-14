@@ -77,6 +77,7 @@ let update_gui cmd old_s updated_s = match cmd with
   update_turn updated_s;
 | Uno -> update_hand old_s updated_s;
   update_turn updated_s;
+  update_stack updated_s;
 | Choose c -> update_arrow updated_s;
   update_turn updated_s;
 | _ -> ()
@@ -166,7 +167,13 @@ let parse_click curr_hand =
   let positions = (convert_hand_to_pos curr_hand) in
   let status = wait_next_event [Button_down] in
   print_endline (string_of_int status.mouse_x ^ ", " ^ string_of_int status.mouse_y);
-convert_statustocmd status positions
+  convert_statustocmd status positions
+
+let rec check_for_winner players =
+  match players with
+  | [] -> false
+  | p::others -> if List.length p.hand = 0 then true
+    else check_for_winner others
 
 (* this is the repl loop that allows the game to play. If the current state has
    a current player of an ai, then the ai module will choose a command. Otherwise,
@@ -174,31 +181,32 @@ convert_statustocmd status positions
    a command.
 *)
 let rec repl_loop s =
-let curr = current_player s in
-if curr.id != 0 then (Unix.sleep 1);
-let cmd =
-  if curr.id = 0 then parse_click curr.hand else Ai.smartai_choose_card s in
-let updated_s = update_state cmd s in
-if curr.id = 0 then print_endline (conv_l_st (conv_lst_str (convert_hand_to_pos curr.hand)) "");
-begin match cmd with
-  | Play c ->
-    if updated_s != s then update_gui (Play c) s updated_s;
-    repl_loop updated_s;
-    if updated_s = s then print_endline("Play a valid card");
-    repl_loop s;
-  | Draw -> update_gui (Draw) s updated_s;
-    repl_loop updated_s;
-  | Choose col -> update_gui (Choose col) s updated_s;
-    repl_loop updated_s;
-  | Info -> print_endline("info goes here"); repl_loop s;
-  | Uno -> update_gui (Uno) s updated_s;
-    repl_loop updated_s;
-    if updated_s = s then print_endline("Play a valid card");
-    repl_loop s;
-  | Quit -> exit 0;
-  | _ -> print_endline("\n**Console**: not a valid command");
-    repl_loop s;
-end
+  if check_for_winner s.players then exit 0
+  else let curr = current_player s in
+  if curr.id != 0 then (Unix.sleep 2);
+  let cmd =
+    if curr.id = 0 then parse_click curr.hand else Ai.smartai_choose_card s in
+  let updated_s = update_state cmd s in
+  if curr.id = 0 then print_endline (conv_l_st (conv_lst_str (convert_hand_to_pos curr.hand)) "");
+  begin match cmd with
+    | Play c ->
+      if updated_s != s then update_gui (Play c) s updated_s;
+      repl_loop updated_s;
+      if updated_s = s then print_endline("Play a valid card");
+      repl_loop s;
+    | Draw -> update_gui (Draw) s updated_s;
+      repl_loop updated_s;
+    | Choose col -> update_gui (Choose col) s updated_s;
+      repl_loop updated_s;
+    | Info -> print_endline("info goes here"); repl_loop s;
+    | Uno -> update_gui (Uno) s updated_s;
+      repl_loop updated_s;
+      if updated_s = s then print_endline("Play a valid card");
+      repl_loop s;
+    | Quit -> exit 0;
+    | _ -> print_endline("\n**Console**: not a valid command");
+      repl_loop s;
+  end
 
 (* the main game, where everything, including the assets, colors, windows,
    and initial state are set up
