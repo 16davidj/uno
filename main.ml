@@ -3,6 +3,7 @@ open Command
 open Player
 open Graphics
 open Gui
+open Ai
 
 (* clears the user's hand on the display and redraws the updated hand *)
 let update_user_hand updated_s = fill_rect 535 0 745 183;
@@ -188,6 +189,13 @@ let rec repl_loop s =
     if curr.id = 0 then parse_click curr.hand else Ai.smartai_choose_card s in
   let updated_s = update_state cmd s in
   if curr.id = 0 then print_endline (conv_l_st (conv_lst_str (convert_hand_to_pos curr.hand)) "");
+
+  (* match (Ai.call_color curr.hand) with
+  | Player.Yellow -> print_endline("yellow color selected");
+  | Player.Blue -> print_endline("blue color");
+  | Player.Green -> print_endline("green color sel");
+  | _ -> print_endline("red/black sel"); *)
+
   begin match cmd with
     | Play c ->
       if updated_s != s then update_gui (Play c) s updated_s;
