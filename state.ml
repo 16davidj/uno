@@ -493,12 +493,11 @@ let update_state cmd s0 =
   if curr_color <> Black then
     match cmd with
     | Play card ->
-      if unocard.id <> -1 && curr_player.id = 0 then bad_uno_attempt s
-      else if (check_playability curr_color top_card card)
-      && (player_has_card s.players curr_player.id card) then
-        let new_state = update_state_play_card card s in
-        if human_has_two s then add_2_to_prev_player new_state
-        else new_state
+      if (check_playability curr_color top_card card) &&
+      (player_has_card s.players curr_player.id card) then
+        (if unocard.id <> -1 && curr_player.id = 0
+          then update_state_play_card card (bad_uno_attempt s)
+          else update_state_play_card card s)
       else s
     | Draw -> draw_card s
     | Uno ->
