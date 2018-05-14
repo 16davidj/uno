@@ -59,6 +59,7 @@ let convert_color str =
   | "black" -> 0
   | _ -> -1
 
+(* Parses a string representation of a color and converts it to the color type *)
 let str_to_color str =
   match str with
   | "yellow" -> Yellow
@@ -113,6 +114,7 @@ let rec parse_args arg =
   with
   | _ -> parse_args (string_of_int (convert_to_id arg))
 
+(* Gets the color given a string representation of that color. *)
 let get_color str =
   let col_str = get_args str in
   begin

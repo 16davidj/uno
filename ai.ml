@@ -3,16 +3,21 @@ open State
 open Command
 open Random
 
+(* [effect] represents a possible effect of the card. *)
 type effect = Skip | Plus | Reverse | NoEffect | Wild | Wild4
 
 (* [color] represents the color of a card *)
 type color = Red | Green | Blue | Yellow | Black | NoColor
 
+(* Helper function for dumb AI that determines if a Wild card or
+ * Wild4 card exists in the hand to play. *)
 let rec does_wild4_exist hand =
   match hand with
   | [] -> None
   | h::t -> if h.effect = Wild4 || h.effect = Wild then Some h else does_wild4_exist t
 
+(* Helper for dumb AI that determines the first playable card in its hand.
+ * Returns a card option. *)
 let rec find_possible_card color num eff hand =
   match hand with
   | [] -> None
@@ -23,7 +28,10 @@ let rec find_possible_card color num eff hand =
         find_possible_card color num eff t
     end
 
-(* let dumbai_choose_card s =
+(* One potential algorithm for the AI to play cards. The way it works
+ * is a rudimentary "find first card" method. It plays the first card it sees.
+ * In our implementation, we decided to only use the Smart AI however. *)
+let dumbai_choose_card s =
   let top_card = top_card s in let hand = (current_player s).hand in
   let exists_card = find_possible_card (top_card.color) (top_card.value) (top_card.effect) hand in
   match exists_card with
@@ -32,7 +40,7 @@ let rec find_possible_card color num eff hand =
       | None -> Draw (* {value = -1; color = NoColor; effect = NoEffect; id = -1} *)
       | Some x -> Draw (* {value = -1; color = Red; effect = x.effect; id = x.id} *)
     end
-  | Some h -> if List.length hand = 2 then Uno else Play h *)
+  | Some h -> Play h
 
 
 (* returns a list of all the possible cards you could play
@@ -44,8 +52,10 @@ let rec get_possible_list hand top_card lst s =
   | h::t ->
     if h.color = Black then get_possible_list t top_card (h::lst) s else
     if h.color = (current_color s) then get_possible_list t top_card (h::lst) s else
-    if (h.effect = NoEffect && top_card.effect = NoEffect && h.value = top_card.value) then get_possible_list t top_card (h::lst) s else
-    if (h.effect = top_card.effect && h.effect <> NoEffect && top_card.effect <> NoEffect) then get_possible_list t top_card (h::lst) s else
+    if (h.effect = NoEffect && top_card.effect = NoEffect && h.value = top_card.value)
+    then get_possible_list t top_card (h::lst) s else
+    if (h.effect = top_card.effect && h.effect <> NoEffect && top_card.effect <> NoEffect)
+    then get_possible_list t top_card (h::lst) s else
       get_possible_list t top_card lst s
 
 (* counts the number of colors you have in your hand and stores each value in
@@ -88,39 +98,17 @@ let most_color tup =
     if (max (max (max y g) b) r) = b then Blue else
     if (max (max (max y g) b) r) = r then Red else Black
 
-(* gets a list of cards already played, extracting each card from the stack.
- * Returns the elements to the list in the order opposite that of the stack. *)
-(* let rec board_stats play_pile lst =
-  (* let pp = Stack.copy play_pile in *)
-  match Stack.is_empty play_pile with
-  | true -> lst
-  | _ -> let t = (Stack.pop play_pile) in board_stats play_pile (t::lst) *)
-
-let best_color lst =
-  let y = List.nth lst 0 in let g = List.nth lst 1 in let b = List.nth lst 2 in let r = List.nth lst 3 in
-  if (r > y && r > b && r > g) then Player.Red else
-  if (g > y && g > b && g > r) then Player.Green else
-  if (b > y && b > g && b > r) then Player.Blue else Player.Yellow
-
-
-
-(* let rec most_col hand arr =
-  match hand with
-  | [] -> best_color (Array.to_list arr)
-  | h::t -> begin
-      match h.color with
-      | Yellow -> let v = arr.(0) in let vp = arr.(0) <- (v+1); most_col t vp
-      | Green -> let v = arr.(1) in let vp = arr.(1) <- (v+1); most_col t vp
-      | Blue -> let v = arr.(2) in let vp = arr.(2) <- (v+1); most_col t vp
-      | _ -> let v = arr.(3) in let vp = arr.(3) <- (v+1); most_col t vp
-    end *)
-
-                     (* *)
+(* Returns the card with the highest heuristic value. This
+ * determines which card the Smart AI should play given the current situation.
+ * This is a helper function for our Smart AI choose card method. *)
 let rec find_max lst num c =
   match lst with
   | [] -> c
   | (n,ca)::t -> if n > num then find_max t n ca else find_max t num c
 
+(* Method that determines what the best color to call is for an AI. Its
+ * implementation looks at how many of each color is in the hand, and chooses the
+ * highest color. *)
 let call_color lst =
   match most_color (color_count lst (0,0,0,0,0)) with
   | Red -> Player.Red
@@ -128,92 +116,78 @@ let call_color lst =
   | Green -> Player.Green
   | _ -> Player.Blue
 
-let random_col =
+(* let random_col =
   Random.self_init();
   match (Random.int 4) with
   | 0 -> Player.Red
   | 1 -> Player.Yellow
   | 2 -> Player.Green
-  | _ -> Player.Blue
+   | _ -> Player.Blue *)
 
+(* Returns a command to play the best card in the smart AI function. *)
 let helper_best lst tf hand =
-  (* Draw *)
   if tf = true then Choose (call_color hand) else
   if List.length lst = 0 then Draw else
     let best_card = find_max lst 0 ({value = -1; color = NoColor; effect = NoEffect; id = -1}) in
     if (best_card = {value = -1; color = NoColor; effect = NoEffect; id = -1}) then Draw else
     Play best_card
 
+(* Assigns heuristic numerical values to each card. There is a different number
+ * for different situations, and the higher the number, the more likely it should be
+ * played. *)
 let rec find_best_card hand (c : Player.color) top_card num_h s lst =
   if c = NoColor then helper_best lst true (current_player s).hand else begin
     match hand with
     | [] -> helper_best lst false (current_player s).hand
     | h::t ->
       if (next_turn s = 0) then
-        if (h.effect = Skip || h.effect = Plus || h.effect = Reverse) then find_best_card t c top_card num_h s ((50,h)::lst)
-        else if (h.effect = Wild4) then if (num_h <= 3) then find_best_card t c top_card num_h s ((100,h)::lst) else find_best_card t c top_card num_h s ((45,h)::lst)
-        else if (h.effect = Wild) then if (List.length hand <= 3) then find_best_card t c top_card num_h s ((75,h)::lst) else find_best_card t c top_card num_h s ((20,h)::lst)
+        if (h.effect = Skip || h.effect = Plus || h.effect = Reverse)
+        then find_best_card t c top_card num_h s ((50,h)::lst)
+        else if (h.effect = Wild4) then if (num_h <= 3)
+          then find_best_card t c top_card num_h s ((100,h)::lst)
+          else find_best_card t c top_card num_h s ((45,h)::lst)
+        else if (h.effect = Wild) then if (List.length hand <= 3)
+          then find_best_card t c top_card num_h s ((75,h)::lst)
+          else find_best_card t c top_card num_h s ((20,h)::lst)
         (* else NoEffect *)
-        else if (h.value = 0) then if (h.color = c) then find_best_card t c top_card num_h s ((40,h)::lst) else find_best_card t c top_card num_h s ((30,h)::lst)
-        else if (h.color = c) then find_best_card t c top_card num_h s ((25,h)::lst) else find_best_card t c top_card num_h s ((20,h)::lst)
+        else if (h.value = 0) then if (h.color = c)
+          then find_best_card t c top_card num_h s ((40,h)::lst)
+          else find_best_card t c top_card num_h s ((30,h)::lst)
+        else if (h.color = c) then find_best_card t c top_card num_h s ((25,h)::lst)
+        else find_best_card t c top_card num_h s ((20,h)::lst)
       else if (next_next_turn s = 0) then
-        if (h.effect = Skip || h.effect = Plus || h.effect = Wild4) then find_best_card t c top_card num_h s ((10,h)::lst)
+        if (h.effect = Skip || h.effect = Plus || h.effect = Wild4)
+        then find_best_card t c top_card num_h s ((10,h)::lst)
         else if (h.effect = Reverse) then find_best_card t c top_card num_h s ((20,h)::lst)
-        else if (h.effect = Wild) then if (List.length hand <= 3) then find_best_card t c top_card num_h s ((50,h)::lst) else find_best_card t c top_card num_h s ((20,h)::lst)
+        else if (h.effect = Wild) then if (List.length hand <= 3)
+          then find_best_card t c top_card num_h s ((50,h)::lst)
+          else find_best_card t c top_card num_h s ((20,h)::lst)
         (* else NoEffect *)
-        else if (h.value = 0) then if (h.color = c) then find_best_card t c top_card num_h s ((60,h)::lst) else find_best_card t c top_card num_h s ((55,h)::lst) else find_best_card t c top_card num_h s ((52,h)::lst)
+        else if (h.value = 0) then if (h.color = c)
+          then find_best_card t c top_card num_h s ((60,h)::lst)
+          else find_best_card t c top_card num_h s ((55,h)::lst)
+        else find_best_card t c top_card num_h s ((52,h)::lst)
       else
-        if (h.effect = Reverse || h.effect = Wild4) then find_best_card t c top_card num_h s ((5,h)::lst)
-        else if (h.effect = Skip || h.effect = Plus) then find_best_card t c top_card num_h s ((15,h)::lst)
-        else if (h.effect = Wild) then find_best_card t c top_card num_h s ((25,h)::lst)
-        else if (h.value = 0) then if (h.color = c) then find_best_card t c top_card num_h s ((70,h)::lst) else find_best_card t c top_card num_h s ((60,h)::lst)
+      if (h.effect = Reverse || h.effect = Wild4)
+      then find_best_card t c top_card num_h s ((5,h)::lst)
+      else if (h.effect = Skip || h.effect = Plus)
+      then find_best_card t c top_card num_h s ((15,h)::lst)
+      else if (h.effect = Wild)
+      then find_best_card t c top_card num_h s ((25,h)::lst)
+      else if (h.value = 0) then if (h.color = c)
+        then find_best_card t c top_card num_h s ((70,h)::lst)
+        else find_best_card t c top_card num_h s ((60,h)::lst)
         else find_best_card t c top_card num_h s ((50,h)::lst)
   end
 
-  (* match hand with
-  | [] -> play_best lst
-  | h::t -> if (State.next_turn st = 0 && h.effect <> NoEffect) then
-      if (h.effect = Wild4 || h.effect = Plus || h.effect = Skip) then find_best_card t c top_card num_h st ((150,h)::lst) else
-      find_best_card t c top_card num_h st ((100,h)::lst) else
-    if (h.value = 0) then find_best_card t c top_card num_h st ((30,h)::lst) else
-    if ((h.color = top_card.color) && h.value <> -1) then
-      let play_tup = color_count (board_stats (played_pile st) []) (0,0,0,0,0) in begin
-        match h.color with
-        | Yellow -> let add_n = (fir play_tup) in
-          if h.color = c then
-             find_best_card t c top_card num_h st (((h.value + add_n + 10),h)::lst)
-          else find_best_card t c top_card num_h st (((h.value + add_n),h)::lst)
-        | Green -> let add_n = sen play_tup in
-          if h.color = c then
-            find_best_card t c top_card num_h st (((h.value + add_n + 10),h)::lst)
-          else find_best_card t c top_card num_h st (((h.value + add_n),h)::lst)
-        | Blue -> let add_n = trd play_tup in
-          if h.color = c then
-            find_best_card t c top_card num_h st (((h.value + add_n + 10),h)::lst)
-          else find_best_card t c top_card num_h st (((h.value + add_n),h)::lst)
-        | Red -> let add_n = frt play_tup in
-          if h.color = c then
-             find_best_card t c top_card num_h st (((h.value + add_n + 10),h)::lst)
-          else find_best_card t c top_card num_h st (((h.value + add_n),h)::lst)
-        | Black -> if List.length hand > 4 then find_best_card t c top_card num_h st ((10,h)::lst) else
-            find_best_card t c top_card num_h st ((75,h)::lst)
-        | _ -> failwith "Impossible"
-      end
-        (* for effect cards *)
-    else
-      let next_player_cards = List.length ((List.nth (players st) (next_turn st)).hand) in
-      if next_player_cards = 1 then
-        find_best_card t c top_card num_h st ((50,h)::lst) else
-      if next_player_cards < 4 then
-        find_best_card t c top_card num_h st ((40,h)::lst) else
-        find_best_card t c top_card num_h st ((25,h)::lst) *)
-
+(* Method used to determine which card the AI plays. Ultimately returns a command. *)
 let smartai_choose_card s =
   let curr = current_player s in let hand = curr.hand in
   let get_human = List.find (fun x -> x.id = 0) (players s) in
   let num_h_cards = List.length (get_human.hand) in
   let possible_plays = get_possible_list hand (top_card s) [] s in
-  if current_color s = Black then find_best_card possible_plays NoColor (top_card s) num_h_cards s [] else
+  if current_color s = Black
+  then find_best_card possible_plays NoColor (top_card s) num_h_cards s [] else
   let curr_hand_stats = color_count possible_plays (0,0,0,0,0) in
   begin
     match most_color (curr_hand_stats) with
