@@ -439,9 +439,10 @@ let curr_player = s.current_player in
   turn = next_turn s;
 }
 
-(* [has_two_cards] returns true if the current player has 2 cards *)
-let has_two_cards s = let curr_player = s.current_player in
-List.length curr_player.hand = 2
+(* [human_has_two] returns true if the current player is the human player
+ * and the human has only 2 cards left *)
+let human_has_two s = let curr_player = s.current_player in
+List.length curr_player.hand = 2 && curr_player.id = 0
 
 (* [bad_uno_attempt] returns state that draws 2 cards from the draw pile
  * in the input state and adds to the current player. Current player and
@@ -496,7 +497,7 @@ let update_state cmd s0 =
       else if (check_playability curr_color top_card card)
       && (player_has_card s.players curr_player.id card) then
         let new_state = update_state_play_card card s in
-        if has_two_cards s then add_2_to_prev_player new_state
+        if human_has_two s then add_2_to_prev_player new_state
         else new_state
       else s
     | Draw -> draw_card s
