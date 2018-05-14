@@ -22,7 +22,6 @@ let rec find_possible_card color num eff hand =
         find_possible_card color num eff t
     end
 
-
 (* let dumbai_choose_card s =
   let top_card = top_card s in let hand = (current_player s).hand in
   let exists_card = find_possible_card (top_card.color) (top_card.value) (top_card.effect) hand in
@@ -39,16 +38,6 @@ let rec find_possible_card color num eff hand =
  * given a top_card. Includes cards of the same color, value, effect, or
  * Wild cards. (implemented in a way that reverses original order)*)
 let rec get_possible_list hand top_card lst s =
-  (* match hand with
-  | [] -> lst
-  | h::t -> if h.color = Black then get_possible_list t top_card (h::lst) else
-    if (h.value <> -1) then
-      if h.value = top_card.value || h.color = top_card.color then
-        get_possible_list t top_card (h::lst) else
-        get_possible_list t top_card lst else
-    if h.color = top_card.color || (h.effect = top_card.effect && h.effect <> NoEffect) then
-      get_possible_list t top_card (h::lst) else
-      get_possible_list t top_card lst *)
   match hand with
   | [] -> lst
   | h::t ->
@@ -106,6 +95,7 @@ let fif tup =
   match tup with
   | (_,_,_,_,f) -> f
 
+                     (* *)
 let rec find_max lst num c =
   match lst with
   | [] -> c
@@ -113,15 +103,15 @@ let rec find_max lst num c =
 
 let call_color lst =
   match most_color (color_count lst (0,0,0,0,0)) with
-  | Black -> Red
-  | Yellow -> Yellow
-  | Green -> Green
-  | Blue -> Blue
-  | _ -> Red
+  | Black -> Player.Red
+  | Yellow -> Player.Yellow
+  | Green -> Player.Green
+  | Blue -> Player.Blue
+  | _ -> Player.Red
 
 let helper_best lst tf hand =
   (* Draw *)
-  if tf = true then Choose Red else
+  if tf = true then Choose (call_color hand) else
   if List.length lst = 0 then Draw else
     let best_card = find_max lst 0 ({value = -1; color = NoColor; effect = NoEffect; id = -1}) in
     if (best_card = {value = -1; color = NoColor; effect = NoEffect; id = -1}) then Draw else
@@ -142,7 +132,7 @@ let rec find_best_card hand (c : Player.color) top_card num_h s lst =
     | h::t ->
       if (next_turn s = 0) then
         if (h.effect = Skip || h.effect = Plus || h.effect = Reverse) then find_best_card t c top_card num_h s ((50,h)::lst)
-        else if (h.effect = Wild4) then if (num_h <= 3) then find_best_card t c top_card num_h s ((100,h)::lst) else find_best_card t c top_card num_h s ((50,h)::lst)
+        else if (h.effect = Wild4) then if (num_h <= 3) then find_best_card t c top_card num_h s ((100,h)::lst) else find_best_card t c top_card num_h s ((45,h)::lst)
         else if (h.effect = Wild) then if (List.length hand <= 3) then find_best_card t c top_card num_h s ((75,h)::lst) else find_best_card t c top_card num_h s ((20,h)::lst)
         (* else NoEffect *)
         else if (h.value = 0) then if (h.color = c) then find_best_card t c top_card num_h s ((40,h)::lst) else find_best_card t c top_card num_h s ((30,h)::lst)
