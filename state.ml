@@ -138,7 +138,7 @@ let all_cards = [{value = 0; color = Red; effect = NoEffect; id = 40};
              {value = -1; color = Blue; effect = Skip; id = 63};
                {value = -1; color = Blue; effect = Reverse; id = 73}; ]
 
-let user_hand s = let p = hd s.players in p.hand
+let user_hand s = let p = nth s.players 0 in p.hand
 let ai1_hand s = let p = nth s.players 1 in p.hand
 let ai2_hand s = let p = nth s.players 2 in p.hand
 let ai3_hand s = let p = nth s.players 3 in p.hand
