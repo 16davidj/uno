@@ -23,13 +23,13 @@ let update_ai3_hand updated_s = fill_rect 225 290 108 430;
 (* updates all hands *)
 let update_hand old_s updated_s =
   set_color 0xb30000;
-  if user_hand old_s != user_hand updated_s then
+  if user_hand old_s <> user_hand updated_s then
     update_user_hand updated_s
-  else if ai1_hand old_s != ai1_hand updated_s then
+  else if ai1_hand old_s <> ai1_hand updated_s then
     update_ai1_hand updated_s
-  else if ai2_hand old_s != ai2_hand updated_s then
+  else if ai2_hand old_s <> ai2_hand updated_s then
     update_ai2_hand updated_s
-  else if ai3_hand old_s != ai3_hand updated_s then
+  else if ai3_hand old_s <> ai3_hand updated_s then
     update_ai3_hand updated_s
 
 (* redraws the updated arrow given the updated turn and color in the new state*)
