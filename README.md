@@ -13,7 +13,7 @@ on the player's computer in order for our system to work.
 
 If using the VM, this can be done simply with the following instructions:
 The graphics.cma file should already be built into the VM, but it's best to reinstall Graphics and
-Camlimages, and then reinstall OCaml as well.
+Camlimages, and then reinstall OCaml as well.  
 <br />
 	1. opam install graphics
 <br />
@@ -21,7 +21,7 @@ Camlimages, and then reinstall OCaml as well.
 <br />
 	3. opam switch reinstall 4.06.0
 <br />
-If using a Mac, XQuartz will be needed:
+If using a Mac, XQuartz will be needed:  
 <br />
 	1. Download XQuartz
 <br />
@@ -31,7 +31,7 @@ If using a Mac, XQuartz will be needed:
 <br />
 <br />
 
-We have 4 make commands, highlighted in our Makefile.
+We have 4 make commands, highlighted in our Makefile.  
 <br />
 	1. make clean	: cleans the build files
 <br />
@@ -42,7 +42,7 @@ We have 4 make commands, highlighted in our Makefile.
 	4. make play 	: opens our GUI and plays the game
 
 ## Game Rules
-Instructions for playing our UNO game:
+Instructions for playing our UNO game:  
 	1. Follow standard UNO rules  
 	2. Turn 1 is your turn first. You click a valid card to play  
 	3. If you cannot play any cards, you must draw a card. You will click the deck to draw a new card.  
