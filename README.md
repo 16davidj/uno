@@ -20,7 +20,7 @@ Camlimages, and then reinstall OCaml as well.
 	2. opam install camlimages
 <br />
 	3. opam switch reinstall 4.06.0
-<br />
+<br />  
 If using a Mac, XQuartz will be needed:  
 <br />
 	1. Download XQuartz
@@ -28,7 +28,6 @@ If using a Mac, XQuartz will be needed:
 	2. If you used macports to install OCaml and not homebrew, opam switch reinstall 4.06.0
 <br />
 	3. If you used homebrew, brew reinstall ocaml --with-x11
-<br />
 <br />
 
 We have 4 make commands, highlighted in our Makefile.  
@@ -42,7 +41,7 @@ We have 4 make commands, highlighted in our Makefile.
 	4. make play 	: opens our GUI and plays the game
 
 ## Game Rules
-Instructions for playing our UNO game:  
+Instructions for playing our UNO game:    
 	1. Follow standard UNO rules  
 	2. Turn 1 is your turn first. You click a valid card to play  
 	3. If you cannot play any cards, you must draw a card. You will click the deck to draw a new card.  
