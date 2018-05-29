@@ -1,4 +1,4 @@
-#Uno
+# Uno
 
 ## Summary
 The following is an implementation of Uno in OCaml as a final project for 3110 by Brian Cheang, Jeffrey Wong, and David Jin
@@ -41,7 +41,6 @@ We have 4 make commands, highlighted in our Makefile.
 	4. make play 	: opens our GUI and plays the game
 
 ## Game Rules
-Instructions for playing our UNO game:    
 	1. Follow standard UNO rules  
 	2. Turn 1 is your turn first. You click a valid card to play  
 	3. If you cannot play any cards, you must draw a card. You will click the deck to draw a new card.  
