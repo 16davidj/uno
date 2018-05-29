@@ -14,6 +14,7 @@ on the player's computer in order for our system to work.
 If using the VM, this can be done simply with the following instructions:
 The graphics.cma file should already be built into the VM, but it's best to reinstall Graphics and
 Camlimages, and then reinstall OCaml as well.
+<br />
 	1. opam install graphics
 	2. opam install camlimages
 	3. opam switch reinstall 4.06.0
